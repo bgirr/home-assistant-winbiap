@@ -1,11 +1,13 @@
 {
   "config": {
     "abort": {
-      "already_configured": "Dieses Bibliothekskonto ist bereits eingerichtet."
+      "already_configured": "Dieses Bibliothekskonto ist bereits eingerichtet.",
+      "reauth_successful": "Die erneute Authentifizierung war erfolgreich."
     },
     "error": {
       "cannot_connect": "Verbindung fehlgeschlagen",
       "invalid_auth": "Ungültige Ausweisnummer oder ungültiges Passwort",
+      "unsupported_page": "Die Anmeldung war erfolgreich, aber diese WebOPAC-Kontoansicht wird noch nicht unterstützt",
       "unknown": "Unerwarteter Fehler"
     },
     "step": {
@@ -15,7 +17,15 @@
           "library_card": "Bibliotheksausweisnummer",
           "password": "Passwort"
         },
-        "description": "Verbinde ein Bibliothekskonto, das von WinBIAP bereitgestellt wird."
+        "description": "Verbinde ein Bibliothekskonto, das von WinBIAP bereitgestellt wird.",
+        "title": "Bibliothekskonto verbinden"
+      },
+      "reauth_confirm": {
+        "data": {
+          "password": "Passwort"
+        },
+        "description": "Gib das aktuelle Passwort für dieses Bibliothekskonto ein.",
+        "title": "Bibliothekskonto erneut authentifizieren"
       }
     }
   }
