@@ -5,13 +5,14 @@ by WinBIAP WebOPAC. It exposes current loans and due dates without sending
 library credentials anywhere except the configured library server.
 
 > [!WARNING]
-> `0.1.0-beta.1` is a protocol-validation release. The public login form of the
+> `0.1.0-beta.2` is a protocol-validation release. The public login form of the
 > Stadtbücherei Königsbrunn is supported, but its authenticated account layout
 > still needs to be verified with sanitized fixtures before a stable release.
 
 ## Current functionality
 
-- UI configuration with a WebOPAC URL, card number, and password
+- searchable library selection from the official WinBIAP provider directory
+- manual WebOPAC URL fallback for libraries missing from the bundled catalog
 - live credential and page-layout validation before an entry is created
 - isolated cookie session with ASP.NET `VIEWSTATE` form handling
 - automatic reauthentication prompt after rejected credentials
@@ -35,10 +36,13 @@ Until the integration is accepted into the HACS default catalog:
 4. Select **Integration** and add the repository.
 5. Download **WinBIAP Library** and restart Home Assistant.
 6. Open **Settings > Devices & services > Add integration**.
-7. Select **WinBIAP Library** and enter the root URL of your WebOPAC, your
-   card number, and password.
+7. Select **WinBIAP Library**, search for your library by name, city, or postal
+   code, and then enter your card number and password.
 
-Example URL: `https://opac.winbiap.net/koenigsbrunn/`
+The integration currently bundles 806 library entries sourced from the
+[official WinBIAP reference directory](https://www.winbiap.de/referenzen). If
+your library is missing, choose **Other / manual WebOPAC URL** and enter its
+root address, for example `https://opac.winbiap.net/koenigsbrunn/`.
 
 ## Entities
 
@@ -81,6 +85,15 @@ python -m venv .venv
 .venv/bin/ruff check custom_components tests
 .venv/bin/pytest
 ```
+
+Refresh the bundled provider catalog with:
+
+```bash
+.venv/bin/python scripts/update_libraries.py
+```
+
+See [docs/library-catalog.md](docs/library-catalog.md) for catalog provenance,
+update behavior, and review guidance.
 
 The parser tests use synthetic, anonymized fixtures only. See
 [CONTRIBUTING.md](CONTRIBUTING.md) before contributing a new WebOPAC layout.
