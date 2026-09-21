@@ -28,7 +28,7 @@
           "base_url": "WebOPAC-URL"
         },
         "data_description": {
-          "base_url": "Stammadresse des WinBIAP-WebOPAC, zum Beispiel https://opac.winbiap.net/koenigsbrunn/"
+          "base_url": "Stammadresse des WinBIAP-WebOPAC"
         },
         "description": "Gib die WebOPAC-Adresse ein, wenn deine Bibliothek nicht aufgeführt ist.",
         "title": "Bibliothek manuell eingeben"

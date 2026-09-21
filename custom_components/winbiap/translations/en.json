@@ -28,7 +28,7 @@
           "base_url": "WebOPAC URL"
         },
         "data_description": {
-          "base_url": "Root address of the WinBIAP WebOPAC, for example https://opac.winbiap.net/koenigsbrunn/"
+          "base_url": "Root address of the WinBIAP WebOPAC"
         },
         "description": "Enter the WebOPAC address if your library is not listed.",
         "title": "Enter library manually"
