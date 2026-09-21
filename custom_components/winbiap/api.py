@@ -130,11 +130,14 @@ def _normalize(value: str) -> str:
 def normalize_base_url(base_url: str) -> str:
     """Normalize and validate a WebOPAC base URL."""
     value = base_url.strip()
-    if not value.startswith(("https://", "http://")):
+    if "://" not in value:
         value = f"https://{value}"
     parsed = urlparse(value)
-    if not parsed.hostname:
+    if parsed.scheme not in {"http", "https"} or not parsed.hostname:
         raise ValueError("WebOPAC URL has no hostname")
+    # Provider catalog links are often still published as HTTP. Credentials
+    # must never be submitted over an unencrypted connection.
+    parsed = parsed._replace(scheme="https")
 
     path = parsed.path.rstrip("/")
     for suffix in ("/index.aspx", "/user/login.aspx"):

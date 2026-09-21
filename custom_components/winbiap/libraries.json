@@ -1,0 +1,4843 @@
+{
+  "source": "https://www.winbiap.de/referenzen",
+  "generated_at": "2026-09-21",
+  "count": 806,
+  "libraries": [
+    {
+      "id": "48a8e8642eec7db4",
+      "name": "\"Der Bücherwurm\" Bücherei St. Vitus, Altenmünster",
+      "location": "86450 Altenmünster",
+      "url": "https://www.buecherwurm-altenmuenster.de/"
+    },
+    {
+      "id": "7e304c8945b4d008",
+      "name": "\"Ernst-Koch-Bücherei\" Witzenhausen",
+      "location": "37213 Witzenhausen",
+      "url": "http://webopac.winbiap.de/witzenhausen"
+    },
+    {
+      "id": "2b4077339559c0b2",
+      "name": "A.B. von Stettensches Institut",
+      "location": "86152 Augsburg",
+      "url": "http://webopac.winbiap.de/stetten-institut"
+    },
+    {
+      "id": "841e1a2100ae8e7f",
+      "name": "Affinger Bücherstüberl",
+      "location": "86444 Affing",
+      "url": "http://opac.winbiap.net/affing"
+    },
+    {
+      "id": "ac2bd5fc5df878f7",
+      "name": "Albert-Teuto-Bücherei Diessen",
+      "location": "86911 Diessen a. A.",
+      "url": "http://webopac.winbiap.de/diessen"
+    },
+    {
+      "id": "9ea3aae64eaa730f",
+      "name": "Alexander-von-Humboldt Gym. Bornheim",
+      "location": "53332 Bornheim",
+      "url": "http://opac.winbiap.de/bornheim-avh"
+    },
+    {
+      "id": "a0f16a42c60c53e6",
+      "name": "Ammersee-Gymnasium Dießen",
+      "location": "86911 Dießen am Ammersee",
+      "url": "http://opac.winbiap.net/diessen-gym"
+    },
+    {
+      "id": "94bce656915f843a",
+      "name": "Amtsbibliothek Peitz",
+      "location": "03185 Peitz",
+      "url": "http://opac.winbiap.net/peitz"
+    },
+    {
+      "id": "0f3de206f96c4a63",
+      "name": "Anne-Frank-Schule Eschwege",
+      "location": "37269 Eschwege",
+      "url": "http://lummerland.datronic.de/cgi-bin/findus.fcgi.pl?customer=eschwege_afs"
+    },
+    {
+      "id": "c955eb9f644add1a",
+      "name": "Annette-Kolb-Gymnasium Schulbibliothek",
+      "location": "83278 Traunstein",
+      "url": "http://lummerland.datronic.de/cgi-bin/findus.fcgi.pl?customer=traunstein_akg"
+    },
+    {
+      "id": "c8ebab8a283ab547",
+      "name": "Anton Bruckner Gymnasium Straubing",
+      "location": "94315 Straubing",
+      "url": "http://webopac.winbiap.de/straubing-gym"
+    },
+    {
+      "id": "faf6da94e7956a78",
+      "name": "Astrid-Lindgren-Schule",
+      "location": "34266 Niestetal",
+      "url": "http://opac.winbiap.net/niestetal"
+    },
+    {
+      "id": "dc4c69be148286fa",
+      "name": "Bachtalbücherei Bachhagel",
+      "location": "89429 Bachhagel",
+      "url": "http://opac.winbiap.net/bachhagel"
+    },
+    {
+      "id": "777acf3ec8a7b053",
+      "name": "Bayerische Theaterakademie August Everding",
+      "location": "81675 München",
+      "url": "http://opac.winbiap.net/theaterakademie"
+    },
+    {
+      "id": "68fd7c8277ad6486",
+      "name": "Bayernkolleg Augsburg",
+      "location": "86169 Augsburg",
+      "url": "http://opac.winbiap.net/bk-augsburg"
+    },
+    {
+      "id": "c4cb74685877552b",
+      "name": "BDA | Bundesvereinigung der Deutschen Arbeitgeberverbände",
+      "location": "10178 Berlin",
+      "url": "http://webopac.winbiap.de/berlin-bda"
+    },
+    {
+      "id": "a539f9825215e130",
+      "name": "Berufliches Schulzentrum Heidenheim",
+      "location": "89518 Heidenheim",
+      "url": "http://opac.winbiap.de/heidenheim-bsz"
+    },
+    {
+      "id": "f9a3416a804deffa",
+      "name": "Berufsbildende Schulen der Diakonie Rotenburg",
+      "location": "27356 Rotenburg",
+      "url": "http://opac.winbiap.net/rotenburg-fs"
+    },
+    {
+      "id": "b209ad2c49f818c5",
+      "name": "Bezirkskliniken Schwaben KU, Bezirkskrankenhaus Günzburg, Bibliothek",
+      "location": "89312 Günzburg",
+      "url": "http://opac.winbiap.net/guenzburg-bkh"
+    },
+    {
+      "id": "d310e038bb3dc0c5",
+      "name": "Bibliothek \"Im Kronenhof\" Böhmenkirch",
+      "location": "89558 Böhmenkirch",
+      "url": "http://opac.winbiap.net/boehmenkirch"
+    },
+    {
+      "id": "7d8e220d9ad8bdf1",
+      "name": "Bibliothek am Bildungszentrum Markdorf",
+      "location": "88677 Markdorf",
+      "url": "http://opac.winbiap.de/markdorf"
+    },
+    {
+      "id": "effc8ce5fe233857",
+      "name": "Bibliothek Borsdorf",
+      "location": "04451 Borsdorf",
+      "url": "http://opac.winbiap.net/borsdorf"
+    },
+    {
+      "id": "a169e1723d22b2c9",
+      "name": "Bibliothek Burgkirchen a.d.Alz",
+      "location": "84508 Burgkirchen a.d.Alz",
+      "url": "https://cloudopac.winbiap.de/burgkirchen/"
+    },
+    {
+      "id": "dc626f25394c0149",
+      "name": "Bibliothek der EKvW Bielefeld",
+      "location": "33602 Bielefeld",
+      "url": "http://opac.winbiap.de/bibliothek-ekvw"
+    },
+    {
+      "id": "add7dc667bc1fcae",
+      "name": "Bibliothek der FAKS Maria Stern Augsburg",
+      "location": "86152 Augsburg",
+      "url": "http://opac.winbiap.de/augsburg-faks"
+    },
+    {
+      "id": "7c19f8f0c22ebe6f",
+      "name": "Bibliothek des Deutschen Alpenvereins",
+      "location": "80538 München",
+      "url": "http://opac.winbiap.de/alpenverein"
+    },
+    {
+      "id": "0e13fb7ce8b13905",
+      "name": "Bibliothek des Marktes Stockstadt",
+      "location": "63811 Stockstadt a. Main",
+      "url": "http://opac.winbiap.net/stockstadt"
+    },
+    {
+      "id": "e7ac54a0707abe18",
+      "name": "Bibliothek Gemeinde Eichwalde",
+      "location": "15732 Eichwalde",
+      "url": "http://opac.winbiap.net/eichwalde"
+    },
+    {
+      "id": "7f0d3065f0a2b5e0",
+      "name": "Bibliothek Gymnasium Bad Aibling",
+      "location": "83043 Bad Aibling",
+      "url": "http://webopac.winbiap.de/bad-aibling-gym"
+    },
+    {
+      "id": "02186108f9462be3",
+      "name": "Bibliothek Höchberg",
+      "location": "97204 Höchberg",
+      "url": "http://webopac.winbiap.de/hoechberg"
+    },
+    {
+      "id": "23470be81c91338c",
+      "name": "Bibliothek im Beruflichen Schulzentrum Backnang",
+      "location": "71522 Backnang",
+      "url": "http://opac.winbiap.de/backnang-bsz"
+    },
+    {
+      "id": "868e52410c9e9512",
+      "name": "Bibliothek im Beruflichen Schulzentrum Schorndorf",
+      "location": "73614 Schorndorf",
+      "url": "http://opac.winbiap.de/schorndorf-bsz"
+    },
+    {
+      "id": "bf91ca74100e64e2",
+      "name": "Bibliothek im Beruflichen Schulzentrum Waiblingen",
+      "location": "71332 Waiblingen",
+      "url": "http://opac.winbiap.de/bswn"
+    },
+    {
+      "id": "5e0cc99ce8e65408",
+      "name": "Bibliothek im Bildungszentrum Weissach i. T.",
+      "location": "71554 Weissach im Tal",
+      "url": "http://opac.winbiap.de/weissach"
+    },
+    {
+      "id": "bbb0e2a16813c2d0",
+      "name": "Bibliothek im Rathaus Salem",
+      "location": "88682 Salem-Mimmenhausen",
+      "url": "http://opac.winbiap.net/salem"
+    },
+    {
+      "id": "2802ce4666bab85e",
+      "name": "Bibliothek Kall",
+      "location": "53925 Kall",
+      "url": "http://cloudopac.winbiap.de/kall"
+    },
+    {
+      "id": "94c19cec9a43f804",
+      "name": "Bibliothek Mamertus Bad Birnbach",
+      "location": "84361 Bad Birnbach",
+      "url": "http://webopac.winbiap.de/badbirnbach"
+    },
+    {
+      "id": "a6a0399f4de3b641",
+      "name": "Bibliothek Markt Cadolzburg",
+      "location": "90556 Cadolzburg",
+      "url": "http://webopac.winbiap.de/cadolzburg"
+    },
+    {
+      "id": "6396a77c779d6301",
+      "name": "Bibliothek Markt Manching",
+      "location": "85077 Manching",
+      "url": "http://cloudopac.winbiap.de/manching"
+    },
+    {
+      "id": "2cf33ddf9887df27",
+      "name": "Bibliothek Neunkirchen",
+      "location": "57290 Neunkirchen",
+      "url": "https://webopac.kommunale.it/neunkirchen"
+    },
+    {
+      "id": "d3b4c8abbda73c4b",
+      "name": "Bibliothek Remshalden",
+      "location": "73630 Remshalden",
+      "url": "http://webopac.winbiap.de/remshalden"
+    },
+    {
+      "id": "c7437793dbd4b3be",
+      "name": "Bibliothek Stadt Hohen Neuendorf",
+      "location": "16540 Hohen Neuendorf",
+      "url": "http://webopac.winbiap.de/hohen-neuendorf"
+    },
+    {
+      "id": "f4052ea09a2a9746",
+      "name": "Bibliothek Theologisches Seminar Herborn",
+      "location": "35745 Herborn",
+      "url": "http://opac.winbiap.de/theologisches-seminar-herborn"
+    },
+    {
+      "id": "dfb88098ec0fe3ad",
+      "name": "Bibliothek Wackersdorf",
+      "location": "92442 Wackersdorf",
+      "url": "http://webopac.winbiap.de/wackersdorf"
+    },
+    {
+      "id": "8265c27be064d078",
+      "name": "Bibliothek Wilnsdorf",
+      "location": "57234 Wilnsdorf",
+      "url": "https://webopac.kommunale.it/wilnsdorf"
+    },
+    {
+      "id": "d823659459765f49",
+      "name": "Bibliothek/Mediothek im BSZ Biberach",
+      "location": "88400 Biberach an der Riß",
+      "url": "http://opac.winbiap.net/biberach"
+    },
+    {
+      "id": "b5c662cad9b24cc2",
+      "name": "Bibliotheksnetzwerk Mansfeld-Südharz",
+      "location": "06295 Lutherstadt Eisleben",
+      "url": "http://opac.winbiap.de/bibliotheken-msh"
+    },
+    {
+      "id": "5cde14c4e640d6c2",
+      "name": "Bibliothekszentrum in Hösbach",
+      "location": "63768 Hösbach",
+      "url": "http://bibliothekszentrum-mediensuche.lra-ab.de/"
+    },
+    {
+      "id": "cf9b6473614baf8c",
+      "name": "BIZ Hassfurt",
+      "location": "97437 Haßfurt",
+      "url": "http://opac.winbiap.net/hassfurt"
+    },
+    {
+      "id": "4b61c6793b32a969",
+      "name": "Brand University",
+      "location": "22765 Hamburg",
+      "url": "http://opac.winbiap.net/brand-university"
+    },
+    {
+      "id": "7b15da2868e119f1",
+      "name": "Brüder Grimm Grundschule Bebra",
+      "location": "36179 Bebra",
+      "url": "http://webopac.winbiap.de/bebra"
+    },
+    {
+      "id": "8a7c5c5fc2df0971",
+      "name": "Buchenbergschule Ellwangen",
+      "location": "73479 Ellwangen (Jagst)",
+      "url": "http://opac.winbiap.de/ellwangen-buchenbergschule"
+    },
+    {
+      "id": "f115f16e9027e954",
+      "name": "Burkhart-Gymnasium Mallersdorf-Pfaffenberg",
+      "location": "84066 Mallersdorf-Pfaffenberg",
+      "url": "http://opac.winbiap.net/bgm"
+    },
+    {
+      "id": "9672d315f62fe179",
+      "name": "Bücherbus e.V. Uelzen",
+      "location": "29525 Uelzen",
+      "url": "http://cloudopac.winbiap.de/uelzen"
+    },
+    {
+      "id": "04fa39e661d8ac58",
+      "name": "Bücherei Albershausen",
+      "location": "73095 Albershausen",
+      "url": "http://webopac.winbiap.de/albershausen"
+    },
+    {
+      "id": "f9cf2270ea13c8a6",
+      "name": "Bücherei am Münztor Schongau",
+      "location": "86956 Schongau",
+      "url": "http://opac.winbiap.net/schongau"
+    },
+    {
+      "id": "567859aca80b5cf9",
+      "name": "Bücherei am Römerturm Wessobrunn",
+      "location": "82405 Wessobrunn",
+      "url": "http://opac.winbiap.de/wessobrunn"
+    },
+    {
+      "id": "fb2f5bd958cb793f",
+      "name": "Bücherei am Stadtpark Kulmbach",
+      "location": "95326 Kulmbach",
+      "url": "http://webopac.buecherei-kulmbach.de/"
+    },
+    {
+      "id": "c63c2150bcad2c00",
+      "name": "Bücherei Anzing",
+      "location": "85646 Anzing",
+      "url": "http://opac.winbiap.net/anzing"
+    },
+    {
+      "id": "4047ddbea9352946",
+      "name": "Bücherei Bernbeuren",
+      "location": "86975 Bernbeuren",
+      "url": "http://opac.winbiap.net/bernbeuren"
+    },
+    {
+      "id": "03182da4840d4981",
+      "name": "Bücherei Biessenhofen",
+      "location": "67640 Biessenhofen",
+      "url": "http://opac.winbiap.de/biessenhofen"
+    },
+    {
+      "id": "dd691ef5f6aa429a",
+      "name": "Bücherei Bischofsheim",
+      "location": "65474 Bischofsheim",
+      "url": "http://opac.winbiap.de/bischofsheim"
+    },
+    {
+      "id": "b391482a4b8ef23f",
+      "name": "Bücherei Christi Himmelfahrt Donauwörth",
+      "location": "86609 Donauwörth",
+      "url": "http://opac.winbiap.de/donauwoerth"
+    },
+    {
+      "id": "6a43a55d7435d6aa",
+      "name": "Bücherei Dasing",
+      "location": "86453 Dasing",
+      "url": "http://webopac.winbiap.de/dasing"
+    },
+    {
+      "id": "ba6de882aa5504af",
+      "name": "Bücherei der Gemeinde Niederviehbach",
+      "location": "84183 Niederviehbach",
+      "url": "http://opac.winbiap.net/niederviehbach"
+    },
+    {
+      "id": "8961560115d6f108",
+      "name": "Bücherei des Marktes Hahnbach und der Gemeinde Gebenbach",
+      "location": "92256 Hahnbach",
+      "url": "http://opac.winbiap.net/hahnbach"
+    },
+    {
+      "id": "97606d396bcfb193",
+      "name": "Bücherei Feldkirchen-Westerham",
+      "location": "83620 Feldkirchen-Westerham",
+      "url": "http://cloudopac.winbiap.de/feldkirchen-westerham"
+    },
+    {
+      "id": "ca1b2c3d60ee1615",
+      "name": "Bücherei Freystadt",
+      "location": "92342 Freystadt",
+      "url": "http://webopac.winbiap.de/freystadt"
+    },
+    {
+      "id": "5139a2c3371e7510",
+      "name": "Bücherei Grassau",
+      "location": "83224 Grassau",
+      "url": "http://webopac.winbiap.de/grassau"
+    },
+    {
+      "id": "5160b3bdb2389945",
+      "name": "Bücherei Großburgwedel",
+      "location": "30938 Burgwedel",
+      "url": "http://opac.winbiap.net/grossburgwedel"
+    },
+    {
+      "id": "fdc4985c383f0eb0",
+      "name": "Bücherei im alten Rathaus Giebelstadt",
+      "location": "97232 Giebelstadt",
+      "url": "http://opac.winbiap.net/giebelstadt"
+    },
+    {
+      "id": "fbdee6b0a947d3af",
+      "name": "Bücherei im Bahnhof Veitshöchheim",
+      "location": "97209 Veitshöchheim",
+      "url": "https://webopac.veitshoechheim.de/"
+    },
+    {
+      "id": "de9bd8904991702c",
+      "name": "Bücherei im Dorfzentrum Eisingen",
+      "location": "97249 Eisingen",
+      "url": "http://opac.winbiap.net/eisingen"
+    },
+    {
+      "id": "a186d449b4e99bd6",
+      "name": "Bücherei im Fohlenhof Steingaden",
+      "location": "86989 Steingaden",
+      "url": "http://opac.winbiap.net/steingaden"
+    },
+    {
+      "id": "ef35d952999774c1",
+      "name": "Bücherei im Kinzighaus Loßburg",
+      "location": "72290 Loßburg",
+      "url": "http://opac.winbiap.net/lossburg"
+    },
+    {
+      "id": "adfdb0e8e70523d6",
+      "name": "Bücherei im Wasserschloss Rottendorf",
+      "location": "97228 Rottendorf",
+      "url": "http://opac.winbiap.net/rottendorf"
+    },
+    {
+      "id": "13fc1fe201b8dca8",
+      "name": "Bücherei Irsee",
+      "location": "87660 Irsee",
+      "url": "http://webopac.winbiap.de/irsee"
+    },
+    {
+      "id": "af65ad5b07ba517a",
+      "name": "Bücherei Kleinburgwedel",
+      "location": "30938 Burgwedel",
+      "url": "http://opac.winbiap.net/kleinburgwedel"
+    },
+    {
+      "id": "eb7994a812c0c1a2",
+      "name": "Bücherei Lengdorf",
+      "location": "84435 Lengdorf",
+      "url": "http://opac.winbiap.net/lengdorf"
+    },
+    {
+      "id": "e55d366dd98c21d9",
+      "name": "Bücherei Markt Kaufering",
+      "location": "86916 Kaufering",
+      "url": "http://opac.winbiap.net/kaufering"
+    },
+    {
+      "id": "2a13dc620f4e870e",
+      "name": "Bücherei Markt Roßtal",
+      "location": "90574 Roßtal",
+      "url": "http://webopac.winbiap.de/rosstal"
+    },
+    {
+      "id": "54faac4dda4ec641",
+      "name": "Bücherei Marzling",
+      "location": "85417 Marzling",
+      "url": "http://opac.winbiap.net/marzling"
+    },
+    {
+      "id": "32214f450d6d65e0",
+      "name": "Bücherei Meinerzhagen",
+      "location": "58540 Meinerzhagen",
+      "url": "https://webopac.kommunale.it/meinerzhagen"
+    },
+    {
+      "id": "af3bac3fe894424c",
+      "name": "Bücherei Meitingen",
+      "location": "86405 Meitingen",
+      "url": "http://opac.winbiap.net/meitingen"
+    },
+    {
+      "id": "d085c8e9d6250f26",
+      "name": "Bücherei Mering",
+      "location": "86415 Mering",
+      "url": "http://opac.winbiap.net/mering"
+    },
+    {
+      "id": "0fffc24cfa9f38de",
+      "name": "Bücherei Neu Wulmstorf",
+      "location": "21629 Neu Wulmstorf",
+      "url": "http://opac.winbiap.net/neuwulmstorf"
+    },
+    {
+      "id": "3386f031c9740896",
+      "name": "Bücherei Prien",
+      "location": "83209 Prien am Chiemsee",
+      "url": "http://webopac.winbiap.de/prien"
+    },
+    {
+      "id": "f920039a62a10715",
+      "name": "Bücherei Ruderting",
+      "location": "94161 Ruderting",
+      "url": "http://webopac.winbiap.de/ruderting"
+    },
+    {
+      "id": "e872de93c31714c7",
+      "name": "Bücherei Samtgemeinde Elbmarsch",
+      "location": "21436 Marschacht",
+      "url": "http://opac.winbiap.de/elbmarsch"
+    },
+    {
+      "id": "099f2fa003cdbbee",
+      "name": "Bücherei Scheyern",
+      "location": "85298 Scheyern",
+      "url": "http://opac.winbiap.de/scheyern"
+    },
+    {
+      "id": "60475e3710813a96",
+      "name": "Bücherei Schweitenkirchen",
+      "location": "85301 Schweitenkirchen",
+      "url": "http://opac.winbiap.net/schweitenkirchen"
+    },
+    {
+      "id": "5e0bd78273979d8b",
+      "name": "Bücherei St. Jakob Buchbach",
+      "location": "84428 Buchbach",
+      "url": "http://opac.winbiap.net/buchbach"
+    },
+    {
+      "id": "9117d7b71bbdb90b",
+      "name": "Bücherei Steinberg am See",
+      "location": "92449 Steinberg am See",
+      "url": "http://webopac.winbiap.de/steinberg"
+    },
+    {
+      "id": "5e2b395167866a2e",
+      "name": "Bücherei Teisendorf",
+      "location": "83317 Teisendorf",
+      "url": "http://webopac.winbiap.de/teisendorf"
+    },
+    {
+      "id": "e2223f4e69c52e05",
+      "name": "Bücherei Teutschenthal",
+      "location": "06179 Teutschenthal",
+      "url": "http://webopac.winbiap.de/teutschenthal"
+    },
+    {
+      "id": "99e061b9d448d3fc",
+      "name": "Bücherei Trebur",
+      "location": "65468 Trebur",
+      "url": "http://opac.winbiap.de/trebur"
+    },
+    {
+      "id": "32082b1d88ec6e5a",
+      "name": "Bücherei Welden",
+      "location": "86465 Welden",
+      "url": "http://opac.winbiap.net/welden"
+    },
+    {
+      "id": "2812794dc0872aca",
+      "name": "Bücherei Wilhelmsfeld e.V.",
+      "location": "69259 Wilhelmsfeld",
+      "url": "http://opac.winbiap.net/wilhelmsfeld"
+    },
+    {
+      "id": "f66a415b66a51bcb",
+      "name": "Bücherei Ziemetshausen",
+      "location": "86473 Ziemetshausen",
+      "url": "http://webopac.winbiap.de/ziemetshausen"
+    },
+    {
+      "id": "45cfaee532849409",
+      "name": "Büchereien der Gemeinde Oerlenbach",
+      "location": "97714 Oerlenbach",
+      "url": "http://opac.winbiap.de/oerlenbach"
+    },
+    {
+      "id": "e07f25e694b19d36",
+      "name": "Büchereien Essenbach und Ahrain",
+      "location": "84051 Essenbach",
+      "url": "http://opac.winbiap.net/essenbach-ahrain"
+    },
+    {
+      "id": "205f9a2dafe31b57",
+      "name": "Bürgerbibliothek Essingen",
+      "location": "73457 Essingen",
+      "url": "http://opac.winbiap.net/essingen"
+    },
+    {
+      "id": "f52d39fa110a728f",
+      "name": "Carl-Orff-Gymnasium Unterschleissheim",
+      "location": "85716 Unterschleissheim",
+      "url": "http://opac.winbiap.net/carl_orff_gym"
+    },
+    {
+      "id": "a53c8e27290b39e0",
+      "name": "CBS Bibliothek",
+      "location": "50996 Köln",
+      "url": "http://opac.winbiap.net/cbs"
+    },
+    {
+      "id": "5986e86c8d862974",
+      "name": "Christian-Wagner-Bücherei Rutesheim",
+      "location": "71277 Rutesheim",
+      "url": "http://opac.winbiap.de/rutesheim"
+    },
+    {
+      "id": "12e27e26eb01f55f",
+      "name": "Christine-Brückner-Bücherei Bad Arolsen",
+      "location": "34454 Bad Arolsen",
+      "url": "http://opac.winbiap.net/bad-arolsen"
+    },
+    {
+      "id": "30fac65cebdc668c",
+      "name": "Christophorus-Gymnasium Altensteig",
+      "location": "72213 Altensteig",
+      "url": "http://webopac.winbiap.de/altensteig-gym"
+    },
+    {
+      "id": "7b2e97ded703fbda",
+      "name": "Comenius Gymnasium Deggendorf",
+      "location": "94469 Deggendorf",
+      "url": "http://opac.winbiap.de/comenius-deg"
+    },
+    {
+      "id": "dcb042df57437616",
+      "name": "Comenius Realschule Wertheim",
+      "location": "97877 Wertheim",
+      "url": "http://webopac.winbiap.net/wertheim"
+    },
+    {
+      "id": "9581afc00ad969d9",
+      "name": "Communität Casteller Ring e.V. - Bibliothek",
+      "location": "97348 Rödelsee",
+      "url": "http://opac.winbiap.de/ccr-schwanberg"
+    },
+    {
+      "id": "19ab19e65fbd4adc",
+      "name": "DAV Sektion Garmisch-Partenkirchen",
+      "location": "82467 Garmisch-Partenkirchen",
+      "url": "http://opac.winbiap.de/alpenverein-gapa"
+    },
+    {
+      "id": "d74037d5f7c6aee1",
+      "name": "Descartes Gymnasium Bibliothek",
+      "location": "86633 Neuburg a. d. Donau",
+      "url": "http://opac.winbiap.de/descartes-gym"
+    },
+    {
+      "id": "0927155fd63a69ae",
+      "name": "Deutsche Schule Helsinki",
+      "location": "FI 00100 Helsinki",
+      "url": "http://opac.winbiap.net/dsh"
+    },
+    {
+      "id": "bb7c6565026bc54a",
+      "name": "Deutsches Notarinstitut - Bibliothek",
+      "location": "97070 Würzburg",
+      "url": "https://dnoti.de/"
+    },
+    {
+      "id": "013aaae10d170828",
+      "name": "Deutschherren-Gymnasium Aichach",
+      "location": "86551 Aichach",
+      "url": "http://opac.winbiap.de/aichach-gym"
+    },
+    {
+      "id": "a1c47de722b20015",
+      "name": "Dorte-Hilleke-Bücherei Menden",
+      "location": "58706 Menden (Sauerland)",
+      "url": "http://opac.winbiap.de/menden"
+    },
+    {
+      "id": "64fb3cb0bdf05f40",
+      "name": "Ernst-Abbe-Schule Kaufungen",
+      "location": "34260 Kaufungen",
+      "url": "http://opac.winbiap.net/kaufungen"
+    },
+    {
+      "id": "3ff6cf03912ba995",
+      "name": "Ernst-Mach-Gymnasium Haar",
+      "location": "85540 Haar",
+      "url": "http://opac.winbiap.net/emg-haar"
+    },
+    {
+      "id": "f998a7eff8fe015c",
+      "name": "Europaschule Bornheim - Mediothek",
+      "location": "53332 Bornheim",
+      "url": "http://opac.winbiap.net/europaschule-bornheim"
+    },
+    {
+      "id": "aca5ff138dd4f42c",
+      "name": "Ev. Kirche in Hessen u. Nassau - Zentralbibliothek Darmstadt",
+      "location": "64285 Darmstadt",
+      "url": "http://opac.winbiap.de/darmstadt-ekhn"
+    },
+    {
+      "id": "51bb2fc17d61112a",
+      "name": "Evangelische Mediothek Münsterland",
+      "location": "48143 Münster",
+      "url": "http://opac.winbiap.de/muenster-mediothek"
+    },
+    {
+      "id": "17346780bb0386ad",
+      "name": "Fachhochschule Polizei Sachsen-Anhalt - Stabsbereich II / Bibliothek",
+      "location": "06449 Aschersleben",
+      "url": "http://webopac.winbiap.de/fhpollsa"
+    },
+    {
+      "id": "9247184f4596b09b",
+      "name": "Fahrbücherei Landkreis Celle",
+      "location": "29348 Eschede",
+      "url": "http://opac.winbiap.net/celle"
+    },
+    {
+      "id": "d6c20ff816294b5b",
+      "name": "Fahrbücherei Landkreis Cuxhaven",
+      "location": "27470 Cuxhaven",
+      "url": "http://opac.winbiap.de/cuxhaven-fb"
+    },
+    {
+      "id": "df69c1acff58be82",
+      "name": "Feodor-Lynen-Gymnasium",
+      "location": "82152 Planegg",
+      "url": "http://webopac.winbiap.de/planegg-gym"
+    },
+    {
+      "id": "c10f41401cd24e4c",
+      "name": "Franz-Marc-Gymnasium Markt Schwaben",
+      "location": "85570 Markt Schwaben",
+      "url": "http://opac.winbiap.net/fmg"
+    },
+    {
+      "id": "a713d42883bb300b",
+      "name": "Freie Schule Anne-Sophie Bibliothek",
+      "location": "74653 Künzelsau",
+      "url": "http://webopac.winbiap.de/fsas"
+    },
+    {
+      "id": "e3e97fad722bc21e",
+      "name": "Freiherr-vom-Stein-Bibliothek Neckarsteinach",
+      "location": "69239 Neckarsteinach",
+      "url": "http://webopac.winbiap.de/neckarsteinach"
+    },
+    {
+      "id": "aacebc55fd34e0ec",
+      "name": "Friedrich-Ebert-Mittelschule Augsburg-Göggingen",
+      "location": "86199 Augsburg",
+      "url": "http://webopac.winbiap.de/ebertschule"
+    },
+    {
+      "id": "8ea585dab678369a",
+      "name": "Friedrich-Wöhler Gymnasium Singen",
+      "location": "78224 Singen",
+      "url": "http://opac.winbiap.net/singen_gym"
+    },
+    {
+      "id": "372b080f7ed70630",
+      "name": "Fürst-Johann-Moritz-Gymnasium Siegen",
+      "location": "57076 Siegen-Weidenau",
+      "url": "https://webopac.kommunale.it/fjm"
+    },
+    {
+      "id": "025a23ea6bd87e59",
+      "name": "Fürstenberg-Gym. Donaueschingen",
+      "location": "78166 Donaueschingen",
+      "url": "http://webopac.winbiap.de/fgds"
+    },
+    {
+      "id": "7ac24f89a8dccbd9",
+      "name": "Gemeinde Stephanskirchen Bücherei",
+      "location": "83071 Stephanskirchen",
+      "url": "http://opac.winbiap.net/stephanskirchen"
+    },
+    {
+      "id": "a99f4e2188f2a243",
+      "name": "Gemeinde- und Gästebücherei Oberstaufen",
+      "location": "87534 Oberstaufen",
+      "url": "http://webopac.winbiap.de/oberstaufen"
+    },
+    {
+      "id": "4cb8e083b1382435",
+      "name": "Gemeinde- und Kurbücherei Bad Grönenbach",
+      "location": "87730 Bad Grönenbach",
+      "url": "http://webopac.winbiap.de/bad-groenenbach"
+    },
+    {
+      "id": "081278e4d98f468b",
+      "name": "Gemeinde- und Pfarrbücherei Aitrang",
+      "location": "87648 Aitrang",
+      "url": "http://webopac.winbiap.de/aitrang"
+    },
+    {
+      "id": "ae31d2ab129517a3",
+      "name": "Gemeinde- und Pfarrbücherei Benediktbeuern",
+      "location": "83671 Benediktbeuern",
+      "url": "http://webopac.winbiap.de/benediktbeuern"
+    },
+    {
+      "id": "84a96c8d0ab67663",
+      "name": "Gemeinde- und Pfarrbücherei Peiting",
+      "location": "86971 Peiting",
+      "url": "http://opac.winbiap.net/peiting"
+    },
+    {
+      "id": "9942653bf4d4848a",
+      "name": "Gemeinde- und Schulbücherei Lohfelden",
+      "location": "34253 Lohfelden",
+      "url": "http://opac.winbiap.net/lohfelden"
+    },
+    {
+      "id": "6f7c91b13a841325",
+      "name": "Gemeindebibliothek Bergrheinfeld",
+      "location": "97493 Bergrheinfeld",
+      "url": "http://webopac.winbiap.de/bergrheinfeld"
+    },
+    {
+      "id": "3d30d6819ad59f53",
+      "name": "Gemeindebibliothek Bodenwöhr",
+      "location": "92439 Bodenwöhr",
+      "url": "http://webopac.winbiap.de/bodenwoehr"
+    },
+    {
+      "id": "25ffbdb784380fbb",
+      "name": "Gemeindebibliothek Bovenden",
+      "location": "37120 Bovenden",
+      "url": "https://bib.bovenden.de/"
+    },
+    {
+      "id": "7c89e49d0abaa5bc",
+      "name": "Gemeindebibliothek Elsenfeld",
+      "location": "63820 Elsenfeld",
+      "url": "http://opac.winbiap.net/elsenfeld"
+    },
+    {
+      "id": "adf67d52e0be9390",
+      "name": "Gemeindebibliothek Großmehring",
+      "location": "85098 Großmehring",
+      "url": "http://opac.winbiap.net/grossmehring"
+    },
+    {
+      "id": "32b9ccf9a354bb9e",
+      "name": "Gemeindebibliothek Großpösna",
+      "location": "04463 Großpösna",
+      "url": "http://opac.winbiap.de/grosspoesna"
+    },
+    {
+      "id": "d6cb9f1c49c2baaa",
+      "name": "Gemeindebibliothek Hunderdorf",
+      "location": "94336 Hunderdorf",
+      "url": "http://opac.winbiap.net/hunderdorf"
+    },
+    {
+      "id": "1942fd3507c6c00c",
+      "name": "Gemeindebibliothek Ismaning",
+      "location": "85737 Ismaning",
+      "url": "http://webopac.winbiap.de/ismaning"
+    },
+    {
+      "id": "89a66054f567928e",
+      "name": "Gemeindebibliothek Kahl am Main",
+      "location": "63796 Kahl a. Main",
+      "url": "http://opac.winbiap.net/kahl"
+    },
+    {
+      "id": "5f806ff743641812",
+      "name": "Gemeindebibliothek Kleinwallstadt",
+      "location": "63839 Kleinwallstadt",
+      "url": "http://opac.winbiap.de/kleinwallstadt"
+    },
+    {
+      "id": "4c2213b9358ecef3",
+      "name": "Gemeindebibliothek Krailling",
+      "location": "82152 Krailling",
+      "url": "http://opac.winbiap.net/krailling"
+    },
+    {
+      "id": "32a87f3daa73b944",
+      "name": "Gemeindebibliothek Kümmersbruck",
+      "location": "92245 Kümmersbruck",
+      "url": "http://opac.winbiap.net/kuemmersbruck"
+    },
+    {
+      "id": "181a897dd4706e11",
+      "name": "Gemeindebibliothek Neubiberg",
+      "location": "85579 Neubiberg",
+      "url": "http://webopac.winbiap.de/neubiberg"
+    },
+    {
+      "id": "dabc06e13add8228",
+      "name": "Gemeindebibliothek Neufahrn",
+      "location": "85375 Neufahrn",
+      "url": "http://opac.winbiap.net/neufahrn"
+    },
+    {
+      "id": "1ca44e5f1c2dc4f5",
+      "name": "Gemeindebibliothek Niederwerrn",
+      "location": "97464 Niederwerrn",
+      "url": "http://webopac.winbiap.de/niederwerrn"
+    },
+    {
+      "id": "f2ac7848139d2888",
+      "name": "Gemeindebibliothek Ottobrunn",
+      "location": "85521 Ottobrunn",
+      "url": "http://webopac.winbiap.de/ottobrunn"
+    },
+    {
+      "id": "17393551d827999a",
+      "name": "Gemeindebibliothek Röthlein",
+      "location": "97520 Röthlein",
+      "url": "http://webopac.winbiap.de/roethlein"
+    },
+    {
+      "id": "d860c1abc2c49405",
+      "name": "Gemeindebibliothek Schonungen",
+      "location": "97453 Schonungen",
+      "url": "http://opac.winbiap.net/schonungen"
+    },
+    {
+      "id": "2e204f8f27e8f1e3",
+      "name": "Gemeindebibliothek Schwebheim",
+      "location": "97525 Schwebheim",
+      "url": "http://webopac.winbiap.de/schwebheim"
+    },
+    {
+      "id": "6e00aa36d4bd345e",
+      "name": "Gemeindebibliothek Stadtlauringen",
+      "location": "97488 Stadtlauringen",
+      "url": "http://webopac.winbiap.de/stadtlauringen"
+    },
+    {
+      "id": "c3cc767c51a422a4",
+      "name": "Gemeindebibliothek Unterföhring",
+      "location": "85774 Unterföhring",
+      "url": "http://webopac.winbiap.de/unterfoehring"
+    },
+    {
+      "id": "a5d9ff00944a59d0",
+      "name": "Gemeindebibliothek Untermerzbach",
+      "location": "96190 Untermerzbach",
+      "url": "http://opac.winbiap.net/untermerzbach"
+    },
+    {
+      "id": "f26a9f4245756d61",
+      "name": "Gemeindebibliothek Wildflecken",
+      "location": "97772 Wildflecken",
+      "url": "http://webopac.winbiap.de/wildflecken"
+    },
+    {
+      "id": "5570a498da6166d0",
+      "name": "Gemeindebücherei A.-Bäumenheim",
+      "location": "86663 Asbach-Bäumenheim",
+      "url": "http://webopac.winbiap.de/asbach-baeumenheim"
+    },
+    {
+      "id": "e6525b7b47e57a88",
+      "name": "Gemeindebücherei Ahorn",
+      "location": "96482 Ahorn",
+      "url": "http://opac.winbiap.net/ahorn"
+    },
+    {
+      "id": "8b356b635e04c5cf",
+      "name": "Gemeindebücherei Ainring",
+      "location": "83404 Ainring",
+      "url": "http://opac.winbiap.net/ainring"
+    },
+    {
+      "id": "24b9ed8b00ea3c64",
+      "name": "Gemeindebücherei Allersberg",
+      "location": "90584 Allersberg",
+      "url": "http://opac.winbiap.net/allersberg"
+    },
+    {
+      "id": "e90474de16c2f49d",
+      "name": "Gemeindebücherei Allershausen",
+      "location": "85391 Allershausen",
+      "url": "http://webopac.winbiap.de/allershausen"
+    },
+    {
+      "id": "38c0daccc6b45a35",
+      "name": "Gemeindebücherei Alling",
+      "location": "82239 Alling",
+      "url": "http://opac.winbiap.net/alling"
+    },
+    {
+      "id": "52ec61514a386821",
+      "name": "Gemeindebücherei Altomünster",
+      "location": "85250 Altomünster",
+      "url": "http://opac.winbiap.net/altomuenster"
+    },
+    {
+      "id": "cae0700cd5ead310",
+      "name": "Gemeindebücherei Ampfing",
+      "location": "84539 Ampfing",
+      "url": "http://webopac.winbiap.de/ampfing"
+    },
+    {
+      "id": "c0a1f1898adab824",
+      "name": "Gemeindebücherei Aschau a. Inn",
+      "location": "84544 Aschau am Inn",
+      "url": "http://opac.winbiap.net/aschau"
+    },
+    {
+      "id": "05e7ea0fc12cd2d9",
+      "name": "Gemeindebücherei Aschheim",
+      "location": "85609 Aschheim",
+      "url": "http://opac.winbiap.net/aschheim"
+    },
+    {
+      "id": "9658ab7af54e7e5c",
+      "name": "Gemeindebücherei Barbing",
+      "location": "93092 Barbing",
+      "url": "http://opac.winbiap.net/barbing"
+    },
+    {
+      "id": "216bdfbc00bdd937",
+      "name": "Gemeindebücherei Bechhofen",
+      "location": "91572 Bechhofen",
+      "url": "http://webopac.winbiap.de/bechhofen"
+    },
+    {
+      "id": "7f5fcc0229b289bf",
+      "name": "Gemeindebücherei Berg bei Neumarkt",
+      "location": "92348 Berg (Oberpfalz)",
+      "url": "http://cloudopac.winbiap.de/berg"
+    },
+    {
+      "id": "05c3136f816d287f",
+      "name": "Gemeindebücherei Bernhardswald",
+      "location": "93170 Bernhardswald",
+      "url": "http://opac.winbiap.de/bernhardswald"
+    },
+    {
+      "id": "d283d6e9a1763705",
+      "name": "Gemeindebücherei Betzigau",
+      "location": "87488 Betzigau",
+      "url": "http://webopac.winbiap.de/betzigau"
+    },
+    {
+      "id": "eb8d72988abcd11f",
+      "name": "Gemeindebücherei Bickenbach",
+      "location": "64404 Bickenbach",
+      "url": "http://opac.winbiap.de/bickenbach"
+    },
+    {
+      "id": "f6b73c080bbb15c9",
+      "name": "Gemeindebücherei Bindlach",
+      "location": "95463 Bindlach",
+      "url": "http://opac.winbiap.net/bindlach"
+    },
+    {
+      "id": "ab03f6d169ac787d",
+      "name": "Gemeindebücherei Bobenheim-Roxheim",
+      "location": "67240 Bobenheim-Roxheim",
+      "url": "http://webopac.winbiap.de/bobrox"
+    },
+    {
+      "id": "045b5c0274d8ef9d",
+      "name": "Gemeindebücherei Bodolz",
+      "location": "88131 Bodolz",
+      "url": "http://opac.winbiap.net/bodolz"
+    },
+    {
+      "id": "4123f9b026d96951",
+      "name": "Gemeindebücherei Brand",
+      "location": "95682 Brand",
+      "url": "http://opac.winbiap.de/brand"
+    },
+    {
+      "id": "7dda9d6b08e45c46",
+      "name": "Gemeindebücherei Breitbrunn",
+      "location": "83254 Breitbrunn",
+      "url": "http://opac.winbiap.de/breitbrunn"
+    },
+    {
+      "id": "97e0468d444d066f",
+      "name": "Gemeindebücherei Bruckmühl",
+      "location": "83052 Bruckmühl",
+      "url": "http://opac.winbiap.net/bruckmuehl"
+    },
+    {
+      "id": "440ccd19a35fc163",
+      "name": "Gemeindebücherei Brunnthal",
+      "location": "85649 Brunnthal",
+      "url": "http://opac.winbiap.net/brunnthal"
+    },
+    {
+      "id": "ad38ae415f9a36ac",
+      "name": "Gemeindebücherei Bubenreuth",
+      "location": "91088 Bubenreuth",
+      "url": "http://opac.winbiap.net/bubenreuth"
+    },
+    {
+      "id": "bb99b6428537345c",
+      "name": "Gemeindebücherei Buchdorf",
+      "location": "86675 Buchdorf",
+      "url": "http://opac.winbiap.de/buchdorf"
+    },
+    {
+      "id": "0c178d333c85ddd9",
+      "name": "Gemeindebücherei Burbach",
+      "location": "57299 Burbach",
+      "url": "https://webopac.kommunale.it/burbach"
+    },
+    {
+      "id": "41c8f8129924b04f",
+      "name": "Gemeindebücherei Burgheim",
+      "location": "86666 Burgheim",
+      "url": "http://opac.winbiap.net/burgheim"
+    },
+    {
+      "id": "8d2afee605eed0f5",
+      "name": "Gemeindebücherei Burgthann",
+      "location": "90559 Burgthann",
+      "url": "http://webopac.winbiap.de/burgthann"
+    },
+    {
+      "id": "873f08c49edc30b6",
+      "name": "Gemeindebücherei Burtenbach",
+      "location": "89349 Burtenbach",
+      "url": "http://webopac.winbiap.de/burtenbach"
+    },
+    {
+      "id": "021934f619002440",
+      "name": "Gemeindebücherei Bötzingen",
+      "location": "79268 Bötzingen",
+      "url": "http://webopac.winbiap.de/boetzingen"
+    },
+    {
+      "id": "ba9bbc83ec475b45",
+      "name": "Gemeindebücherei Büchenbach",
+      "location": "91186 Büchenbach",
+      "url": "http://opac.winbiap.net/buechenbach"
+    },
+    {
+      "id": "1f8afc240cfb3825",
+      "name": "Gemeindebücherei Denklingen",
+      "location": "86920 Denklingen",
+      "url": "http://webopac.winbiap.de/denklingen"
+    },
+    {
+      "id": "8838738cc1f8e874",
+      "name": "Gemeindebücherei Diedorf",
+      "location": "86420 Diedorf",
+      "url": "http://opac.winbiap.net/diedorf"
+    },
+    {
+      "id": "1cafb5613c7bbfa4",
+      "name": "Gemeindebücherei Dietmannsried",
+      "location": "87463 Dietmannsried",
+      "url": "http://webopac.winbiap.de/dietmannsried"
+    },
+    {
+      "id": "3729693832374911",
+      "name": "Gemeindebücherei Dietramszell",
+      "location": "83623 Dietramszell",
+      "url": "http://opac.winbiap.net/dietramszell"
+    },
+    {
+      "id": "f1af58ce7b1aec7e",
+      "name": "Gemeindebücherei Dietzhölztal",
+      "location": "35716 Dietzhölztal",
+      "url": "http://opac.winbiap.net/dietzhoelztal"
+    },
+    {
+      "id": "67869961966c97d8",
+      "name": "Gemeindebücherei Dörfles-Esbach",
+      "location": "96487 Dörfles-Esbach",
+      "url": "http://opac.winbiap.net/doerfles-esbach"
+    },
+    {
+      "id": "02f58825b9a52c65",
+      "name": "Gemeindebücherei Ebelsbach",
+      "location": "97500 Ebelsbach",
+      "url": "http://opac.winbiap.net/ebelsbach"
+    },
+    {
+      "id": "39c729e7fb992877",
+      "name": "Gemeindebücherei Ebermannsdorf",
+      "location": "92263 Ebermannsdorf",
+      "url": "http://opac.winbiap.net/ebermannsdorf"
+    },
+    {
+      "id": "fe39435e4fe570ce",
+      "name": "Gemeindebücherei Echzell",
+      "location": "61209 Echzell",
+      "url": "http://opac.winbiap.net/echzell"
+    },
+    {
+      "id": "f86c222ee0ab9a53",
+      "name": "Gemeindebücherei Edermünde",
+      "location": "34295 Edermünde",
+      "url": "http://webopac.winbiap.de/edermuende"
+    },
+    {
+      "id": "cd0529de99a4b94b",
+      "name": "Gemeindebücherei Egling",
+      "location": "86492 Egling a.d. Paar",
+      "url": "http://webopac.winbiap.de/egling"
+    },
+    {
+      "id": "0239e0ccb2c52527",
+      "name": "Gemeindebücherei Eichenau",
+      "location": "82223 Eichenau",
+      "url": "http://cloudopac.winbiap.de/eichenau"
+    },
+    {
+      "id": "814846d3d2645edc",
+      "name": "Gemeindebücherei Erkheim",
+      "location": "87746 Erkheim",
+      "url": "https://cloudopac.winbiap.de/erkheim"
+    },
+    {
+      "id": "caa49546bd14db93",
+      "name": "Gemeindebücherei Espenau",
+      "location": "34314 Espenau",
+      "url": "http://opac.winbiap.net/espenau"
+    },
+    {
+      "id": "7d336d21f29dcaa6",
+      "name": "Gemeindebücherei Estenfeld",
+      "location": "97230 Estenfeld",
+      "url": "http://opac.winbiap.net/estenfeld"
+    },
+    {
+      "id": "b8aa677049c5d8eb",
+      "name": "Gemeindebücherei Feldafing",
+      "location": "82340 Feldafing",
+      "url": "http://webopac.winbiap.de/feldafing"
+    },
+    {
+      "id": "74fb656ef86125c5",
+      "name": "Gemeindebücherei Feldkirchen",
+      "location": "85622 Feldkirchen",
+      "url": "http://cloudopac.winbiap.de/feldkirchen"
+    },
+    {
+      "id": "dacae26747aedaa4",
+      "name": "Gemeindebücherei Fellheim",
+      "location": "87748 Fellheim",
+      "url": "http://opac.winbiap.de/fellheim"
+    },
+    {
+      "id": "5f714039abc58b54",
+      "name": "Gemeindebücherei Feucht",
+      "location": "90537 Feucht",
+      "url": "http://opac.winbiap.net/feucht"
+    },
+    {
+      "id": "c109ae5872a8c513",
+      "name": "Gemeindebücherei Finsing",
+      "location": "85464 Finsing",
+      "url": "http://webopac.winbiap.de/finsing"
+    },
+    {
+      "id": "17772e7cc5d6193f",
+      "name": "Gemeindebücherei Forstern",
+      "location": "85659 Forstern",
+      "url": "http://webopac.winbiap.de/forstern"
+    },
+    {
+      "id": "be294d1935d2b4a6",
+      "name": "Gemeindebücherei Forstinning",
+      "location": "85661 Forstinning",
+      "url": "http://opac.winbiap.de/forstinning"
+    },
+    {
+      "id": "cc0532ee0b2f8c3c",
+      "name": "Gemeindebücherei Frammersbach",
+      "location": "97833 Frammersbach",
+      "url": "http://webopac.winbiap.de/frammersbach"
+    },
+    {
+      "id": "52d60d480d327e9d",
+      "name": "Gemeindebücherei Frasdorf",
+      "location": "83112 Frasdorf",
+      "url": "http://opac.winbiap.net/frasdorf"
+    },
+    {
+      "id": "553544980aeb9678",
+      "name": "Gemeindebücherei Fuldatal",
+      "location": "34233 Fuldatal",
+      "url": "http://opac.winbiap.net/fuldatal"
+    },
+    {
+      "id": "9b58af436a117f72",
+      "name": "Gemeindebücherei Geltendorf",
+      "location": "82269 Geltendorf",
+      "url": "http://webopac.winbiap.de/geltendorf"
+    },
+    {
+      "id": "4201f94ecdcfba08",
+      "name": "Gemeindebücherei Gerbrunn",
+      "location": "97218 Gerbrunn",
+      "url": "http://webopac.winbiap.de/gerbrunn"
+    },
+    {
+      "id": "3663b59abaed1ad9",
+      "name": "Gemeindebücherei Gilching",
+      "location": "82205 Gilching",
+      "url": "http://cloudopac.winbiap.de/gilching"
+    },
+    {
+      "id": "8ad619f99fc1e3a1",
+      "name": "Gemeindebücherei Graben",
+      "location": "86836 Graben",
+      "url": "http://opac.winbiap.net/graben"
+    },
+    {
+      "id": "eaf0f9767f066a93",
+      "name": "Gemeindebücherei Grafenrheinfeld",
+      "location": "97506 Grafenrheinfeld",
+      "url": "http://cloudopac.winbiap.de/grafenrheinfeld"
+    },
+    {
+      "id": "269f8c0ad418ee4b",
+      "name": "Gemeindebücherei Grasbrunn",
+      "location": "85630 Grasbrunn",
+      "url": "http://opac.winbiap.net/grasbrunn"
+    },
+    {
+      "id": "f1947eab7544a704",
+      "name": "Gemeindebücherei Groß-Zimmern",
+      "location": "64846 Groß-Zimmern",
+      "url": "http://opac.winbiap.net/gross-zimmern"
+    },
+    {
+      "id": "4fdd47940c5dd36b",
+      "name": "Gemeindebücherei Großenseebach",
+      "location": "91091 Großenseebach",
+      "url": "http://opac.winbiap.net/grossenseebach"
+    },
+    {
+      "id": "a0e5aa1b11c060f9",
+      "name": "Gemeindebücherei Großkrotzenburg",
+      "location": "63538 Großkrotzenburg",
+      "url": "http://opac.winbiap.net/grosskrotzenburg"
+    },
+    {
+      "id": "4f5716bff4547914",
+      "name": "Gemeindebücherei Grossostheim",
+      "location": "63762 Grossostheim",
+      "url": "http://opac.winbiap.net/grossostheim"
+    },
+    {
+      "id": "8c0106b31b1df389",
+      "name": "Gemeindebücherei Grub a. Forst",
+      "location": "96271 Grub am Forst",
+      "url": "http://opac.winbiap.de/grub-am-forst"
+    },
+    {
+      "id": "44ec4d8c26501dce",
+      "name": "Gemeindebücherei Gröbenzell",
+      "location": "82194 Gröbenzell",
+      "url": "http://opac.winbiap.net/groebenzell"
+    },
+    {
+      "id": "feeb10f225f180bd",
+      "name": "Gemeindebücherei Halblech (Trauchgau)",
+      "location": "87642 Halblech",
+      "url": "http://webopac.winbiap.de/halblech"
+    },
+    {
+      "id": "e4a471b786edb2e6",
+      "name": "Gemeindebücherei Hallbergmoos",
+      "location": "85399 Hallbergmoos",
+      "url": "http://webopac.winbiap.de/hallbergmoos"
+    },
+    {
+      "id": "b7594961806b34c7",
+      "name": "Gemeindebücherei Happurg",
+      "location": "91230 Happurg",
+      "url": "http://webopac.winbiap.de/happurg"
+    },
+    {
+      "id": "db8c16e6d740489a",
+      "name": "Gemeindebücherei Hartheim am Rhein",
+      "location": "79258 Hartheim am Rhein",
+      "url": "http://webopac.winbiap.de/hartheim"
+    },
+    {
+      "id": "3b400de2584beb97",
+      "name": "Gemeindebücherei Hebertshausen",
+      "location": "85241 Hebertshausen",
+      "url": "http://webopac.winbiap.de/hebertshausen"
+    },
+    {
+      "id": "535d77cd000e73c0",
+      "name": "Gemeindebücherei Heiningen",
+      "location": "73092 Heiningen",
+      "url": "http://opac.winbiap.net/heiningen"
+    },
+    {
+      "id": "f0367871cfaee113",
+      "name": "Gemeindebücherei Herrsching",
+      "location": "82211 Herrsching",
+      "url": "http://opac.winbiap.net/herrsching"
+    },
+    {
+      "id": "ad0ab18aa59ad6ca",
+      "name": "Gemeindebücherei Hofkirchen",
+      "location": "94544 Hofkirchen",
+      "url": "http://opac.winbiap.de/hofkirchen"
+    },
+    {
+      "id": "9614576d7cafc4cc",
+      "name": "Gemeindebücherei Hohenwart",
+      "location": "86558 Hohenwart",
+      "url": "http://opac.winbiap.net/hohenwart"
+    },
+    {
+      "id": "a529547c3c1cc5f8",
+      "name": "Gemeindebücherei Hollenbach",
+      "location": "86568 Hollenbach",
+      "url": "http://opac.winbiap.de/hollenbach"
+    },
+    {
+      "id": "423dbbd3af440ec3",
+      "name": "Gemeindebücherei Hollenstedt - im Küsterhaus",
+      "location": "21279 Hollenstedt",
+      "url": "http://opac.winbiap.net/hollenstedt"
+    },
+    {
+      "id": "fad063dabfc3f176",
+      "name": "Gemeindebücherei Horgau",
+      "location": "86497 Horgau",
+      "url": "http://opac.winbiap.net/horgau"
+    },
+    {
+      "id": "a82994c823f2453b",
+      "name": "Gemeindebücherei Hurlach",
+      "location": "86857 Hurlach",
+      "url": "http://opac.winbiap.net/hurlach"
+    },
+    {
+      "id": "5089fe0dcfacd838",
+      "name": "Gemeindebücherei Ihrlerstein",
+      "location": "93346 Ihrlerstein",
+      "url": "http://opac.winbiap.net/ihrlerstein"
+    },
+    {
+      "id": "ed30b5b5670492b7",
+      "name": "Gemeindebücherei im Bürgerzentrum Heroldsberg",
+      "location": "90562 Heroldsberg",
+      "url": "http://opac.winbiap.net/heroldsberg"
+    },
+    {
+      "id": "bbda5d02e2c8cc9e",
+      "name": "Gemeindebücherei im Torwärterhaus",
+      "location": "89551 Königsbronn",
+      "url": "http://lummerland.datronic.de/cgi-bin/findus.fcgi.pl?customer=koenigsbronn"
+    },
+    {
+      "id": "60aae4a23276bc24",
+      "name": "Gemeindebücherei Kaisheim",
+      "location": "86687 Kaisheim",
+      "url": "http://opac.winbiap.net/kaisheim"
+    },
+    {
+      "id": "2e42cd70fe46c42c",
+      "name": "Gemeindebücherei Kalchreuth",
+      "location": "90562 Kalchreuth",
+      "url": "http://opac.winbiap.net/kalchreuth"
+    },
+    {
+      "id": "c2ec1432755ea866",
+      "name": "Gemeindebücherei Karlsfeld",
+      "location": "85757 Karlsfeld",
+      "url": "http://webopac.winbiap.de/karlsfeld"
+    },
+    {
+      "id": "42c0d21ba882560e",
+      "name": "Gemeindebücherei Kirchheim",
+      "location": "85551 Kirchheim b. München",
+      "url": "http://webopac.winbiap.de/kirchheim"
+    },
+    {
+      "id": "b60699b950cf3cdf",
+      "name": "Gemeindebücherei Kirchroth",
+      "location": "94356 Kirchroth",
+      "url": "http://opac.winbiap.de/kirchroth"
+    },
+    {
+      "id": "f32207c0293e08e3",
+      "name": "Gemeindebücherei Kirchseeon",
+      "location": "85614 Kirchseeon",
+      "url": "http://webopac.winbiap.de/kirchseeon"
+    },
+    {
+      "id": "d7ff0c3c50894ec7",
+      "name": "Gemeindebücherei Kist",
+      "location": "97270 Kist",
+      "url": "http://opac.winbiap.net/kist"
+    },
+    {
+      "id": "9feb1196bdd94d43",
+      "name": "Gemeindebücherei Knetzgau",
+      "location": "97478 Knetzgau",
+      "url": "http://webopac.winbiap.de/knetzgau"
+    },
+    {
+      "id": "0cddbeb42a7a819d",
+      "name": "Gemeindebücherei Kriftel",
+      "location": "65830 Kriftel",
+      "url": "http://webopac.winbiap.de/kriftel"
+    },
+    {
+      "id": "4ca5b66cc00ead26",
+      "name": "Gemeindebücherei Kulmain",
+      "location": "95508 Kulmain",
+      "url": "http://opac.winbiap.net/kulmain"
+    },
+    {
+      "id": "dee3f5310ea8f991",
+      "name": "Gemeindebücherei Kutzenhausen",
+      "location": "86500 Kutzenhausen",
+      "url": "http://opac.winbiap.de/kutzenhausen"
+    },
+    {
+      "id": "f7d5811e47974b65",
+      "name": "Gemeindebücherei Kösching",
+      "location": "85092 Kösching",
+      "url": "http://webopac.winbiap.de/koesching"
+    },
+    {
+      "id": "e47c428479e073a1",
+      "name": "Gemeindebücherei Künzell",
+      "location": "36093 Künzell",
+      "url": "http://webopac.winbiap.de/kuenzell"
+    },
+    {
+      "id": "205fbc94d8fcd5c9",
+      "name": "Gemeindebücherei Langenneufnach",
+      "location": "86863 Langenneufnach",
+      "url": "http://opac.winbiap.net/langenneufnach"
+    },
+    {
+      "id": "c7eeb9523adafe26",
+      "name": "Gemeindebücherei Langweid",
+      "location": "86462 Langweid",
+      "url": "http://opac.winbiap.net/langweid"
+    },
+    {
+      "id": "b1fd0eb4d5eedb87",
+      "name": "Gemeindebücherei Lauben",
+      "location": "87493 Lauben",
+      "url": "http://opac.winbiap.net/lauben"
+    },
+    {
+      "id": "55a12c654516c9b6",
+      "name": "Gemeindebücherei Lautertal",
+      "location": "96486 Lautertal/Ofr.",
+      "url": "http://opac.winbiap.de/lautertal"
+    },
+    {
+      "id": "c88b77f685df9f0b",
+      "name": "Gemeindebücherei Leiblfing",
+      "location": "94339 Leiblfing",
+      "url": "http://opac.winbiap.de/leiblfing"
+    },
+    {
+      "id": "2204ba2c394b734d",
+      "name": "Gemeindebücherei Lenggries",
+      "location": "83661 Lenggries",
+      "url": "http://opac.winbiap.net/lenggries"
+    },
+    {
+      "id": "821f7c64ce35cd7e",
+      "name": "Gemeindebücherei Lenningen",
+      "location": "73252 Lenningen",
+      "url": "http://cloudopac.winbiap.de/lenningen"
+    },
+    {
+      "id": "4fdf55794f208dd9",
+      "name": "Gemeindebücherei Leopoldshöhe",
+      "location": "33818 Leopoldshöhe",
+      "url": "http://opac.winbiap.net/leopoldshoehe"
+    },
+    {
+      "id": "6a27ad8fca5fbba7",
+      "name": "Gemeindebücherei Maisach",
+      "location": "82216 Maisach",
+      "url": "http://webopac.winbiap.de/maisach"
+    },
+    {
+      "id": "1da510ac68218d9a",
+      "name": "Gemeindebücherei Malsfeld",
+      "location": "34323 Malsfeld",
+      "url": "http://opac.winbiap.net/malsfeld"
+    },
+    {
+      "id": "90c12d9bd44f3fdb",
+      "name": "Gemeindebücherei Mammendorf",
+      "location": "82291 Mammendorf",
+      "url": "http://opac.winbiap.net/mammendorf"
+    },
+    {
+      "id": "d96e83c990825f10",
+      "name": "Gemeindebücherei Markt Schwaben",
+      "location": "85570 Markt Schwaben",
+      "url": "http://opac.winbiap.net/marktschwaben"
+    },
+    {
+      "id": "32222718a3f2f8ae",
+      "name": "Gemeindebücherei Meckesheim",
+      "location": "74909 Meckesheim",
+      "url": "http://opac.winbiap.net/meckesheim"
+    },
+    {
+      "id": "0b40300688c1a858",
+      "name": "Gemeindebücherei Mertingen",
+      "location": "86690 Mertingen",
+      "url": "http://webopac.winbiap.de/mertingen"
+    },
+    {
+      "id": "5ae654fb054fe8e8",
+      "name": "Gemeindebücherei Mintraching",
+      "location": "93098 Mintraching",
+      "url": "http://opac.winbiap.net/mintraching"
+    },
+    {
+      "id": "90716de833b1dae8",
+      "name": "Gemeindebücherei Morsbach",
+      "location": "51597 Morsbach",
+      "url": "http://webopac.winbiap.de/morsbach"
+    },
+    {
+      "id": "a573f9755da3296f",
+      "name": "Gemeindebücherei Murnau",
+      "location": "82418 Murnau a. Staffelsee",
+      "url": "http://cloudopac.winbiap.de/murnau"
+    },
+    {
+      "id": "0d72be46ec9faf27",
+      "name": "Gemeindebücherei Möhnesee",
+      "location": "59519 Möhnesee-Körbecke",
+      "url": "https://webopac.kommunale.it/moehnesee"
+    },
+    {
+      "id": "25b6749110a4afab",
+      "name": "Gemeindebücherei Mühlhausen",
+      "location": "92360 Mühlhausen",
+      "url": "http://opac.winbiap.de/muehlhausen"
+    },
+    {
+      "id": "182e88f99061de50",
+      "name": "Gemeindebücherei Münchsmünster",
+      "location": "85126 Münchsmünster",
+      "url": "http://opac.winbiap.net/muenchsmuenster"
+    },
+    {
+      "id": "84a3f184420f24af",
+      "name": "Gemeindebücherei Nettersheim",
+      "location": "53947 Nettersheim",
+      "url": "http://opac.winbiap.net/nettersheim"
+    },
+    {
+      "id": "cce24ede12a37d95",
+      "name": "Gemeindebücherei Neuching",
+      "location": "85467 Niederneuching",
+      "url": "http://webopac.winbiap.de/neuching"
+    },
+    {
+      "id": "9d1317f8939ca491",
+      "name": "Gemeindebücherei Neuenkirchen-Vörden",
+      "location": "49434 Neuenkirchen-Vörden",
+      "url": "http://webopac.winbiap.de/neuenkirchen-voerden"
+    },
+    {
+      "id": "dba0ccd33ee27dd3",
+      "name": "Gemeindebücherei Neuhof",
+      "location": "36119 Neuhof",
+      "url": "http://opac.winbiap.de/Neuhof"
+    },
+    {
+      "id": "8b75833fad75ef98",
+      "name": "Gemeindebücherei Neuried",
+      "location": "82061 Neuried",
+      "url": "http://webopac.winbiap.de/neuried"
+    },
+    {
+      "id": "d669d5740ad06d1d",
+      "name": "Gemeindebücherei Niederkaufungen",
+      "location": "34260 Kaufungen",
+      "url": "http://opac.winbiap.net/kaufungen"
+    },
+    {
+      "id": "4bd9aaa8a490ebfb",
+      "name": "Gemeindebücherei Niedernhausen",
+      "location": "65527 Niedernhausen",
+      "url": "http://opac.winbiap.net/niedernhausen"
+    },
+    {
+      "id": "c7addf0c207f1ef0",
+      "name": "Gemeindebücherei Niestetal",
+      "location": "34266 Niestetal",
+      "url": "http://opac.winbiap.net/niestetal"
+    },
+    {
+      "id": "47db1b2a5849f82b",
+      "name": "Gemeindebücherei Nüdlingen",
+      "location": "97720 Nüdlingen",
+      "url": "http://opac.winbiap.net/nuedlingen"
+    },
+    {
+      "id": "5ea2896e896ba2db",
+      "name": "Gemeindebücherei Oberammergau",
+      "location": "82487 Oberammergau",
+      "url": "http://webopac.winbiap.de/oberammergau"
+    },
+    {
+      "id": "611850c33a8bc20c",
+      "name": "Gemeindebücherei Oberding",
+      "location": "85445 Oberding",
+      "url": "http://opac.winbiap.net/oberding"
+    },
+    {
+      "id": "0febeb22f253cba9",
+      "name": "Gemeindebücherei Oberkaufungen",
+      "location": "34260 Kaufungen",
+      "url": "http://opac.winbiap.net/kaufungen"
+    },
+    {
+      "id": "12c7ee246f98cfb5",
+      "name": "Gemeindebücherei Oberschneiding",
+      "location": "94363 Oberschneiding",
+      "url": "http://webopac.winbiap.de/oberschneiding"
+    },
+    {
+      "id": "44a3a86822dba448",
+      "name": "Gemeindebücherei Peissenberg",
+      "location": "82380 Peissenberg",
+      "url": "http://webopac.winbiap.de/peissenberg"
+    },
+    {
+      "id": "4f2de7882596942a",
+      "name": "Gemeindebücherei Pentling",
+      "location": "93080 Pentling",
+      "url": "http://webopac.winbiap.de/pentling"
+    },
+    {
+      "id": "cea8215cf0b04825",
+      "name": "Gemeindebücherei Pfaffing",
+      "location": "83539 Pfaffing",
+      "url": "http://opac.winbiap.net/pfaffing"
+    },
+    {
+      "id": "877368b6b5522990",
+      "name": "Gemeindebücherei Pfalzgrafenweiler",
+      "location": "72285 Pfalzgrafenweiler",
+      "url": "http://opac.winbiap.net/pfalzgrafenweiler"
+    },
+    {
+      "id": "13d1f8a128649156",
+      "name": "Gemeindebücherei Pfatter",
+      "location": "93102 Pfatter",
+      "url": "http://webopac.winbiap.de/pfatter"
+    },
+    {
+      "id": "eb19651830adbb07",
+      "name": "Gemeindebücherei Pfronten",
+      "location": "87459 Pfronten-Berg",
+      "url": "http://webopac.winbiap.de/pfronten"
+    },
+    {
+      "id": "869855be8f2cede9",
+      "name": "Gemeindebücherei Planegg",
+      "location": "82152 Planegg",
+      "url": "http://webopac.winbiap.de/planegg"
+    },
+    {
+      "id": "6852da423630d22b",
+      "name": "Gemeindebücherei Plüderhausen",
+      "location": "73655 Plüderhausen",
+      "url": "http://webopac.winbiap.de/pluederhausen"
+    },
+    {
+      "id": "dab4a76e7b5826f1",
+      "name": "Gemeindebücherei Poing",
+      "location": "85586 Poing",
+      "url": "http://webopac.winbiap.de/poing"
+    },
+    {
+      "id": "1515803c34631bca",
+      "name": "Gemeindebücherei Prittriching",
+      "location": "86931 Prittriching",
+      "url": "http://opac.winbiap.net/prittriching"
+    },
+    {
+      "id": "0ef90cce7ff28d8d",
+      "name": "Gemeindebücherei Putzbrunn",
+      "location": "85640 Putzbrunn",
+      "url": "http://webopac.winbiap.de/putzbrunn"
+    },
+    {
+      "id": "8463cbcf869fa090",
+      "name": "Gemeindebücherei Pöcking",
+      "location": "82343 Pöcking",
+      "url": "http://opac.winbiap.net/poecking"
+    },
+    {
+      "id": "4fcb8e7c0426cfb5",
+      "name": "Gemeindebücherei Pürgen",
+      "location": "86932 Pürgen",
+      "url": "http://opac.winbiap.de/puergen"
+    },
+    {
+      "id": "c7626581aedc9799",
+      "name": "Gemeindebücherei Rammingen",
+      "location": "86871 Rammingen",
+      "url": "http://opac.winbiap.de/rammingen"
+    },
+    {
+      "id": "b83a19e8530f4827",
+      "name": "Gemeindebücherei Randersacker",
+      "location": "97236 Randersacker",
+      "url": "http://webopac.winbiap.de/randersacker"
+    },
+    {
+      "id": "10d01d2223483226",
+      "name": "Gemeindebücherei Raubling",
+      "location": "83064 Raubling",
+      "url": "http://webopac.winbiap.de/raubling"
+    },
+    {
+      "id": "53ea65ab23e4c740",
+      "name": "Gemeindebücherei Reichertshausen",
+      "location": "85293 Reichertshausen",
+      "url": "http://webopac.winbiap.de/reichertshausen"
+    },
+    {
+      "id": "b2d28f301cff8e08",
+      "name": "Gemeindebücherei Reichertshofen",
+      "location": "85084 Reichertshofen",
+      "url": "https://cloudopac.winbiap.de/reichertshofen"
+    },
+    {
+      "id": "857178ad08c272fa",
+      "name": "Gemeindebücherei Rimsting",
+      "location": "83253 Rimsting",
+      "url": "http://webopac.winbiap.de/rimsting"
+    },
+    {
+      "id": "4ea01d5ad69a5731",
+      "name": "Gemeindebücherei Röttenbach",
+      "location": "91341 Röttenbach",
+      "url": "http://opac.winbiap.net/roettenbach"
+    },
+    {
+      "id": "a8c2a12469fc5b2f",
+      "name": "Gemeindebücherei Saal a. d. Donau",
+      "location": "93342 Saal a .d. Donau",
+      "url": "http://opac.winbiap.de/saal-donau"
+    },
+    {
+      "id": "e0309cea353d2aac",
+      "name": "Gemeindebücherei Salching",
+      "location": "94330 Salching",
+      "url": "http://webopac.winbiap.de/salching"
+    },
+    {
+      "id": "094573fee8d19b81",
+      "name": "Gemeindebücherei Scheidegg",
+      "location": "88175 Scheidegg",
+      "url": "http://webopac.winbiap.de/scheidegg"
+    },
+    {
+      "id": "3a6ba9bc1e41c33e",
+      "name": "Gemeindebücherei Schondorf",
+      "location": "86938 Schondorf",
+      "url": "http://opac.winbiap.net/schondorf"
+    },
+    {
+      "id": "d44adc5c61318846",
+      "name": "Gemeindebücherei Schwabhausen",
+      "location": "85247 Schwabhausen",
+      "url": "http://opac.winbiap.net/schwabhausen"
+    },
+    {
+      "id": "1325e3a653f199df",
+      "name": "Gemeindebücherei Schwaig",
+      "location": "90571 Schwaig",
+      "url": "http://opac.winbiap.net/schwaig"
+    },
+    {
+      "id": "a1acbdbdaf030930",
+      "name": "Gemeindebücherei Schwanfeld",
+      "location": "97523 Schwanfeld",
+      "url": "http://webopac.winbiap.de/schwanfeld"
+    },
+    {
+      "id": "e8359a61033de7a3",
+      "name": "Gemeindebücherei Schwangau",
+      "location": "87645 Schwangau",
+      "url": "http://opac.winbiap.net/schwangau"
+    },
+    {
+      "id": "7a5110c82881058e",
+      "name": "Gemeindebücherei Schwanstetten",
+      "location": "90596 Schwanstetten",
+      "url": "http://webopac.winbiap.de/schwanstetten"
+    },
+    {
+      "id": "d7da028868b632e3",
+      "name": "Gemeindebücherei Schwarzenbruck",
+      "location": "90592 Schwarzenbruck",
+      "url": "http://webopac.winbiap.de/schwarzenbruck"
+    },
+    {
+      "id": "719d5480a7fc7035",
+      "name": "Gemeindebücherei Schönau a. Königssee",
+      "location": "83471 Schönau am Königssee",
+      "url": "http://lummerland.datronic.de/cgi-bin/findus.fcgi.pl?customer=schoenau"
+    },
+    {
+      "id": "9c456880e78b3c31",
+      "name": "Gemeindebücherei Schönbrunn",
+      "location": "96185 Schönbrunn i. Steigerwald",
+      "url": "http://webopac.winbiap.de/schoenbrunn"
+    },
+    {
+      "id": "6d111d079a0680a9",
+      "name": "Gemeindebücherei Seelbach",
+      "location": "77960 Seelbach",
+      "url": "http://opac.winbiap.net/seelbach"
+    },
+    {
+      "id": "262c3988535fb85b",
+      "name": "Gemeindebücherei Seeon",
+      "location": "83370 Seeon",
+      "url": "http://opac.winbiap.net/seeon"
+    },
+    {
+      "id": "208cd2a8b8210707",
+      "name": "Gemeindebücherei Sonnefeld",
+      "location": "96242 Sonnefeld",
+      "url": "http://webopac.winbiap.de/sonnefeld"
+    },
+    {
+      "id": "c611ad90eadbf18a",
+      "name": "Gemeindebücherei St. Michael Fischach",
+      "location": "86850 Fischach",
+      "url": "http://opac.winbiap.net/fischach"
+    },
+    {
+      "id": "27428ed3f15ca2f6",
+      "name": "Gemeindebücherei St. Nikolaus Langenbach",
+      "location": "85416 Langenbach",
+      "url": "http://opac.winbiap.net/langenbach"
+    },
+    {
+      "id": "d1346367fd6f2351",
+      "name": "Gemeindebücherei St. Peter und Paul Thierhaupten",
+      "location": "86672 Thierhaupten",
+      "url": "http://opac.winbiap.net/thierhaupten"
+    },
+    {
+      "id": "7cb6e0dfeeb94152",
+      "name": "Gemeindebücherei Steinach",
+      "location": "94377 Steinach",
+      "url": "http://opac.winbiap.de/steinach"
+    },
+    {
+      "id": "d3e6b27d2e4aa78f",
+      "name": "Gemeindebücherei Sulzberg",
+      "location": "87477 Sulzberg",
+      "url": "http://webopac.winbiap.de/sulzberg"
+    },
+    {
+      "id": "c1c4d172cff33719",
+      "name": "Gemeindebücherei Tacherting",
+      "location": "83342 Tacherting",
+      "url": "http://opac.winbiap.net/tacherting"
+    },
+    {
+      "id": "4fa2cdf502c43136",
+      "name": "Gemeindebücherei Tapfheim",
+      "location": "86660 Tapfheim",
+      "url": "http://opac.winbiap.net/tapfheim"
+    },
+    {
+      "id": "4c68c4be6baf8ca2",
+      "name": "Gemeindebücherei Taufkirchen",
+      "location": "82024 Taufkirchen",
+      "url": "http://webopac.winbiap.de/taufkirchen"
+    },
+    {
+      "id": "812a358a28f2ca02",
+      "name": "Gemeindebücherei Thüngersheim",
+      "location": "97291 Thüngersheim",
+      "url": "http://webopac.winbiap.de/thuengersheim"
+    },
+    {
+      "id": "85573008bf34d92a",
+      "name": "Gemeindebücherei Tutzing",
+      "location": "82327 Tutzing",
+      "url": "http://opac.winbiap.net/tutzing"
+    },
+    {
+      "id": "297e93c1cc375735",
+      "name": "Gemeindebücherei Türkheim",
+      "location": "86842 Türkheim",
+      "url": "http://opac.winbiap.de/tuerkheim"
+    },
+    {
+      "id": "e65f907d8b67e662",
+      "name": "Gemeindebücherei Umkirch",
+      "location": "79224 Umkirch",
+      "url": "http://opac.winbiap.net/umkirch"
+    },
+    {
+      "id": "e657684362329fe2",
+      "name": "Gemeindebücherei Unterhaching",
+      "location": "82008 Unterhaching",
+      "url": "http://webopac.winbiap.de/unterhaching"
+    },
+    {
+      "id": "9fc1e2c2921d2b3b",
+      "name": "Gemeindebücherei Untermeitingen",
+      "location": "86836 Untermeitingen",
+      "url": "http://webopac.winbiap.de/untermeitingen"
+    },
+    {
+      "id": "2bcda279c62f810c",
+      "name": "Gemeindebücherei Unterneukirchen",
+      "location": "84579 Unterneukirchen",
+      "url": "http://opac.winbiap.net/unterneukirchen"
+    },
+    {
+      "id": "8d816b94b1f73816",
+      "name": "Gemeindebücherei Untersiemau",
+      "location": "96253 Untersiemau",
+      "url": "http://opac.winbiap.net/untersiemau"
+    },
+    {
+      "id": "4d8ff2d023ead364",
+      "name": "Gemeindebücherei Ustersbach",
+      "location": "86514 Ustersbach",
+      "url": "http://opac.winbiap.net/ustersbach"
+    },
+    {
+      "id": "58161d1cfb3d92c4",
+      "name": "Gemeindebücherei Uttenreuth",
+      "location": "91080 Uttenreuth",
+      "url": "http://cloudopac.winbiap.de/uttenreuth"
+    },
+    {
+      "id": "5b390bae1a2bbfc8",
+      "name": "Gemeindebücherei Utting am Ammersee",
+      "location": "86919 Utting",
+      "url": "http://opac.winbiap.net/utting"
+    },
+    {
+      "id": "106cf8ee843a009c",
+      "name": "Gemeindebücherei Vaterstetten",
+      "location": "85598 Baldham",
+      "url": "http://opac.winbiap.net/vaterstetten"
+    },
+    {
+      "id": "b1bcb8d9d00c1ab4",
+      "name": "Gemeindebücherei Veitsbronn",
+      "location": "90587 Veitsbronn",
+      "url": "http://webopac.winbiap.de/veitsbronn"
+    },
+    {
+      "id": "46c7bffd9e658f64",
+      "name": "Gemeindebücherei Velden",
+      "location": "84149 Velden",
+      "url": "http://opac.winbiap.net/velden"
+    },
+    {
+      "id": "82a0aefea072f302",
+      "name": "Gemeindebücherei Vierkirchen",
+      "location": "85256 Vierkirchen",
+      "url": "http://opac.winbiap.de/vierkirchen"
+    },
+    {
+      "id": "85fc7bf4fcc6e5cb",
+      "name": "Gemeindebücherei Vilsheim",
+      "location": "84186 Vilsheim",
+      "url": "http://opac.winbiap.net/vilsheim"
+    },
+    {
+      "id": "4a3057ff33f0f376",
+      "name": "Gemeindebücherei Waakirchen",
+      "location": "83666 Waakirchen",
+      "url": "http://opac.winbiap.de/Waakirchen"
+    },
+    {
+      "id": "ea950c92abf455ac",
+      "name": "Gemeindebücherei Wald",
+      "location": "93192 Wald",
+      "url": "http://webopac.winbiap.de/wald"
+    },
+    {
+      "id": "df4d2f5d8378707a",
+      "name": "Gemeindebücherei Waldbüttelbrunn",
+      "location": "97297 Waldbüttelbrunn",
+      "url": "http://webopac.winbiap.de/waldbuettelbrunn"
+    },
+    {
+      "id": "f7374512db23b1ea",
+      "name": "Gemeindebücherei Wartenberg",
+      "location": "85456 Wartenberg",
+      "url": "http://webopac.winbiap.de/wartenberg"
+    },
+    {
+      "id": "6796292a3269da41",
+      "name": "Gemeindebücherei Wehringen",
+      "location": "86517 Wehringen",
+      "url": "http://webopac.winbiap.de/wehringen"
+    },
+    {
+      "id": "1fe91d79a7956220",
+      "name": "Gemeindebücherei Weidhausen",
+      "location": "96279 Weidhausen b. Coburg",
+      "url": "https://cloudopac.winbiap.de/weidhausen"
+    },
+    {
+      "id": "33f50ed4d704a7bc",
+      "name": "Gemeindebücherei Weil",
+      "location": "86947 Weil OT Geretshausen",
+      "url": "http://opac.winbiap.de/weil"
+    },
+    {
+      "id": "a2ec7892b8143a61",
+      "name": "Gemeindebücherei Weiler-Simmerberg",
+      "location": "88171 Weiler im Allgäu",
+      "url": "http://cloudopac.winbiap.de/weiler-simmerberg"
+    },
+    {
+      "id": "cdf57213f066a69b",
+      "name": "Gemeindebücherei Wellheim",
+      "location": "91809 Wellheim",
+      "url": "http://opac.winbiap.net/wellheim"
+    },
+    {
+      "id": "31c79bb80f3e25ba",
+      "name": "Gemeindebücherei Wendelstein",
+      "location": "90530 Wendelstein",
+      "url": "http://opac.winbiap.net/wendelstein"
+    },
+    {
+      "id": "ec2d3db764c8f506",
+      "name": "Gemeindebücherei Wenzenbach",
+      "location": "93173 Wenzenbach",
+      "url": "http://webopac.winbiap.de/wenzenbach"
+    },
+    {
+      "id": "a1ed6243d0b31f7e",
+      "name": "Gemeindebücherei Weßling",
+      "location": "82234 Weßling",
+      "url": "http://opac.winbiap.net/wessling"
+    },
+    {
+      "id": "f1a7ef25e2a155ae",
+      "name": "Gemeindebücherei Wettstetten",
+      "location": "85139 Wettstetten",
+      "url": "http://cloudopac.winbiap.de/wettstetten"
+    },
+    {
+      "id": "2bf028ff408a91a7",
+      "name": "Gemeindebücherei Wiernsheim",
+      "location": "75446 Wiernsheim",
+      "url": "http://webopac.winbiap.de/wiernsheim"
+    },
+    {
+      "id": "99085ca56211f255",
+      "name": "Gemeindebücherei Wiesenfelden",
+      "location": "94344 Wiesenfelden",
+      "url": "http://webopac.winbiap.de/wiesenfelden"
+    },
+    {
+      "id": "6ba65b7361bbc28a",
+      "name": "Gemeindebücherei Wiggensbach",
+      "location": "87487 Wiggensbach",
+      "url": "http://opac.winbiap.net/wiggensbach"
+    },
+    {
+      "id": "b779ccff1ac5f496",
+      "name": "Gemeindebücherei Wildpoldsried",
+      "location": "87499 Wildpoldsried",
+      "url": "http://webopac.winbiap.de/wildpoldsried"
+    },
+    {
+      "id": "876614fbde55ca94",
+      "name": "Gemeindebücherei Wilhermsdorf",
+      "location": "91452 Wilhermsdorf",
+      "url": "http://webopac.winbiap.de/wilhermsdorf"
+    },
+    {
+      "id": "c51d12a6bd93ae62",
+      "name": "Gemeindebücherei Wölfersheim",
+      "location": "61200 Wölfersheim",
+      "url": "http://opac.winbiap.de/woelfersheim"
+    },
+    {
+      "id": "0d6fe58dd7f966a7",
+      "name": "Gemeindebücherei Wörth",
+      "location": "85457 Wörth",
+      "url": "http://opac.winbiap.net/woerth"
+    },
+    {
+      "id": "0fc0b1ef90d71333",
+      "name": "Gemeindebücherei Wörth a. d. Isar",
+      "location": "84109 Wörth",
+      "url": "http://webopac.winbiap.de/woerth_isar"
+    },
+    {
+      "id": "3a071a9f6a40c2f0",
+      "name": "Gemeindebücherei Wörthsee",
+      "location": "82237 Wörthsee",
+      "url": "http://webopac.winbiap.de/woerthsee"
+    },
+    {
+      "id": "09ff615d85b3ca31",
+      "name": "Gemeindebücherei Zellingen",
+      "location": "97225 Zellingen",
+      "url": "http://opac.winbiap.net/zellingen"
+    },
+    {
+      "id": "5dd71c70726b902d",
+      "name": "Gemeindebücherei Zolling",
+      "location": "85406 Zolling",
+      "url": "http://webopac.winbiap.de/zolling"
+    },
+    {
+      "id": "260ceadb3d604476",
+      "name": "Gemeindebücherei Zusmarshausen",
+      "location": "86441 Zusmarshausen",
+      "url": "https://www.gemeindebuechereizusmarshausen.de/"
+    },
+    {
+      "id": "1d1ebc557e516dfc",
+      "name": "Gemeindebücherei Zuzenhausen",
+      "location": "74939 Zuzenhausen",
+      "url": "http://opac.winbiap.de/zuzenhausen"
+    },
+    {
+      "id": "2d0b8af4d047e78a",
+      "name": "Gemeindebücherei Übersee",
+      "location": "83236 Übersee",
+      "url": "http://opac.winbiap.net/uebersee"
+    },
+    {
+      "id": "404e67eb8012e25c",
+      "name": "Gemeindebüchereien Schöneck (Kilianstädten)",
+      "location": "61137 Schöneck",
+      "url": "http://webopac.winbiap.de/schoeneck"
+    },
+    {
+      "id": "48477e28ae7bb5f9",
+      "name": "Gesamtschule Kaufungen (IGS Kaufungen)",
+      "location": "34260 Kaufungen",
+      "url": "http://opac.winbiap.net/kaufungen"
+    },
+    {
+      "id": "7f02ce5f97e105ef",
+      "name": "Gesamtschule Schenklengsfeld",
+      "location": "36277 Schenklengsfeld",
+      "url": "http://webopac.winbiap.de/schenklengsfeld"
+    },
+    {
+      "id": "4e169c8db32b9ad1",
+      "name": "Gewerkschaft der Polizei",
+      "location": "40721 Hilden",
+      "url": "http://opac.winbiap.net/gdp"
+    },
+    {
+      "id": "30dc5681c6871d47",
+      "name": "Goethe-Gymnasium Regensburg",
+      "location": "93049 Regensburg",
+      "url": "http://webopac.winbiap.de/regensburg_gym"
+    },
+    {
+      "id": "90439a73755e8884",
+      "name": "Grund- und Mittelschule Augsburg-Bärenkeller",
+      "location": "86156 Augsburg-Bärenkeller",
+      "url": "http://webopac.winbiap.de/augsburg_baerenkeller"
+    },
+    {
+      "id": "279c77d8c30d58cc",
+      "name": "Grund- und Mittelschule Dietmannsried",
+      "location": "87463 Dietmannsried",
+      "url": "http://opac.winbiap.net/dietmannsried-schule"
+    },
+    {
+      "id": "d389e40aba433aa3",
+      "name": "Grundschule Bücherei Baltmannsweiler",
+      "location": "73666 Baltmannsweiler",
+      "url": "http://opac.winbiap.net/baltmannsweiler"
+    },
+    {
+      "id": "d781a42246ee4d14",
+      "name": "Grundschule Gräfelfing",
+      "location": "82166 Gräfelfing",
+      "url": "http://webopac.winbiap.de/gs-graefelfing"
+    },
+    {
+      "id": "67adf54b5576ff4a",
+      "name": "Grundschule Sandershausen",
+      "location": "34266 Niestetal",
+      "url": "http://opac.winbiap.net/niestetal"
+    },
+    {
+      "id": "685f403e60f3750b",
+      "name": "Gymnasium Am Löhrtor Siegen",
+      "location": "57072 Siegen",
+      "url": "https://webopac.citkomm.de/gal"
+    },
+    {
+      "id": "503177e3ad8a48ed",
+      "name": "Gymnasium Auf der Morgenröthe Siegen",
+      "location": "57080 Siegen",
+      "url": "https://webopac.kommunale.it/sam"
+    },
+    {
+      "id": "bb356574c729dbd4",
+      "name": "Gymnasium bei Sankt Stephan",
+      "location": "86152 Augsburg",
+      "url": "http://opac.winbiap.net/augsburg_st_stephan"
+    },
+    {
+      "id": "5e67c01108331772",
+      "name": "Gymnasium bei St. Anna",
+      "location": "86159 Augsburg",
+      "url": "http://webopac.winbiap.de/st-anna-gym"
+    },
+    {
+      "id": "8c5dfe91bc647172",
+      "name": "Gymnasium der Regensburger Domspatzen",
+      "location": "93055 Regensburg",
+      "url": "http://opac.winbiap.net/regensburg_domspatzen"
+    },
+    {
+      "id": "25fb13fc0c304049",
+      "name": "Gymnasium Donauwörth",
+      "location": "86609 Donauwörth",
+      "url": "http://opac.winbiap.net/donauwoerth-gym"
+    },
+    {
+      "id": "5a140214c02b2f5c",
+      "name": "Gymnasium Gaimersheim",
+      "location": "85080 Gaimersheim",
+      "url": "http://webopac.winbiap.de/gaimersheim-gym"
+    },
+    {
+      "id": "79e2f0e34037a51e",
+      "name": "Gymnasium Herzogenaurach",
+      "location": "91074 Herzogenaurach",
+      "url": "http://opac.winbiap.net/herzogenaurach-gym"
+    },
+    {
+      "id": "d91f90a1af210087",
+      "name": "Gymnasium Neubiberg",
+      "location": "85579 Neubiberg",
+      "url": "http://opac.winbiap.net/gymneubiberg"
+    },
+    {
+      "id": "c8f2e4b38903d7a0",
+      "name": "Gymnasium Ottobrunn",
+      "location": "85521 Ottobrunn",
+      "url": "http://webopac.winbiap.de/ottobrunn-gym"
+    },
+    {
+      "id": "2191a420609bdcfa",
+      "name": "Gymnasium Schrobenhausen",
+      "location": "86529 Schrobenhausen",
+      "url": "http://webopac.winbiap.de/schrobenhausen-gym"
+    },
+    {
+      "id": "e7598f14daa1845a",
+      "name": "Gymnasium und Kolleg St. Matthias WOR",
+      "location": "82515 Wolfratshausen",
+      "url": "http://opac.winbiap.net/wolfratshausen-gym"
+    },
+    {
+      "id": "8951a6374287e860",
+      "name": "Gymnasium Weilheim",
+      "location": "82362 Weilheim",
+      "url": "http://opac.winbiap.net/weilheim-gym"
+    },
+    {
+      "id": "a563a2c130536beb",
+      "name": "Gymnasium Wertingen",
+      "location": "86637 Wertingen",
+      "url": "http://webopac.winbiap.de/wertingen_gym"
+    },
+    {
+      "id": "4b307de10e7cdaa1",
+      "name": "Hallertau-Gymnasium Wolnzach",
+      "location": "85283 Wolnzach",
+      "url": "http://opac.winbiap.net/wolnzach-gym"
+    },
+    {
+      "id": "184a6b422bc07ec0",
+      "name": "Hariolf-Gymnasium Ellwangen",
+      "location": "73479 Ellwangen (Jagst)",
+      "url": "http://opac.winbiap.de/ellwangen-hg"
+    },
+    {
+      "id": "8c83d9f08acf01f6",
+      "name": "Hegau Gymnasium Singen",
+      "location": "78224 Singen",
+      "url": "http://opac.winbiap.net/singen_gym"
+    },
+    {
+      "id": "0e1cd3e3651397b4",
+      "name": "Heinrich-Schaumberger-Bibliothek Rödental",
+      "location": "96472 Rödental",
+      "url": "http://webopac.winbiap.de/roedental"
+    },
+    {
+      "id": "ef2baa00d4b2d402",
+      "name": "Hessische Fachstelle für Öffentliche Bibliotheken - Kassel",
+      "location": "34132 Kassel",
+      "url": "http://webopac.winbiap.de/lfshessen"
+    },
+    {
+      "id": "883d6d55daf010ee",
+      "name": "Hildegardis-Gymnasium Kempten",
+      "location": "87439 Kempten (Allgäu)",
+      "url": "http://opac.winbiap.de/kempten-gym"
+    },
+    {
+      "id": "02fd1540be2f7446",
+      "name": "Hochschule Fresenius für Internationales Management GmbH",
+      "location": "69129 Heidelberg",
+      "url": "http://opac.winbiap.net/hs-fresenius-hd"
+    },
+    {
+      "id": "350450f14d5f441c",
+      "name": "Hochschule für den öffentlichen Dienst in Bayern",
+      "location": "82211 Herrsching",
+      "url": "http://fhfin-sv-winbiap.finanzen.bayern.de/"
+    },
+    {
+      "id": "84a2c3c79528edb0",
+      "name": "Illertal-Gymnasium Vöhringen",
+      "location": "89269 Vöhringen",
+      "url": "http://opac.winbiap.net/voehringen-gym"
+    },
+    {
+      "id": "e8711b4274077714",
+      "name": "Israelitische Kultusgemeinde München und Oberbayern K.d.ö.R",
+      "location": "80331 München",
+      "url": "http://opac.winbiap.net/ikg-m"
+    },
+    {
+      "id": "e84f577c8b92c3ea",
+      "name": "Jakob-Fugger-Gymnasium Augsburg",
+      "location": "86152 Augsburg",
+      "url": "http://webopac.winbiap.de/jfg"
+    },
+    {
+      "id": "2d13ca1ebeb0968b",
+      "name": "Johann-Michael-Sailer-Gymnasium",
+      "location": "89407 Dillingen",
+      "url": "http://webopac.winbiap.de/jms"
+    },
+    {
+      "id": "b56ce16ff3a30ad8",
+      "name": "Jugendbücherei Eichstetten",
+      "location": "79356 Eichstetten a. K.",
+      "url": "http://opac.winbiap.net/eichstetten"
+    },
+    {
+      "id": "fa238baff03cdd4a",
+      "name": "Jugendbücherei Nersingen",
+      "location": "89278 Nersingen",
+      "url": "http://opac.winbiap.de/nersingen"
+    },
+    {
+      "id": "18bf5e630a359370",
+      "name": "Justizzentrum Bremen - Bibliothek",
+      "location": "28195 Bremen",
+      "url": "http://opac.winbiap.net/justiz-bremen"
+    },
+    {
+      "id": "bd3591972db9009f",
+      "name": "Justus von Liebig Gymnasium",
+      "location": "86356 Neusäß",
+      "url": "http://webopac.winbiap.de/neusaess-gym"
+    },
+    {
+      "id": "b74376f8949c0c92",
+      "name": "Karl-Ritter-von-Frisch-Gym. Moosburg",
+      "location": "85368 Moosburg",
+      "url": "http://opac.winbiap.net/moosburg_gym"
+    },
+    {
+      "id": "877b646159c8aab8",
+      "name": "Karlsgymnasium Bad Reichenhall",
+      "location": "83435 Bad Reichenhall",
+      "url": "http://webopac.winbiap.de/karlsgymnasium-bgl"
+    },
+    {
+      "id": "8edb62574c00a341",
+      "name": "Kaspar-Zeuß-Gymnasium Kronach",
+      "location": "96317 Kronach",
+      "url": "http://opac.winbiap.net/kronach-gym"
+    },
+    {
+      "id": "bca9774ad911e917",
+      "name": "Kath. Kirchenstiftung Bücherei Hitzhofen",
+      "location": "85122 Hitzhofen",
+      "url": "http://opac.winbiap.net/hitzhofen"
+    },
+    {
+      "id": "d81a596201016783",
+      "name": "Kath. Kirchenstiftung St. Vitus",
+      "location": "87665 Mauerstetten",
+      "url": "http://webopac.winbiap.de/mauerstetten"
+    },
+    {
+      "id": "d5dde74445f84cfb",
+      "name": "Kath. Pfarr- und Stadtbücherei St. Justina Bad Wörishofen",
+      "location": "86825 Bad Wörishofen",
+      "url": "http://opac.winbiap.net/bad-woerishofen"
+    },
+    {
+      "id": "2e338a3a7b796d7a",
+      "name": "Kath. Pfarr- und Stadtbücherei St. Ulrich Bad Wörishofen",
+      "location": "86825 Bad Wörishofen",
+      "url": "http://opac.winbiap.net/bad-woerishofen-stulrich"
+    },
+    {
+      "id": "4d68f9e0f32291ee",
+      "name": "Kath. öffentl. Bücherei Schrobenhausen",
+      "location": "86529 Schrobenhausen",
+      "url": "http://webopac.winbiap.de/schrobenhausen"
+    },
+    {
+      "id": "701ea6e598bb426e",
+      "name": "Kath. öffentliche Bücherei Legau",
+      "location": "87764 Legau",
+      "url": "http://opac.winbiap.net/legau"
+    },
+    {
+      "id": "9fd5779472f4d1a6",
+      "name": "Kath. öffentliche Bücherei St. Zeno Isen",
+      "location": "84424 Isen",
+      "url": "http://webopac.winbiap.de/isen"
+    },
+    {
+      "id": "3909cf5cf50f87d8",
+      "name": "Kliniken Schmieder",
+      "location": "78262 Allensbach-Gailingen",
+      "url": "http://lummerland.datronic.de/cgi-bin/findus.fcgi.pl?customer=kliniken_schmieder"
+    },
+    {
+      "id": "e009b87ff1e5f80a",
+      "name": "Konrad-Duden-Stadtbibliothek",
+      "location": "36251 Bad Hersfeld",
+      "url": "http://opac.winbiap.de/bad-hersfeld"
+    },
+    {
+      "id": "b81878a46d453a1a",
+      "name": "Kreis- und Heimatbücherei Aichach",
+      "location": "86551 Aichach",
+      "url": "http://webopac.winbiap.de/aichach"
+    },
+    {
+      "id": "64ec3c318bf09cff",
+      "name": "Kreis- und Stadtbibliothek Vilsbiburg",
+      "location": "84137 Vilsbiburg",
+      "url": "https://www.bibliothek-vilsbiburg.de/"
+    },
+    {
+      "id": "46faf0051901d464",
+      "name": "Kreis- und Stadtbücherei Weilburg",
+      "location": "35781 Weilburg an der Lahn",
+      "url": "https://buecherei-weilburg.de/"
+    },
+    {
+      "id": "c18ee2f960dd1ee1",
+      "name": "Kreisberufsschulzentrum Nagold - Kreisbibliothek",
+      "location": "72202 Nagold",
+      "url": "http://opac.winbiap.net/nagold"
+    },
+    {
+      "id": "faf5fe3a48c78240",
+      "name": "Kreisbibliothek Freyung",
+      "location": "94078 Freyung",
+      "url": "http://opac.winbiap.net/freyung"
+    },
+    {
+      "id": "32d077b6c98ccbc0",
+      "name": "Kreisbücherei an der Walter-Lübcke-Schule",
+      "location": "34466 Wolfhagen",
+      "url": "http://opac.winbiap.net/kreis-wolfhagen"
+    },
+    {
+      "id": "d71bf3feaa531a10",
+      "name": "Kreisbücherei Wertingen",
+      "location": "86637 Wertingen",
+      "url": "http://opac.winbiap.de/dlg-wer"
+    },
+    {
+      "id": "cd0f35b4fc1e0c20",
+      "name": "König-Karlmann-Gymnasium Altötting",
+      "location": "84503 Altötting",
+      "url": "http://webopac.winbiap.de/altoetting-gym"
+    },
+    {
+      "id": "817c44ab420ccd19",
+      "name": "Landesfachstelle für das öffentliche Bibliothekswesen",
+      "location": "80807 München",
+      "url": "http://opac.winbiap.net/lfs"
+    },
+    {
+      "id": "5f43b18396687be5",
+      "name": "Landesfachstelle für Öffentliche Bibliotheken in Thüringen",
+      "location": "99084 Erfurt",
+      "url": "http://webopac.winbiap.de/erfurtlfs"
+    },
+    {
+      "id": "d0b43019318b4b0f",
+      "name": "Landeskundliche Bibliothek Altena",
+      "location": "58762 Altena",
+      "url": "http://webopac.citkomm.de/mklandesbib"
+    },
+    {
+      "id": "ce564700fc9591d8",
+      "name": "Landratsamt Freising",
+      "location": "85356 Freising",
+      "url": "http://webopac.winbiap.de/freising-lra"
+    },
+    {
+      "id": "f10c6e90dcc4a50f",
+      "name": "Lese-Insel Augsburg",
+      "location": "86159 Augsburg",
+      "url": "https://www.leseinsel-augsburg.de/"
+    },
+    {
+      "id": "eaa005f6454740d0",
+      "name": "Lise-Meitner-Gymnasium",
+      "location": "82008 Unterhaching",
+      "url": "http://opac.winbiap.net/lmg"
+    },
+    {
+      "id": "8949e891da8c15f1",
+      "name": "Ludwig-Thoma-Gymnasium Prien",
+      "location": "83209 Prien a. Chiemsee",
+      "url": "http://opac.winbiap.net/ltgprien"
+    },
+    {
+      "id": "d797a8cb727c41cc",
+      "name": "Ludwigsgymnasium Straubing",
+      "location": "94315 Straubing",
+      "url": "http://opac.winbiap.net/straubing-ludwigsgymnasium"
+    },
+    {
+      "id": "8a4ba8f51a9613bb",
+      "name": "Markt Marktleugast Bücherei",
+      "location": "95352 Marktleugast",
+      "url": "http://opac.winbiap.de/marktleugast"
+    },
+    {
+      "id": "90a8793d6b47398e",
+      "name": "Markt Wiesentheid, Carl-Stumpf-Bibliothek",
+      "location": "97353 Wiesentheid",
+      "url": "http://webopac.winbiap.de/wiesentheid"
+    },
+    {
+      "id": "88a229c2ad927b30",
+      "name": "Marktbibliothek Kallmünz",
+      "location": "93183 Kallmünz",
+      "url": "http://opac.winbiap.net/kallmuenz"
+    },
+    {
+      "id": "0826d67d8eb443bd",
+      "name": "Marktbibliothek Mantel",
+      "location": "92708 Mantel",
+      "url": "http://opac.winbiap.net/mantel"
+    },
+    {
+      "id": "1b799661801bab60",
+      "name": "Marktbibliothek Nittendorf",
+      "location": "93152 Nittendorf",
+      "url": "http://webopac.winbiap.de/nittendorf"
+    },
+    {
+      "id": "0beaca5cf06c0d87",
+      "name": "Marktbücherei Aindling",
+      "location": "86447 Aindling",
+      "url": "https://cloudopac.winbiap.de/aindling"
+    },
+    {
+      "id": "cd85d9539c145bca",
+      "name": "Marktbücherei Bad Abbach",
+      "location": "93077 Bad Abbach",
+      "url": "http://opac.winbiap.net/badabbach"
+    },
+    {
+      "id": "926bb50ff5b34418",
+      "name": "Marktbücherei Beratzhausen",
+      "location": "93176 Beratzhausen",
+      "url": "http://opac.winbiap.net/beratzhausen"
+    },
+    {
+      "id": "a90499fe902e9032",
+      "name": "Marktbücherei Berchtesgaden",
+      "location": "83471 Berchtesgaden",
+      "url": "http://opac.winbiap.net/berchtesgaden"
+    },
+    {
+      "id": "3a369d7ef28e6952",
+      "name": "Marktbücherei Bruck i.d.OPf.",
+      "location": "92436 Bruck i.d. OPf.",
+      "url": "http://webopac.winbiap.de/bruck"
+    },
+    {
+      "id": "b43ea2055f76723d",
+      "name": "Marktbücherei Laaber",
+      "location": "93164 Laaber",
+      "url": "http://opac.winbiap.net/laaber"
+    },
+    {
+      "id": "a9f08986768cca68",
+      "name": "Marktbücherei Lappersdorf",
+      "location": "93138 Lappersdorf",
+      "url": "http://cloudopac.winbiap.de/lappersdorf/"
+    },
+    {
+      "id": "8a30ed082978ed36",
+      "name": "Marktbücherei Pilsting",
+      "location": "94431 Pilsting",
+      "url": "http://opac.winbiap.net/pilsting"
+    },
+    {
+      "id": "984f18573599fae2",
+      "name": "Marktbücherei Postbauer-Heng",
+      "location": "92353 Postbauer-Heng",
+      "url": "http://opac.winbiap.de/postbauer-heng"
+    },
+    {
+      "id": "c87941fc6993ff37",
+      "name": "Marktbücherei Pöttmes",
+      "location": "86554 Pöttmes",
+      "url": "http://webopac.winbiap.de/poettmes"
+    },
+    {
+      "id": "17be2a7e846632d8",
+      "name": "Marktbücherei Regenstauf",
+      "location": "93128 Regenstauf",
+      "url": "http://opac.winbiap.de/regenstauf"
+    },
+    {
+      "id": "f21ed1eaccfb8159",
+      "name": "Marktbücherei Wolnzach",
+      "location": "85283 Wolnzach",
+      "url": "http://webopac.winbiap.de/wolnzach"
+    },
+    {
+      "id": "75d9793da3874f5f",
+      "name": "Matthias-Claudius-Gym. Gehrden",
+      "location": "30989 Gehrden",
+      "url": "http://lummerland.datronic.de/cgi-bin/findus.fcgi.pl?customer=gehrden_gym"
+    },
+    {
+      "id": "359b9d237f1b9092",
+      "name": "Max-Josef-Stift Gymnasium",
+      "location": "81677 München",
+      "url": "http://opac.winbiap.net/max-josef-stift"
+    },
+    {
+      "id": "543523a81c248c09",
+      "name": "Mediathek Abstatt",
+      "location": "74232 Abstatt",
+      "url": "http://opac.winbiap.de/abstatt"
+    },
+    {
+      "id": "3c8a4912cbbf6bc9",
+      "name": "Mediathek Römerberg",
+      "location": "67354 Römerberg",
+      "url": "http://cloudopac.winbiap.de/roemerberg"
+    },
+    {
+      "id": "de08b6c8fba2de17",
+      "name": "Mediathek Seeheim-Jugenheim",
+      "location": "64342 Seeheim-Jugenheim",
+      "url": "http://opac.winbiap.de/seeheim-jugenheim"
+    },
+    {
+      "id": "399a07909ab31894",
+      "name": "Mediathek Stadt Raunheim",
+      "location": "65479 Raunheim",
+      "url": "http://webopac.winbiap.de/raunheim"
+    },
+    {
+      "id": "bed83c8266d5282b",
+      "name": "Mediathek Winkelhaid",
+      "location": "90610 Winkelhaid",
+      "url": "https://www.mediathek-winkelhaid.de/"
+    },
+    {
+      "id": "e87303c0fb06d380",
+      "name": "Mediathek- Bücherei der Gemeinde Ihringen",
+      "location": "79241 Ihringen am Kaiserstuhl",
+      "url": "http://opac.winbiap.net/ihringen"
+    },
+    {
+      "id": "a7ce58f1de00bc95",
+      "name": "Medienhaus am See Friedrichshafen",
+      "location": "88045 Friedrichshafen",
+      "url": "http://opac.winbiap.net/medienhaus-fn"
+    },
+    {
+      "id": "79a2d7dbd7ad2a39",
+      "name": "Medienhaus Ebersdorf b.Coburg",
+      "location": "96237 Ebersdorf b.Coburg",
+      "url": "http://opac.winbiap.net/ebersdorf"
+    },
+    {
+      "id": "0917ca37d364efb5",
+      "name": "Medientreff Gemeindebücherei Rodenbach",
+      "location": "63517 Rodenbach",
+      "url": "http://opac.winbiap.net/rodenbach"
+    },
+    {
+      "id": "587b979ebb2c5eca",
+      "name": "Medienzentrum Haus Villigst Schwerte",
+      "location": "58239 Schwerte",
+      "url": "http://opac.winbiap.de/medienzentrum-ekvw"
+    },
+    {
+      "id": "cec3bf3a647e0fbe",
+      "name": "Medienzentrum Hersfeld-Rotenburg",
+      "location": "36199 Rotenburg a. d. Fulda",
+      "url": "http://opac.winbiap.net/mzhr"
+    },
+    {
+      "id": "7574f5b6d8c04c02",
+      "name": "Mediothek Deggenhausertal",
+      "location": "88693 Deggenhausertal",
+      "url": "http://opac.winbiap.net/deggenhausertal"
+    },
+    {
+      "id": "052e64ccfdf75933",
+      "name": "Mediothek Gudensberg",
+      "location": "34281 Gudensberg",
+      "url": "http://opac.winbiap.net/gudensberg"
+    },
+    {
+      "id": "6d5678e8e3f61680",
+      "name": "Michael-Ende-Schule Raubling",
+      "location": "83064 Raubling",
+      "url": "http://webopac.winbiap.de/raubling-mes"
+    },
+    {
+      "id": "de55e45f145923c2",
+      "name": "Miesbacher Stadtbücherei",
+      "location": "83714 Miesbach",
+      "url": "http://webopac.miesbach.de/"
+    },
+    {
+      "id": "228fa1c88d8c5e16",
+      "name": "miz Medien- und Informationszentrum am Überwald-Gymnasium",
+      "location": "69483 Wald-Michelbach",
+      "url": "http://opac.winbiap.net/miz"
+    },
+    {
+      "id": "c4e01a9cd4a42b1a",
+      "name": "Modellschule Obersberg",
+      "location": "36251 Bad Hersfeld",
+      "url": "http://opac.winbiap.net/mso"
+    },
+    {
+      "id": "e7098019ec3eb426",
+      "name": "Oberstdorf Bibliothek",
+      "location": "87561 Oberstdorf",
+      "url": "http://webopac.winbiap.de/oberstdorf"
+    },
+    {
+      "id": "d226cad1a9056e8e",
+      "name": "Ortsbücherei Dettingen",
+      "location": "73265 Dettingen unter Teck",
+      "url": "http://webopac.winbiap.de/dettingen"
+    },
+    {
+      "id": "fa802c66d08c0866",
+      "name": "Ortsbücherei Erligheim",
+      "location": "74391 Erligheim",
+      "url": "http://webopac.winbiap.de/erligheim"
+    },
+    {
+      "id": "6ece370b09e37e4f",
+      "name": "Ortsbücherei Wimsheim",
+      "location": "71299 Wimsheim",
+      "url": "http://webopac.winbiap.de/wimsheim"
+    },
+    {
+      "id": "d5b21bb9c788bddf",
+      "name": "Peter-Paul-Rubens Gymnasium Siegen",
+      "location": "57074 Siegen",
+      "url": "https://webopac.kommunale.it/pprg"
+    },
+    {
+      "id": "2d8403b7cb873e0c",
+      "name": "Peutinger-Gymnasium Ellwangen",
+      "location": "73479 Ellwangen (Jagst)",
+      "url": "http://opac.winbiap.de/ellwangen-peutinger"
+    },
+    {
+      "id": "afe6a9839f5f41a3",
+      "name": "Pfarr- und Gemeindebücherei Inchenhofen",
+      "location": "86570 Inchenhofen",
+      "url": "http://opac.winbiap.net/inchenhofen"
+    },
+    {
+      "id": "63fb1b73b3828f82",
+      "name": "Pfarr- und Gemeindebücherei Weichs",
+      "location": "85258 Weichs",
+      "url": "http://webopac.winbiap.de/weichs"
+    },
+    {
+      "id": "c642fc3fe9b614bb",
+      "name": "Rathausbücherei Petersberg",
+      "location": "36100 Petersberg",
+      "url": "http://opac.winbiap.net/petersberg"
+    },
+    {
+      "id": "bcdc36d59f308afb",
+      "name": "Ratsbücherei Lüneburg",
+      "location": "21335 Lüneburg",
+      "url": "https://rblg.stadt.lueneburg.de/webopac"
+    },
+    {
+      "id": "95bb2aa2c5f2def2",
+      "name": "Realschule Obertraubling",
+      "location": "93083 Obertraubling",
+      "url": "http://opac.winbiap.de/obertraubling-rs"
+    },
+    {
+      "id": "65f90df9e57858c3",
+      "name": "Rechtsprechungsarchiv des OVG Rheinland-Pfalz - Koblenz",
+      "location": "56068 Koblenz",
+      "url": "http://webopac.winbiap.de/ovg-koblenz"
+    },
+    {
+      "id": "a1be5d429118974a",
+      "name": "Regionalbibliothek Weiden",
+      "location": "92637 Weiden i.d.OPf.",
+      "url": "http://opac.winbiap.net/weiden"
+    },
+    {
+      "id": "7273ef2bcff7fb1f",
+      "name": "Regionales Medienzentrum Eisleben",
+      "location": "06295 Eisleben, Lutherstadt",
+      "url": "http://medien.mansfeldportal.de/"
+    },
+    {
+      "id": "ff538cf74c05a4ac",
+      "name": "Religionspädagogische Arbeitsstelle (RPAS)",
+      "location": "70174 Stuttgart",
+      "url": "http://opac.winbiap.net/stuttgart-rpas"
+    },
+    {
+      "id": "519c5009dc42f833",
+      "name": "Rhabanus-Maurus-Gymnasium St. Ottilien",
+      "location": "86941 St. Ottilien",
+      "url": "http://opac.winbiap.net/rmg-ottilien"
+    },
+    {
+      "id": "65cd20149932aa20",
+      "name": "Rolf-Hochhuth-Stadtbibliothek Eschwege",
+      "location": "37269 Eschwege",
+      "url": "http://webopac.winbiap.de/eschwege"
+    },
+    {
+      "id": "29f26faded6b2ec0",
+      "name": "Rosenbibliothek Sangerhausen",
+      "location": "06526 Sangerhausen",
+      "url": "http://webopac.winbiap.de/rosenbibliothek"
+    },
+    {
+      "id": "dc9975e41eef8ca0",
+      "name": "Ruperti-Gymnasium Mühldorf",
+      "location": "84453 Mühldorf a. Inn",
+      "url": "http://webopac.winbiap.de/muehldorf_gym"
+    },
+    {
+      "id": "feef1bc8a6466052",
+      "name": "Samtgemeinde Lemförde - Bücherei",
+      "location": "49448 Lemförde",
+      "url": "http://opac.winbiap.net/lemfoerde"
+    },
+    {
+      "id": "59b8c1ca6c1583ec",
+      "name": "Samtgemeindebücherei Jesteburg",
+      "location": "21266 Jesteburg",
+      "url": "http://opac.winbiap.net/jesteburg"
+    },
+    {
+      "id": "9fc3e3a436ae4856",
+      "name": "Samtgemeindebücherei Salzhausen",
+      "location": "21376 Salzhausen",
+      "url": "http://opac.winbiap.de/salzhausen"
+    },
+    {
+      "id": "32ac0326c65abf08",
+      "name": "SBA Oberhausen",
+      "location": "46117 Oberhausen",
+      "url": "http://opac.winbiap.de/oberhausen-sba"
+    },
+    {
+      "id": "e4d2d55ba008ae09",
+      "name": "Schnapperei Gingen",
+      "location": "73333 Gingen an der Fils",
+      "url": "http://opac.winbiap.net/gingen"
+    },
+    {
+      "id": "0c29763ddda9f235",
+      "name": "Schul- und Gemeindebücherei Guxhagen",
+      "location": "34302 Guxhagen",
+      "url": "http://webopac.winbiap.de/guxhagen"
+    },
+    {
+      "id": "30406e061497a45f",
+      "name": "Schulbibliothek Kreismedienzentrum Ravensburg",
+      "location": "88212 Ravensburg",
+      "url": "http://opac.winbiap.de/ravensburg-sb"
+    },
+    {
+      "id": "64146897d647a1a6",
+      "name": "Sportmuseum Berlin - Sporthistorische Bibliothek",
+      "location": "14053 Berlin",
+      "url": "http://opac.winbiap.de/sportmuseum-berlin"
+    },
+    {
+      "id": "81dab6a1bd64adac",
+      "name": "Staatl. Gymnasium Höhenkirchen-Siegertsbrunn",
+      "location": "85635 Höhenkirchen-Siegertsbrunn",
+      "url": "http://opac.winbiap.net/gym-hksb"
+    },
+    {
+      "id": "025bc1f727b2f8b2",
+      "name": "Staatliche Ballettschule Berlin und Schule für Artistik",
+      "location": "10409 Berlin",
+      "url": "http://opac.winbiap.net/berlin_ballettschule"
+    },
+    {
+      "id": "65ab2643c7a61342",
+      "name": "Staatliche Realschule Geisenfeld",
+      "location": "85290 Geisenfeld",
+      "url": "http://opac.winbiap.de/geisenfeld-rs"
+    },
+    {
+      "id": "4e139bd55175d183",
+      "name": "Staatliches Gymnasium Friedberg",
+      "location": "86316 Friedberg",
+      "url": "http://webopac.winbiap.de/friedberg-gym"
+    },
+    {
+      "id": "4ec4c05ea9f7bf46",
+      "name": "Staatliches Gymnasium Neutraubling",
+      "location": "93073 Neutraubling",
+      "url": "http://opac.winbiap.de/neutraubling-gym"
+    },
+    {
+      "id": "941a4ea6ca73c4e4",
+      "name": "Stadt- und Kreisbibliothek Arnstadt",
+      "location": "99310 Arnstadt",
+      "url": "http://opac.winbiap.de/arnstadt"
+    },
+    {
+      "id": "2a479fab40f31569",
+      "name": "Stadt- und Kreisbibliothek Zella-Mehlis",
+      "location": "98544 Zella-Mehlis",
+      "url": "http://cloudopac.winbiap.de/zellamehlis"
+    },
+    {
+      "id": "d287f605ddcb4c77",
+      "name": "Stadt- und Pfarrbücherei Greding",
+      "location": "91171 Greding",
+      "url": "http://webopac.winbiap.de/greding"
+    },
+    {
+      "id": "7a8cc8bdc717e901",
+      "name": "Stadt- und Schulbibliothek Gunzenhausen",
+      "location": "91710 Gunzenhausen",
+      "url": "http://opac.winbiap.net/gunzenhausen"
+    },
+    {
+      "id": "0f1b9bcb96ac2e98",
+      "name": "Stadt- und Schulbücherei Immenhausen",
+      "location": "34376 Immenhausen",
+      "url": "http://webopac.winbiap.de/immenhausen"
+    },
+    {
+      "id": "d0637baf8fe8ff87",
+      "name": "Stadtbetrieb Bibliothek Euskirchen",
+      "location": "53879 Euskirchen",
+      "url": "https://webopac.euskirchen.de/"
+    },
+    {
+      "id": "c17dfde44349727e",
+      "name": "Stadtbibliothek Aalen",
+      "location": "73430 Aalen",
+      "url": "http://opac.winbiap.net/aalen"
+    },
+    {
+      "id": "1a4fa503c117ca9e",
+      "name": "Stadtbibliothek Amberg",
+      "location": "92224 Amberg",
+      "url": "https://opac.amberg.de/"
+    },
+    {
+      "id": "0df58cbc5466fe30",
+      "name": "Stadtbibliothek Arnstein",
+      "location": "97450 Arnstein",
+      "url": "http://webopac.winbiap.de/arnstein"
+    },
+    {
+      "id": "9c70e6b4415d2523",
+      "name": "Stadtbibliothek Bad Berka",
+      "location": "99438 Bad Berka",
+      "url": "http://webopac.winbiap.de/badberka"
+    },
+    {
+      "id": "809f843acd672188",
+      "name": "Stadtbibliothek Bad Brückenau",
+      "location": "97769 Bad Brückenau",
+      "url": "http://opac.winbiap.net/bad-brueckenau"
+    },
+    {
+      "id": "23235564b1bc09ad",
+      "name": "Stadtbibliothek Bad Kreuznach",
+      "location": "55543 Bad Kreuznach",
+      "url": "http://opac.winbiap.de/bad-kreuznach"
+    },
+    {
+      "id": "56476ae9387ea1ab",
+      "name": "Stadtbibliothek Bad Schmiedeberg",
+      "location": "06905 Bad Schmiedeberg",
+      "url": "http://opac.winbiap.net/bad-schmiedeberg"
+    },
+    {
+      "id": "0e572af06f29fc70",
+      "name": "Stadtbibliothek Bad Tölz",
+      "location": "83646 Bad Tölz",
+      "url": "http://webopac.winbiap.de/badtoelz"
+    },
+    {
+      "id": "b29fe1316065210b",
+      "name": "Stadtbibliothek Bad Vilbel",
+      "location": "61118 Bad Vilbel",
+      "url": "http://webopac.winbiap.de/badvilbel"
+    },
+    {
+      "id": "09a28f6ffdeb460b",
+      "name": "Stadtbibliothek Bensheim",
+      "location": "64625 Bensheim",
+      "url": "http://webopac.winbiap.de/bensheim"
+    },
+    {
+      "id": "5aad5c01c108804d",
+      "name": "Stadtbibliothek Blomberg",
+      "location": "32825 Blomberg",
+      "url": "http://opac.winbiap.de/blomberg"
+    },
+    {
+      "id": "e7fc05db6f581fa1",
+      "name": "Stadtbibliothek Bonn",
+      "location": "53111 Bonn",
+      "url": "https://lib.bonn.de/"
+    },
+    {
+      "id": "80faad694d171439",
+      "name": "Stadtbibliothek Brandis",
+      "location": "04821 Brandis",
+      "url": "http://opac.winbiap.de/brandis"
+    },
+    {
+      "id": "5b3a6b218897ad44",
+      "name": "Stadtbibliothek Buchloe",
+      "location": "86807 Buchloe",
+      "url": "http://cloudopac.winbiap.de/buchloe"
+    },
+    {
+      "id": "fa0fa6e5962bc329",
+      "name": "Stadtbibliothek Burglengenfeld",
+      "location": "93133 Burglengenfeld",
+      "url": "http://webopac.winbiap.de/burglengenfeld"
+    },
+    {
+      "id": "691750f1d871f612",
+      "name": "Stadtbibliothek Cham",
+      "location": "93413 Cham",
+      "url": "http://opac.winbiap.de/cham"
+    },
+    {
+      "id": "1b623a36f5042716",
+      "name": "Stadtbibliothek Cuxhaven",
+      "location": "27472 Cuxhaven",
+      "url": "http://cloudopac.winbiap.de/sb-cuxhaven"
+    },
+    {
+      "id": "a0b60a13251e9071",
+      "name": "Stadtbibliothek Detmold",
+      "location": "32756 Detmold",
+      "url": "http://webopac.detmold.de/"
+    },
+    {
+      "id": "6f0ac0ed7b205a67",
+      "name": "Stadtbibliothek Dettelbach",
+      "location": "97337 Dettelbach",
+      "url": "http://opac.winbiap.net/dettelbach"
+    },
+    {
+      "id": "92b9db4d5c487c1f",
+      "name": "Stadtbibliothek Dinkelsbühl",
+      "location": "91550 Dinkelsbühl",
+      "url": "https://cloudopac.winbiap.de/dinkelsbuehl"
+    },
+    {
+      "id": "ec3190b1b80e4c9c",
+      "name": "Stadtbibliothek Donauwörth",
+      "location": "86609 Donauwörth",
+      "url": "http://webopac.winbiap.de/donauwoerth"
+    },
+    {
+      "id": "006e6440e3ef7310",
+      "name": "Stadtbibliothek Eggenfelden",
+      "location": "84307 Eggenfelden",
+      "url": "http://opac.winbiap.net/eggenfelden"
+    },
+    {
+      "id": "abc664190f785849",
+      "name": "Stadtbibliothek Ellwangen",
+      "location": "73479 Ellwangen (Jagst)",
+      "url": "http://opac.winbiap.de/ellwangen"
+    },
+    {
+      "id": "2cfc6f706e1ab0c4",
+      "name": "Stadtbibliothek Emsdetten",
+      "location": "48282 Emsdetten",
+      "url": "http://opac.winbiap.de/emsdetten"
+    },
+    {
+      "id": "6944176ab8363eb1",
+      "name": "Stadtbibliothek Erlenbach",
+      "location": "63906 Erlenbach",
+      "url": "http://opac.winbiap.net/erlenbach"
+    },
+    {
+      "id": "f673bccf03054803",
+      "name": "Stadtbibliothek Filderstadt",
+      "location": "70794 Filderstadt-Bernhausen",
+      "url": "http://opac.winbiap.de/filderstadt"
+    },
+    {
+      "id": "bcff8201b49d1ace",
+      "name": "Stadtbibliothek Freiberg a. N.",
+      "location": "71691 Freiberg a. N.",
+      "url": "http://webopac.winbiap.de/freiberg"
+    },
+    {
+      "id": "7f4a2ae80a77727c",
+      "name": "Stadtbibliothek Freising",
+      "location": "85354 Freising",
+      "url": "https://opac.freising.de/"
+    },
+    {
+      "id": "702950480603e8d5",
+      "name": "Stadtbibliothek Friedberg (Hessen)",
+      "location": "61169 Friedberg (Hessen)",
+      "url": "http://opac.winbiap.net/friedberg-hessen"
+    },
+    {
+      "id": "db79f4b67e772ce3",
+      "name": "Stadtbibliothek Furth im Wald",
+      "location": "93437 Furth im Wald",
+      "url": "http://webopac.winbiap.de/furth"
+    },
+    {
+      "id": "7e37d444e1c4b290",
+      "name": "Stadtbibliothek Fürstenfeldbruck",
+      "location": "82256 Fürstenfeldbruck",
+      "url": "http://opac.winbiap.net/fuerstenfeldbruck"
+    },
+    {
+      "id": "dbdc70455d9ff675",
+      "name": "Stadtbibliothek Gehrden",
+      "location": "30989 Gehrden",
+      "url": "http://lummerland.datronic.de/cgi-bin/findus.fcgi.pl?customer=gehrden"
+    },
+    {
+      "id": "c2e7bb5a82395ff7",
+      "name": "Stadtbibliothek Geretsried",
+      "location": "82538 Geretsried",
+      "url": "http://webopac.winbiap.de/geretsried"
+    },
+    {
+      "id": "52c4ebf38959c706",
+      "name": "Stadtbibliothek Germering",
+      "location": "82110 Germering",
+      "url": "http://opac.winbiap.de/germering"
+    },
+    {
+      "id": "7cf5f43a2da4ef0e",
+      "name": "Stadtbibliothek Gerolzhofen",
+      "location": "97447 Gerolzhofen",
+      "url": "http://opac.winbiap.net/gerolzhofen"
+    },
+    {
+      "id": "4182f41605782c74",
+      "name": "Stadtbibliothek Gersthofen",
+      "location": "86368 Gersthofen",
+      "url": "http://opac.winbiap.net/gersthofen"
+    },
+    {
+      "id": "e1239fc674d98ec1",
+      "name": "Stadtbibliothek Giengen",
+      "location": "89537 Giengen",
+      "url": "http://opac.winbiap.de/giengen"
+    },
+    {
+      "id": "0628521c0470b55f",
+      "name": "Stadtbibliothek Hammelburg",
+      "location": "97762 Hammelburg",
+      "url": "http://webopac.winbiap.de/hammelburg"
+    },
+    {
+      "id": "119b1057e85f26ae",
+      "name": "Stadtbibliothek Hanau",
+      "location": "63450 Hanau",
+      "url": "http://webopac.winbiap.de/hanau"
+    },
+    {
+      "id": "2e6f7bb9b995742c",
+      "name": "Stadtbibliothek Heubach",
+      "location": "73540 Heubach",
+      "url": "http://opac.winbiap.net/heubach"
+    },
+    {
+      "id": "935ddde8353e509c",
+      "name": "Stadtbibliothek Hirschhorn",
+      "location": "69434 Hirschhorn",
+      "url": "http://opac.winbiap.net/hirschhorn"
+    },
+    {
+      "id": "d369b2c6ca01ff7b",
+      "name": "Stadtbibliothek Hünfeld",
+      "location": "36088 Hünfeld",
+      "url": "http://webopac.winbiap.de/huenfeld"
+    },
+    {
+      "id": "6b4034364859dc41",
+      "name": "Stadtbibliothek im Schelfenhaus Volkach",
+      "location": "97332 Volkach",
+      "url": "http://webopac.winbiap.de/volkach"
+    },
+    {
+      "id": "4825d8622c4dd452",
+      "name": "Stadtbibliothek Karlstadt",
+      "location": "97753 Karlstadt",
+      "url": "http://webopac.winbiap.de/karlstadt"
+    },
+    {
+      "id": "6b728c3f652751b3",
+      "name": "Stadtbibliothek Kassel",
+      "location": "34117 Kassel",
+      "url": "https://bibliothek.stadt-kassel.de/"
+    },
+    {
+      "id": "b670719e000a9b33",
+      "name": "Stadtbibliothek Kelkheim",
+      "location": "65779 Kelkheim (Taunus)",
+      "url": "http://opac.winbiap.net/kelkheim"
+    },
+    {
+      "id": "0202fcc0883ce847",
+      "name": "Stadtbibliothek Kierspe",
+      "location": "58566 Kierspe",
+      "url": "https://webopac.kommunale.it/kierspe"
+    },
+    {
+      "id": "468fc4f7d129ef0f",
+      "name": "Stadtbibliothek Konstanz",
+      "location": "78462 Konstanz",
+      "url": "http://webopac.winbiap.de/konstanz"
+    },
+    {
+      "id": "c4314b8c33a0df8e",
+      "name": "Stadtbibliothek Konz",
+      "location": "54329 Konz",
+      "url": "http://cloudopac.winbiap.de/konz"
+    },
+    {
+      "id": "b42ec530d977567f",
+      "name": "Stadtbibliothek Kremmen",
+      "location": "16766 Kremmen",
+      "url": "http://opac.winbiap.net/kremmen"
+    },
+    {
+      "id": "08c25753cc7abb00",
+      "name": "Stadtbibliothek Landsberg",
+      "location": "86899 Landsberg a. Lech",
+      "url": "http://webopac.winbiap.de/landsberg"
+    },
+    {
+      "id": "db641b14f1469ccb",
+      "name": "Stadtbibliothek Laupheim",
+      "location": "88471 Laupheim",
+      "url": "http://opac.winbiap.de/laupheim"
+    },
+    {
+      "id": "0a06e444c1ec98d2",
+      "name": "Stadtbibliothek Leutershausen",
+      "location": "91578 Leutershausen",
+      "url": "http://webopac.winbiap.de/leutershausen"
+    },
+    {
+      "id": "6eefeca2fc68f846",
+      "name": "Stadtbibliothek Lich",
+      "location": "35423 Lich",
+      "url": "http://opac.winbiap.net/hungenlich"
+    },
+    {
+      "id": "335a569d6dde3773",
+      "name": "Stadtbibliothek Lingen",
+      "location": "49808 Lingen (Ems)",
+      "url": "http://opac.winbiap.net/lingen"
+    },
+    {
+      "id": "da5525fc2f3b14d2",
+      "name": "Stadtbibliothek Lohr a. Main",
+      "location": "97816 Lohr am Main",
+      "url": "http://cloudopac.winbiap.de/lohr"
+    },
+    {
+      "id": "98e4b7e22fa2777e",
+      "name": "Stadtbibliothek Mainburg",
+      "location": "84048 Mainburg",
+      "url": "http://opac.winbiap.net/mainburg"
+    },
+    {
+      "id": "28404d8a87dc8f28",
+      "name": "Stadtbibliothek Marktheidenfeld",
+      "location": "97828 Marktheidenfeld",
+      "url": "http://opac.winbiap.net/marktheidenfeld"
+    },
+    {
+      "id": "61f39e9da57dc4bb",
+      "name": "Stadtbibliothek Memmingen",
+      "location": "87700 Memmingen",
+      "url": "https://bibliothek.memmingen.de/"
+    },
+    {
+      "id": "546f9c5c5824b126",
+      "name": "Stadtbibliothek Minden",
+      "location": "32423 Minden",
+      "url": "http://opac.winbiap.net/minden"
+    },
+    {
+      "id": "d58ee3febc01405e",
+      "name": "Stadtbibliothek Montabaur",
+      "location": "56410 Montabaur",
+      "url": "http://opac.winbiap.de/montabaur"
+    },
+    {
+      "id": "374c0251415ac4d0",
+      "name": "Stadtbibliothek Mühlhausen",
+      "location": "99974 Mühlhausen (Thüringen)",
+      "url": "http://webopac.winbiap.de/muehlhausen"
+    },
+    {
+      "id": "e6e708bb1750a250",
+      "name": "Stadtbibliothek Nagold",
+      "location": "72202 Nagold",
+      "url": "http://webopac.winbiap.de/nagold"
+    },
+    {
+      "id": "ad3b68667b5d315e",
+      "name": "Stadtbibliothek Naila",
+      "location": "95119 Naila",
+      "url": "http://opac.winbiap.net/naila"
+    },
+    {
+      "id": "193ee5a2202c095d",
+      "name": "Stadtbibliothek Naumburg",
+      "location": "06618 Naumburg (Saale)",
+      "url": "http://cloudopac.winbiap.de/naumburg"
+    },
+    {
+      "id": "26ea819ecf8213e8",
+      "name": "Stadtbibliothek Naunhof",
+      "location": "04683 Naunhof",
+      "url": "http://opac.winbiap.de/naunhof"
+    },
+    {
+      "id": "ccefac524f6f8715",
+      "name": "Stadtbibliothek Nidda",
+      "location": "63667 Nidda",
+      "url": "http://webopac.winbiap.de/nidda"
+    },
+    {
+      "id": "18634cd372f2cda3",
+      "name": "Stadtbibliothek Oberhausen",
+      "location": "46045 Oberhausen",
+      "url": "https://oberhausen.winbiap.de/"
+    },
+    {
+      "id": "045a51388133b2f2",
+      "name": "Stadtbibliothek Oberkochen",
+      "location": "73447 Oberkochen",
+      "url": "http://webopac.winbiap.de/oberkochen"
+    },
+    {
+      "id": "03a2cefba2e09dee",
+      "name": "Stadtbibliothek Ochsenfurt",
+      "location": "97199 Ochsenfurt",
+      "url": "http://opac.winbiap.net/ochsenfurt"
+    },
+    {
+      "id": "57cbaeed4d008f2a",
+      "name": "Stadtbibliothek Oettingen",
+      "location": "86732 Oettingen i. Bay.",
+      "url": "http://opac.winbiap.net/oettingen"
+    },
+    {
+      "id": "f5bb20e0b3995657",
+      "name": "Stadtbibliothek Rheda-Wiedenbrück",
+      "location": "33378 Rheda-Wiedenbrück",
+      "url": "http://opac.winbiap.de/rheda-wiedenbrueck"
+    },
+    {
+      "id": "9fc8fdf5f2be83f5",
+      "name": "Stadtbibliothek Rheinau",
+      "location": "77866 Rheinau",
+      "url": "http://opac.winbiap.net/rheinau"
+    },
+    {
+      "id": "4cfbf8c7274b2eeb",
+      "name": "Stadtbibliothek Rietberg",
+      "location": "33397 Rietberg",
+      "url": "http://webopac.winbiap.de/rietberg"
+    },
+    {
+      "id": "bbfe197219710ed8",
+      "name": "Stadtbibliothek Roßwein",
+      "location": "04741 Roßwein",
+      "url": "http://opac.winbiap.net/rosswein"
+    },
+    {
+      "id": "295f1d00df5ab032",
+      "name": "Stadtbibliothek Röthenbach a. d. Pegnitz",
+      "location": "90552 Röthenbach/Pegnitz",
+      "url": "http://opac.winbiap.net/roethenbach"
+    },
+    {
+      "id": "7377f05927ac205b",
+      "name": "Stadtbibliothek Schriesheim",
+      "location": "69198 Schriesheim",
+      "url": "http://opac.winbiap.de/schriesheim"
+    },
+    {
+      "id": "9b6e4e946363f6b1",
+      "name": "Stadtbibliothek Siegen",
+      "location": "57072 Siegen",
+      "url": "https://webopac.kommunale.it/siegen"
+    },
+    {
+      "id": "cd3ace8934832ed4",
+      "name": "Stadtbibliothek Sinsheim",
+      "location": "74889 Sinsheim",
+      "url": "https://stadtbibliothek.sinsheim.cloud/"
+    },
+    {
+      "id": "a5b34f287efc3b6f",
+      "name": "Stadtbibliothek Stollberg",
+      "location": "09366 Stollberg",
+      "url": "http://opac.winbiap.de/stollberg"
+    },
+    {
+      "id": "1e6377713823303d",
+      "name": "Stadtbibliothek Storkow",
+      "location": "15859 Storkow",
+      "url": "http://cloudopac.winbiap.de/storkow"
+    },
+    {
+      "id": "c6abd241a732668e",
+      "name": "Stadtbibliothek Straubing",
+      "location": "94315 Straubing",
+      "url": "https://webopac.straubing.de/"
+    },
+    {
+      "id": "2d8f7d64d9ed7cbd",
+      "name": "Stadtbibliothek Unterschleißheim",
+      "location": "85716 Unterschleißheim",
+      "url": "http://opac.winbiap.net/unterschleissheim"
+    },
+    {
+      "id": "748403d88e7b41b6",
+      "name": "Stadtbibliothek Vohburg",
+      "location": "85088 Vohburg",
+      "url": "http://webopac.winbiap.de/vohburg"
+    },
+    {
+      "id": "c002cfca563e489d",
+      "name": "Stadtbibliothek Völklingen",
+      "location": "66333 Völklingen",
+      "url": "http://bibliothek.voelklingen.de/"
+    },
+    {
+      "id": "dbaef0111dbf761b",
+      "name": "Stadtbibliothek Wasserburg",
+      "location": "83512 Wasserburg a. Inn",
+      "url": "http://cloudopac.winbiap.de/wasserburg"
+    },
+    {
+      "id": "f3220a4d6fa39042",
+      "name": "Stadtbibliothek Weißenburg",
+      "location": "91781 Weißenburg",
+      "url": "http://opac.winbiap.net/weissenburg"
+    },
+    {
+      "id": "250c2f1f5ca21834",
+      "name": "Stadtbibliothek Weißwasser",
+      "location": "02943 Weißwasser",
+      "url": "http://opac.winbiap.de/weisswasser"
+    },
+    {
+      "id": "549b845c4c47140f",
+      "name": "Stadtbibliothek Worms",
+      "location": "67547 Worms",
+      "url": "http://opac.winbiap.de/worms"
+    },
+    {
+      "id": "57f12073a0602e74",
+      "name": "Stadtbibliothek Wörth a.Main",
+      "location": "63939 Wörth a.Main",
+      "url": "http://opac.winbiap.de/woerth-main"
+    },
+    {
+      "id": "3aae9be8a1b95bdb",
+      "name": "Stadtbibliothek Zeil a. Main",
+      "location": "97475 Zeil a. Main",
+      "url": "http://webopac.winbiap.de/zeil"
+    },
+    {
+      "id": "a5e19d58764f5841",
+      "name": "Stadtbibliothek Zossen",
+      "location": "15806 Zossen",
+      "url": "http://opac.winbiap.net/zossen"
+    },
+    {
+      "id": "d251d03652afd356",
+      "name": "Stadtbücherei / Mediothek Homberg (Efze)",
+      "location": "34576 Homberg (Efze)",
+      "url": "http://webopac.winbiap.de/homberg"
+    },
+    {
+      "id": "8c50032b34aba0f8",
+      "name": "Stadtbücherei Alsdorf",
+      "location": "52477 Alsdorf",
+      "url": "http://opac.winbiap.net/alsdorf"
+    },
+    {
+      "id": "0e8d4c133a04e33b",
+      "name": "Stadtbücherei Altdorf b. Nürnberg",
+      "location": "90518 Altdorf b. Nürnberg",
+      "url": "http://webopac.winbiap.de/altdorf"
+    },
+    {
+      "id": "0f1faa3a234495ec",
+      "name": "Stadtbücherei Altena",
+      "location": "58762 Altena",
+      "url": "https://webopac.kommunale.it/altena"
+    },
+    {
+      "id": "670af3b7d40f32aa",
+      "name": "Stadtbücherei Altensteig",
+      "location": "72213 Altensteig",
+      "url": "http://webopac.winbiap.de/altensteig"
+    },
+    {
+      "id": "d69bf109d830b9cd",
+      "name": "Stadtbücherei Bad Aibling",
+      "location": "83043 Bad Aibling",
+      "url": "http://opac.winbiap.net/badaibling"
+    },
+    {
+      "id": "a180adf8281aa260",
+      "name": "Stadtbücherei Bad Berleburg",
+      "location": "57319 Bad Berleburg",
+      "url": "https://webopac.kommunale.it/bad-berleburg"
+    },
+    {
+      "id": "77c3936497c7e975",
+      "name": "Stadtbücherei Bad Kissingen",
+      "location": "97688 Bad Kissingen",
+      "url": "http://opac.winbiap.net/badkissingen"
+    },
+    {
+      "id": "fdf2cdda6cd94e2f",
+      "name": "Stadtbücherei Bad Königshofen",
+      "location": "97631 Bad Königshofen",
+      "url": "http://webopac.winbiap.de/badkoenigshofen"
+    },
+    {
+      "id": "5e3dbea602001bbd",
+      "name": "Stadtbücherei Bad Kötzting",
+      "location": "93444 Bad Kötzting",
+      "url": "http://webopac.winbiap.de/bad-koetzting"
+    },
+    {
+      "id": "f7e032c45f826758",
+      "name": "Stadtbücherei Bad Laasphe",
+      "location": "57334 Bad Laasphe",
+      "url": "http://opac.winbiap.de/bad-laasphe"
+    },
+    {
+      "id": "7e3d4c4c972ee52b",
+      "name": "Stadtbücherei Bad Mergentheim",
+      "location": "97980 Bad Mergentheim",
+      "url": "https://webopac.bad-mergentheim.de/"
+    },
+    {
+      "id": "b7f5f7b7ae6e9810",
+      "name": "Stadtbücherei Bad Nauheim",
+      "location": "61231 Bad Nauheim",
+      "url": "http://opac.winbiap.net/bad-nauheim"
+    },
+    {
+      "id": "8245a257990df4d6",
+      "name": "Stadtbücherei Bad Oeynhausen",
+      "location": "32545 Bad Oeynhausen",
+      "url": "https://webopac.badoeynhausen.de/"
+    },
+    {
+      "id": "e8a07171c3ffd1ab",
+      "name": "Stadtbücherei Bad Salzuflen",
+      "location": "32105 Bad Salzuflen",
+      "url": "https://webopac.bad-salzuflen.de/"
+    },
+    {
+      "id": "9a868c094ca15762",
+      "name": "Stadtbücherei Bad Schwalbach",
+      "location": "65307 Bad Schwalbach",
+      "url": "http://opac.winbiap.net/bad-schwalbach"
+    },
+    {
+      "id": "2584ab19cc4a8e50",
+      "name": "Stadtbücherei Bad Staffelstein",
+      "location": "96231 Bad Staffelstein",
+      "url": "http://webopac.winbiap.de/bad-staffelstein"
+    },
+    {
+      "id": "f4b595593a18a2bc",
+      "name": "Stadtbücherei Bad Wildungen",
+      "location": "34537 Bad Wildungen",
+      "url": "http://webopac.winbiap.de/badwildungen"
+    },
+    {
+      "id": "234a88cdcee21951",
+      "name": "Stadtbücherei Baunatal",
+      "location": "34225 Baunatal",
+      "url": "http://webopac.winbiap.de/baunatal"
+    },
+    {
+      "id": "9bda793c8dc8a88e",
+      "name": "Stadtbücherei Berching",
+      "location": "92334 Berching",
+      "url": "http://opac.winbiap.net/berching"
+    },
+    {
+      "id": "e11bcf79c1bca03b",
+      "name": "Stadtbücherei Bergneustadt",
+      "location": "51702 Bergneustadt",
+      "url": "http://opac.winbiap.net/bergneustadt"
+    },
+    {
+      "id": "5dee50a866603e20",
+      "name": "Stadtbücherei Bischofsheim i.d.Rhön",
+      "location": "97653 Bischofsheim i.d. Rhön",
+      "url": "http://opac.winbiap.net/bischofsheim"
+    },
+    {
+      "id": "00a2b51ebf0e19bd",
+      "name": "Stadtbücherei Bobingen",
+      "location": "86399 Bobingen",
+      "url": "http://opac.winbiap.net/bobingen"
+    },
+    {
+      "id": "c67c64228b1a8223",
+      "name": "Stadtbücherei Borken",
+      "location": "34582 Borken",
+      "url": "http://opac.winbiap.net/borken"
+    },
+    {
+      "id": "4b2c0a4d7c455025",
+      "name": "Stadtbücherei Burscheid",
+      "location": "51399 Burscheid",
+      "url": "https://webopac.kommunale.it/burscheid"
+    },
+    {
+      "id": "e3a211be0a8b1342",
+      "name": "Stadtbücherei Dietfurt a.d. Altmühl",
+      "location": "92345 Dietfurt a. d. Altmühl",
+      "url": "http://webopac.winbiap.de/dietfurt"
+    },
+    {
+      "id": "4d90a60f113826fb",
+      "name": "Stadtbücherei Dillenburg",
+      "location": "35683 Dillenburg",
+      "url": "http://webopac.winbiap.de/dillenburg"
+    },
+    {
+      "id": "c88989d76b71eb50",
+      "name": "Stadtbücherei Dorfen",
+      "location": "84405 Dorfen",
+      "url": "http://opac.winbiap.net/dorfen"
+    },
+    {
+      "id": "0dcb296963083e3a",
+      "name": "Stadtbücherei Dornhan",
+      "location": "72175 Dornhan",
+      "url": "http://webopac.winbiap.de/dornhan"
+    },
+    {
+      "id": "a4615fa48041e870",
+      "name": "Stadtbücherei Ebern",
+      "location": "96106 Ebern",
+      "url": "http://ebern-findus.opac.datronic.de/cgi-bin/findus.fcgi.pl?customer=ebern"
+    },
+    {
+      "id": "1da605e5cce3b51f",
+      "name": "Stadtbücherei Ebersberg",
+      "location": "85560 Ebersberg",
+      "url": "http://webopac.winbiap.de/ebersberg"
+    },
+    {
+      "id": "5e3ef478f086cc6d",
+      "name": "Stadtbücherei Erding",
+      "location": "85435 Erding",
+      "url": "http://opac.winbiap.de/erding"
+    },
+    {
+      "id": "7050f0aa808ae843",
+      "name": "Stadtbücherei Erkelenz",
+      "location": "41812 Erkelenz",
+      "url": "http://opac.winbiap.net/erkelenz"
+    },
+    {
+      "id": "83f6de9c0f7d00b2",
+      "name": "Stadtbücherei Eschweiler",
+      "location": "52249 Eschweiler",
+      "url": "http://opac.winbiap.net/eschweiler"
+    },
+    {
+      "id": "2b32657ba1a8cf19",
+      "name": "Stadtbücherei Espelkamp",
+      "location": "32339 Espelkamp",
+      "url": "https://webopac.espelkamp.de/"
+    },
+    {
+      "id": "8271a41aa280b2b8",
+      "name": "Stadtbücherei Feuchtwangen",
+      "location": "91555 Feuchtwangen",
+      "url": "http://webopac.winbiap.de/feuchtwangen"
+    },
+    {
+      "id": "491c0f33865dd03f",
+      "name": "Stadtbücherei Flörsheim",
+      "location": "65439 Flörsheim am Main",
+      "url": "http://opac.winbiap.de/floersheim"
+    },
+    {
+      "id": "4e13def407660334",
+      "name": "Stadtbücherei Forchheim",
+      "location": "91301 Forchheim",
+      "url": "http://opac.winbiap.de/forchheim"
+    },
+    {
+      "id": "7f9d002116f6af76",
+      "name": "Stadtbücherei Frankenberg",
+      "location": "35066 Frankenberg (Eder)",
+      "url": "http://opac.winbiap.net/frankenberg"
+    },
+    {
+      "id": "e4519690b64e7979",
+      "name": "Stadtbücherei Freilassing",
+      "location": "83395 Freilassing",
+      "url": "http://cloudopac.winbiap.de/freilassing"
+    },
+    {
+      "id": "a30029406c912261",
+      "name": "Stadtbücherei Freudenberg",
+      "location": "57258 Freudenberg",
+      "url": "https://webopac.kommunale.it/freudenberg"
+    },
+    {
+      "id": "f253d033ff9d9f29",
+      "name": "Stadtbücherei Friedberg",
+      "location": "86316 Friedberg",
+      "url": "http://webopac.winbiap.de/friedberg"
+    },
+    {
+      "id": "ea14d4b1023b32d2",
+      "name": "Stadtbücherei Friedrichsdorf",
+      "location": "61381 Friedrichsdorf",
+      "url": "http://opac.winbiap.net/friedrichsdorf"
+    },
+    {
+      "id": "72cd4953d21dbba2",
+      "name": "Stadtbücherei Geisenfeld",
+      "location": "85290 Geisenfeld",
+      "url": "http://webopac.winbiap.de/geisenfeld"
+    },
+    {
+      "id": "1daf5e3bd0b2413d",
+      "name": "Stadtbücherei Grafing",
+      "location": "85567 Grafing bei München",
+      "url": "http://opac.winbiap.net/grafing"
+    },
+    {
+      "id": "bad791ace40ef3d1",
+      "name": "Stadtbücherei Gundelfingen",
+      "location": "89423 Gundelfingen a. d. Donau",
+      "url": "http://opac.winbiap.net/gundelfingen"
+    },
+    {
+      "id": "dbca16d16a80d82b",
+      "name": "Stadtbücherei Günzburg",
+      "location": "89312 Günzburg",
+      "url": "http://opac.winbiap.net/guenzburg"
+    },
+    {
+      "id": "c8b4fdd1e1ea05cd",
+      "name": "Stadtbücherei Haar",
+      "location": "85540 Haar",
+      "url": "http://opac.winbiap.net/haar"
+    },
+    {
+      "id": "6224f59770675b4f",
+      "name": "Stadtbücherei Harburg",
+      "location": "86655 Harburg (Schwaben)",
+      "url": "http://webopac.winbiap.de/harburg"
+    },
+    {
+      "id": "8cf106fa0e487318",
+      "name": "Stadtbücherei Hattersheim",
+      "location": "65795 Hattersheim",
+      "url": "http://opac.winbiap.net/hattersheim"
+    },
+    {
+      "id": "e074af08fa2a1beb",
+      "name": "Stadtbücherei Helmbrechts",
+      "location": "95233 Helmbrechts",
+      "url": "http://webopac.winbiap.de/helmbrechts"
+    },
+    {
+      "id": "93fa777ccb9a985e",
+      "name": "Stadtbücherei Hemau",
+      "location": "93155 Hemau",
+      "url": "http://webopac.winbiap.de/hemau"
+    },
+    {
+      "id": "346babfa1173d316",
+      "name": "Stadtbücherei Heppenheim",
+      "location": "64646 Heppenheim",
+      "url": "http://opac.winbiap.net/heppenheim"
+    },
+    {
+      "id": "d58084333c2d8b25",
+      "name": "Stadtbücherei Herborn - Magistrat der Stadt Herborn",
+      "location": "35745 Herborn",
+      "url": "http://opac.winbiap.net/herborn"
+    },
+    {
+      "id": "e58115b8b2894fd3",
+      "name": "Stadtbücherei Herbrechtingen",
+      "location": "89542 Herbrechtingen",
+      "url": "http://opac.winbiap.de/herbrechtingen"
+    },
+    {
+      "id": "069e958f3d937a88",
+      "name": "Stadtbücherei Hersbruck",
+      "location": "91217 Hersbruck",
+      "url": "http://cloudopac.winbiap.de/hersbruck"
+    },
+    {
+      "id": "2a15dd08aa77644b",
+      "name": "Stadtbücherei Herzogenaurach",
+      "location": "91074 Herzogenaurach",
+      "url": "http://webopac.winbiap.de/herzogenaurach"
+    },
+    {
+      "id": "3efb431872df0d70",
+      "name": "Stadtbücherei Herzogenrath",
+      "location": "52134 Herzogenrath",
+      "url": "http://opac.winbiap.net/herzogenrath"
+    },
+    {
+      "id": "b60e5e3a177f7e0e",
+      "name": "Stadtbücherei Hilchenbach",
+      "location": "57271 Hilchenbach",
+      "url": "https://webopac.kommunale.it/hilchenbach"
+    },
+    {
+      "id": "043a810b5307fe87",
+      "name": "Stadtbücherei Hofgeismar",
+      "location": "34369 Hofgeismar",
+      "url": "http://opac.winbiap.net/hofgeismar"
+    },
+    {
+      "id": "7a768f20e70db3f9",
+      "name": "Stadtbücherei Hofheim am Taunus",
+      "location": "65719 Hofheim am Taunus",
+      "url": "http://webopac.winbiap.de/hofheim"
+    },
+    {
+      "id": "eff06c92e071f11a",
+      "name": "Stadtbücherei Hofheim i.UFr.",
+      "location": "97461 Hofheim",
+      "url": "http://cloudopac.winbiap.de/hofheim"
+    },
+    {
+      "id": "dd54a75e7590fd22",
+      "name": "Stadtbücherei Hungen",
+      "location": "35410 Hungen",
+      "url": "http://opac.winbiap.net/hungenlich"
+    },
+    {
+      "id": "a57dfd1adb8d3266",
+      "name": "Stadtbücherei Höchstadt a. d. Aisch",
+      "location": "91315 Höchstadt a. d. Aisch",
+      "url": "http://webopac.winbiap.de/hoechstadt"
+    },
+    {
+      "id": "1d832342449c3bfe",
+      "name": "Stadtbücherei Höchstädt",
+      "location": "89420 Höchstädt a. d. Donau",
+      "url": "http://webopac.winbiap.de/hoechstaedt"
+    },
+    {
+      "id": "5a9492804cd6e839",
+      "name": "Stadtbücherei Idstein",
+      "location": "65510 Idstein",
+      "url": "http://opac.winbiap.net/idstein"
+    },
+    {
+      "id": "f3fad310b14b3c52",
+      "name": "Stadtbücherei im Luitpoldbau",
+      "location": "97318 Kitzingen",
+      "url": "http://opac.winbiap.net/kitzingen"
+    },
+    {
+      "id": "08169764f1077635",
+      "name": "StadtBücherei im Pfleghof Langenau",
+      "location": "89129 Langenau",
+      "url": "http://opac.winbiap.de/langenau"
+    },
+    {
+      "id": "2a5a94b1467dade6",
+      "name": "Stadtbücherei Immenstadt - Literaturhaus Allgäu",
+      "location": "87509 Immenstadt",
+      "url": "http://opac.winbiap.net/immenstadt"
+    },
+    {
+      "id": "bf1653eca56ec7a2",
+      "name": "Stadtbücherei in der MAG Geislingen",
+      "location": "73312 Geislingen",
+      "url": "https://opac.geislingen.de/"
+    },
+    {
+      "id": "9c976bf072f29439",
+      "name": "Stadtbücherei Julie Hirschfeld Horn-Bad Meinberg",
+      "location": "32805 Horn-Bad Meinberg",
+      "url": "http://opac.winbiap.net/horn-badmeinberg"
+    },
+    {
+      "id": "5129810154577035",
+      "name": "Stadtbücherei Kelheim",
+      "location": "93309 Kelheim",
+      "url": "http://opac.winbiap.net/kelheim"
+    },
+    {
+      "id": "30d469f63a6388e5",
+      "name": "Stadtbücherei Kirchberg an der Jagst",
+      "location": "74592 Kirchberg an der Jagst",
+      "url": "http://webopac.winbiap.de/kirchberg"
+    },
+    {
+      "id": "6faf1dd234e9c485",
+      "name": "Stadtbücherei Kirchheim u. Teck",
+      "location": "73230 Kirchheim u. Teck",
+      "url": "https://webopac.kirchheim-teck.de/"
+    },
+    {
+      "id": "9316a8b319118e94",
+      "name": "Stadtbücherei Kolbermoor",
+      "location": "83059 Kolbermoor",
+      "url": "http://opac.winbiap.net/kolbermoor"
+    },
+    {
+      "id": "1937c8d4b8f88337",
+      "name": "Stadtbücherei Korbach",
+      "location": "34497 Korbach",
+      "url": "http://cloudopac.winbiap.de/korbach"
+    },
+    {
+      "id": "a6d94fdcc262be26",
+      "name": "Stadtbücherei Krumbach",
+      "location": "86381 Krumbach (Schwaben)",
+      "url": "http://webopac.winbiap.de/krumbach"
+    },
+    {
+      "id": "3a8829beb48e3919",
+      "name": "Stadtbücherei Königsbrunn",
+      "location": "86343 Königsbrunn",
+      "url": "http://opac.winbiap.net/koenigsbrunn"
+    },
+    {
+      "id": "ee26ba6da46945d5",
+      "name": "Stadtbücherei Lage",
+      "location": "32791 Lage",
+      "url": "http://opac.winbiap.net/lage"
+    },
+    {
+      "id": "d76097a469e93c17",
+      "name": "Stadtbücherei Langen",
+      "location": "63225 Langen (Hessen)",
+      "url": "http://opac.winbiap.de/langen"
+    },
+    {
+      "id": "75a6cb29499d04a0",
+      "name": "Stadtbücherei Langenzenn",
+      "location": "90579 Langenzenn",
+      "url": "http://webopac.winbiap.de/langenzenn"
+    },
+    {
+      "id": "23adfcc113aa7f80",
+      "name": "Stadtbücherei Laufen",
+      "location": "83410 Laufen",
+      "url": "http://webopac.winbiap.de/laufen"
+    },
+    {
+      "id": "db3f92154d2a15d1",
+      "name": "Stadtbücherei Lauingen",
+      "location": "89415 Lauingen (Donau)",
+      "url": "http://webopac.winbiap.de/lauingen"
+    },
+    {
+      "id": "32cfa2260da3e916",
+      "name": "Stadtbücherei Leichlingen",
+      "location": "42799 Leichlingen",
+      "url": "https://webopac.kommunale.it/leichlingen"
+    },
+    {
+      "id": "96649dee289b80f7",
+      "name": "Stadtbücherei Leinfelden-Echterdingen",
+      "location": "70771 Leinfelden-Echterdingen",
+      "url": "http://opac.winbiap.de/le"
+    },
+    {
+      "id": "27180d703b351bda",
+      "name": "Stadtbücherei Lemgo",
+      "location": "32657 Lemgo",
+      "url": "http://webopac.lemgo.de/stadtbuecherei"
+    },
+    {
+      "id": "6706ec42c4ee0fcd",
+      "name": "Stadtbücherei Lindau",
+      "location": "88131 Lindau (B)",
+      "url": "https://webopac.kultur-lindau.de/"
+    },
+    {
+      "id": "19eb38f756fdccc3",
+      "name": "Stadtbücherei Lindenberg",
+      "location": "88161 Lindenberg",
+      "url": "http://webopac.winbiap.de/lindenberg"
+    },
+    {
+      "id": "72eddce061fd20ab",
+      "name": "Stadtbücherei Lippstadt",
+      "location": "59555 Lippstadt",
+      "url": "https://webopac.kommunale.it/lippstadt/"
+    },
+    {
+      "id": "58b5759e0486af4d",
+      "name": "Stadtbücherei Lorch",
+      "location": "73547 Lorch",
+      "url": "http://opac.winbiap.de/lorch"
+    },
+    {
+      "id": "bcf79a2347f8b1f6",
+      "name": "Stadtbücherei Löhne",
+      "location": "32584 Löhne-Ulenburg",
+      "url": "http://opac.winbiap.de/Loehne"
+    },
+    {
+      "id": "7d9e107978f1eb11",
+      "name": "Stadtbücherei Lünen",
+      "location": "44532 Lünen",
+      "url": "http://opac.winbiap.net/luenen"
+    },
+    {
+      "id": "aed17261f05eaf88",
+      "name": "Stadtbücherei Marktbreit",
+      "location": "97340 Marktbreit",
+      "url": "http://opac.winbiap.net/marktbreit"
+    },
+    {
+      "id": "36d20ffd76fc8833",
+      "name": "Stadtbücherei Maxhütte-Haidhof",
+      "location": "93142 Maxhütte-Haidhof",
+      "url": "http://opac.winbiap.net/maxhuette"
+    },
+    {
+      "id": "28536042b03e5432",
+      "name": "Stadtbücherei Mellrichstadt",
+      "location": "97638 Mellrichstadt",
+      "url": "http://opac.winbiap.net/mellrichstadt"
+    },
+    {
+      "id": "b28f19154dacca68",
+      "name": "Stadtbücherei Melsungen",
+      "location": "34212 Melsungen",
+      "url": "http://webopac.winbiap.de/melsungen"
+    },
+    {
+      "id": "5d373d8890486229",
+      "name": "Stadtbücherei Meschede",
+      "location": "59872 Meschede",
+      "url": "http://opac.winbiap.de/meschede"
+    },
+    {
+      "id": "e24ff2c7064fce0f",
+      "name": "Stadtbücherei Mindelheim",
+      "location": "87719 Mindelheim",
+      "url": "http://cloudopac.winbiap.de/mindelheim"
+    },
+    {
+      "id": "6987faaa63d8c620",
+      "name": "Stadtbücherei Moosburg a.d. Isar",
+      "location": "85368 Moosburg",
+      "url": "http://webopac.winbiap.de/moosburg"
+    },
+    {
+      "id": "015ed47a1310fe27",
+      "name": "Stadtbücherei Mörfelden-Walldorf",
+      "location": "64546 Mörfelden-Walldorf",
+      "url": "http://opac.winbiap.net/moerfelden-walldorf"
+    },
+    {
+      "id": "50dd1c0c67a1ded2",
+      "name": "Stadtbücherei Mühldorf a. Inn",
+      "location": "84453 Mühldorf a. Inn",
+      "url": "http://webopac.winbiap.de/muehldorf"
+    },
+    {
+      "id": "c60e8edbffecbda9",
+      "name": "Stadtbücherei Mühlheim am Main",
+      "location": "63165 Mühlheim am Main",
+      "url": "http://opac.winbiap.net/muehlheim"
+    },
+    {
+      "id": "c70b1c4f2359066a",
+      "name": "Stadtbücherei Münnerstadt",
+      "location": "97702 Münnerstadt",
+      "url": "http://webopac.winbiap.de/muennerstadt"
+    },
+    {
+      "id": "60fc02bec6164a21",
+      "name": "Stadtbücherei Neckargemünd",
+      "location": "69151 Neckargemünd",
+      "url": "http://opac.winbiap.net/neckargemuend"
+    },
+    {
+      "id": "6124f270bf1ba53d",
+      "name": "Stadtbücherei Neu-Ulm",
+      "location": "89231 Neu-Ulm",
+      "url": "http://webopac.winbiap.de/neu-ulm"
+    },
+    {
+      "id": "03b2975b1cd4ffa6",
+      "name": "Stadtbücherei Neuburg",
+      "location": "86633 Neuburg a. d. Donau",
+      "url": "http://opac.winbiap.net/neuburg"
+    },
+    {
+      "id": "87e128cb819e2738",
+      "name": "Stadtbücherei Neustadt a.d. Donau",
+      "location": "93333 Neustadt a.d. Donau",
+      "url": "http://opac.winbiap.net/neustadt_donau"
+    },
+    {
+      "id": "c2e9fb952040ac3c",
+      "name": "Stadtbücherei Neutraubling",
+      "location": "93073 Neutraubling",
+      "url": "http://cloudopac.winbiap.de/neutraubling"
+    },
+    {
+      "id": "b8e26618307bf39b",
+      "name": "Stadtbücherei Nittenau",
+      "location": "93149 Nittenau",
+      "url": "http://webopac.winbiap.de/nittenau"
+    },
+    {
+      "id": "02ef1ee448a29f63",
+      "name": "Stadtbücherei Obernburg",
+      "location": "63785 Obernburg",
+      "url": "http://opac.winbiap.net/obernburg"
+    },
+    {
+      "id": "aa342aba693885ff",
+      "name": "Stadtbücherei Olching",
+      "location": "82140 Olching",
+      "url": "http://webopac.winbiap.de/olching"
+    },
+    {
+      "id": "5736cbe198c7ec30",
+      "name": "Stadtbücherei Olpe",
+      "location": "57462 Olpe",
+      "url": "https://webopac.kommunale.it/olpe"
+    },
+    {
+      "id": "512744aa47f49e43",
+      "name": "Stadtbücherei Olsberg",
+      "location": "59939 Olsberg",
+      "url": "https://webopac.kommunale.it/olsberg"
+    },
+    {
+      "id": "f9f8f8da03b04996",
+      "name": "Stadtbücherei Ostheim v.d. Rhön",
+      "location": "97645 Ostheim v.d.Rhön",
+      "url": "http://opac.winbiap.net/ostheim"
+    },
+    {
+      "id": "ca3fe01a7d03f7ea",
+      "name": "Stadtbücherei Penzberg",
+      "location": "82377 Penzberg",
+      "url": "https://cloudopac.winbiap.de/penzberg"
+    },
+    {
+      "id": "442e762893d90b0a",
+      "name": "Stadtbücherei Pohlheim",
+      "location": "35415 Pohlheim",
+      "url": "http://opac.winbiap.net/pohlheim"
+    },
+    {
+      "id": "1b6e30f87f0adb7f",
+      "name": "Stadtbücherei Porta Westfalica",
+      "location": "32457 Porta Westfalica",
+      "url": "https://webopac.portawestfalica.de/"
+    },
+    {
+      "id": "af501111425d25be",
+      "name": "Stadtbücherei Rain",
+      "location": "86641 Rain a. Lech",
+      "url": "http://opac.winbiap.net/rain"
+    },
+    {
+      "id": "36e19c7da03e2d3d",
+      "name": "Stadtbücherei Reinheim",
+      "location": "64354 Reinheim",
+      "url": "http://webopac.winbiap.de/reinheim"
+    },
+    {
+      "id": "5ada95ac6ea0918f",
+      "name": "Stadtbücherei Rosbach v. d. Höhe",
+      "location": "61191 Rosbach v. d. Höhe",
+      "url": "http://webopac.winbiap.de/rosbach"
+    },
+    {
+      "id": "c3d71e7a15ede407",
+      "name": "Stadtbücherei Roth",
+      "location": "91154 Roth",
+      "url": "http://opac.winbiap.net/roth"
+    },
+    {
+      "id": "68035fcf7f2111b9",
+      "name": "Stadtbücherei Rothenburg o.d.T.",
+      "location": "91541 Rothenburg ob der Tauber",
+      "url": "http://opac.winbiap.net/rothenburg"
+    },
+    {
+      "id": "b5a28df6ab255751",
+      "name": "Stadtbücherei Rödermark",
+      "location": "63322 Rödermark",
+      "url": "https://medienkatalog.stadtbuecherei.info/"
+    },
+    {
+      "id": "b95ff87154c18ab5",
+      "name": "Stadtbücherei Röttingen",
+      "location": "97285 Röttingen",
+      "url": "http://webopac.winbiap.de/roettingen"
+    },
+    {
+      "id": "394f3e18b56fb4ea",
+      "name": "Stadtbücherei Rötz",
+      "location": "92444 Rötz",
+      "url": "http://opac.winbiap.net/roetz"
+    },
+    {
+      "id": "47a90191f0f0e1a1",
+      "name": "Stadtbücherei Schillingsfürst",
+      "location": "91583 Schillingsfürst",
+      "url": "http://opac.winbiap.net/schillingsfuerst"
+    },
+    {
+      "id": "fba4c4cb65be6fcd",
+      "name": "Stadtbücherei Schorndorf",
+      "location": "73614 Schorndorf",
+      "url": "http://webopac.winbiap.de/schorndorf"
+    },
+    {
+      "id": "0f7b284dd6fc9625",
+      "name": "Stadtbücherei Schrobenhausen",
+      "location": "86529 Schrobenhausen",
+      "url": "http://opac.winbiap.net/schrobenhausen"
+    },
+    {
+      "id": "704728c41e640d45",
+      "name": "Stadtbücherei Schwabmünchen",
+      "location": "86830 Schwabmünchen",
+      "url": "http://webopac.winbiap.de/schwabmuenchen"
+    },
+    {
+      "id": "cb060eb01a333e20",
+      "name": "Stadtbücherei Schwalmstadt",
+      "location": "34613 Schwalmstadt-Treysa",
+      "url": "http://opac.winbiap.de/schwalmstadt"
+    },
+    {
+      "id": "364d215997fed46c",
+      "name": "Stadtbücherei Schwarzenbach a.Wald",
+      "location": "95131 Schwarzenbach a.Wald",
+      "url": "http://webopac.winbiap.de/schwarzenbach"
+    },
+    {
+      "id": "2cba89c79e26028d",
+      "name": "Stadtbücherei Schwarzenbach an der Saale",
+      "location": "95126 Schwarzenbach a.d.Saale",
+      "url": "http://webopac.winbiap.de/schwarzenbach_saale"
+    },
+    {
+      "id": "89ae67368ea9ce5b",
+      "name": "Stadtbücherei Schwerte",
+      "location": "58239 Schwerte",
+      "url": "https://webopac.kommunale.it/schwerte/"
+    },
+    {
+      "id": "4cdcb2f88acedbd4",
+      "name": "Stadtbücherei Seligenstadt",
+      "location": "63500 Seligenstadt",
+      "url": "http://opac.winbiap.net/seligenstadt"
+    },
+    {
+      "id": "1acae4641f0c089a",
+      "name": "Stadtbücherei Senden",
+      "location": "89250 Senden",
+      "url": "http://webopac.winbiap.de/senden"
+    },
+    {
+      "id": "d51b89382c9813b2",
+      "name": "Stadtbücherei Soest",
+      "location": "59494 Soest",
+      "url": "http://opac.winbiap.net/soest"
+    },
+    {
+      "id": "685ab81529293cd5",
+      "name": "Stadtbücherei Sonthofen",
+      "location": "87527 Sonthofen",
+      "url": "http://webopac.winbiap.de/sonthofen"
+    },
+    {
+      "id": "1487e539c2d4f44e",
+      "name": "Stadtbücherei Spalt",
+      "location": "91174 Spalt",
+      "url": "http://webopac.winbiap.de/spalt"
+    },
+    {
+      "id": "ef5b834a5a8a1858",
+      "name": "Stadtbücherei St. Johannes",
+      "location": "89335 Ichenhausen",
+      "url": "http://opac.winbiap.net/ichenhausen"
+    },
+    {
+      "id": "55b9c6b2cf666081",
+      "name": "Stadtbücherei St. Martin Illertissen",
+      "location": "89257 Illertissen",
+      "url": "http://webopac.winbiap.de/illertissen"
+    },
+    {
+      "id": "66df5cbc4ef58b8f",
+      "name": "Stadtbücherei Stadtallendorf",
+      "location": "35260 Stadtallendorf",
+      "url": "http://opac.winbiap.net/stadtallendorf"
+    },
+    {
+      "id": "2dd87a6d1798b26f",
+      "name": "Stadtbücherei Stadtbergen",
+      "location": "86391 Stadtbergen",
+      "url": "http://cloudopac.winbiap.de/stadtbergen"
+    },
+    {
+      "id": "59e248a1f92b7d6c",
+      "name": "Stadtbücherei Starnberg",
+      "location": "82319 Starnberg",
+      "url": "http://opac.winbiap.net/starnberg"
+    },
+    {
+      "id": "355a6c10b05ae82f",
+      "name": "Stadtbücherei Steinbach",
+      "location": "61449 Steinbach (Taunus)",
+      "url": "http://opac.winbiap.de/steinbach"
+    },
+    {
+      "id": "599c943b00ecf5bb",
+      "name": "Stadtbücherei Suhl",
+      "location": "98527 Suhl",
+      "url": "http://opac.winbiap.net/suhl"
+    },
+    {
+      "id": "a5d9735b6b254875",
+      "name": "Stadtbücherei Süßen",
+      "location": "73079 Süßen",
+      "url": "http://webopac.winbiap.de/suessen"
+    },
+    {
+      "id": "ec8845dc788e375f",
+      "name": "Stadtbücherei Tegernsee St. Quirinus",
+      "location": "83684 Tegernsee",
+      "url": "http://webopac.winbiap.de/tegernsee"
+    },
+    {
+      "id": "c4f96594ad1e28c0",
+      "name": "Stadtbücherei Teublitz",
+      "location": "93158 Teublitz",
+      "url": "http://opac.winbiap.net/teublitz"
+    },
+    {
+      "id": "d849526e33a013e4",
+      "name": "Stadtbücherei Thannhausen",
+      "location": "86470 Thannhausen",
+      "url": "http://webopac.winbiap.de/thannhausen"
+    },
+    {
+      "id": "f3dc36bf3614d5f1",
+      "name": "Stadtbücherei Traunreut",
+      "location": "83301 Traunreut",
+      "url": "http://cloudopac.winbiap.de/traunreut"
+    },
+    {
+      "id": "e653ba072ec40dc0",
+      "name": "Stadtbücherei u. Schulbibliotheken Barsinghausen",
+      "location": "30890 Barsinghausen",
+      "url": "http://opac.winbiap.net/barsinghausen"
+    },
+    {
+      "id": "b54681687d292039",
+      "name": "Stadtbücherei Uffenheim",
+      "location": "97215 Uffenheim",
+      "url": "http://webopac.winbiap.de/uffenheim"
+    },
+    {
+      "id": "a70dd07fb37427d7",
+      "name": "Stadtbücherei und Zelius Neuenrade",
+      "location": "58809 Neuenrade",
+      "url": "https://webopac.kommunale.it/neuenrade"
+    },
+    {
+      "id": "eccd90cf689a3997",
+      "name": "Stadtbücherei Usingen",
+      "location": "61250 Usingen",
+      "url": "http://webopac.winbiap.de/usingen"
+    },
+    {
+      "id": "90470deaf2d371e6",
+      "name": "Stadtbücherei Vellmar",
+      "location": "34246 Vellmar",
+      "url": "http://webopac.winbiap.de/vellmar"
+    },
+    {
+      "id": "3dff52955010c119",
+      "name": "Stadtbücherei Vohenstrauß",
+      "location": "92648 Vohenstrauß",
+      "url": "http://opac.winbiap.net/vohenstrauss"
+    },
+    {
+      "id": "b1ebf51f968ede7d",
+      "name": "Stadtbücherei Vöhringen",
+      "location": "89269 Vöhringen",
+      "url": "http://opac.winbiap.net/voehringen"
+    },
+    {
+      "id": "99e660cf59ce9d5f",
+      "name": "Stadtbücherei Waldbröl",
+      "location": "51545 Waldbröl",
+      "url": "http://opac.winbiap.net/waldbroel"
+    },
+    {
+      "id": "7f8eac383661a779",
+      "name": "Stadtbücherei Waldkraiburg",
+      "location": "84478 Waldkraiburg",
+      "url": "http://webopac.winbiap.de/waldkraiburg"
+    },
+    {
+      "id": "f7250a4b2230a5bf",
+      "name": "Stadtbücherei Waldsassen",
+      "location": "95652 Waldsassen",
+      "url": "http://opac.winbiap.net/waldsassen"
+    },
+    {
+      "id": "f9b55e72026f96fe",
+      "name": "Stadtbücherei Walldorf",
+      "location": "69190 Walldorf",
+      "url": "http://opac.winbiap.net/walldorf"
+    },
+    {
+      "id": "479ea0d87b56eb12",
+      "name": "Stadtbücherei Wemding",
+      "location": "86650 Wemding",
+      "url": "http://opac.winbiap.net/wemding"
+    },
+    {
+      "id": "0cc1cff809a60210",
+      "name": "Stadtbücherei Werdohl",
+      "location": "58791 Werdohl",
+      "url": "https://webopac.kommunale.it/werdohl"
+    },
+    {
+      "id": "3224523103afeb6a",
+      "name": "Stadtbücherei Werl",
+      "location": "59457 Werl",
+      "url": "https://webopac.kommunale.it/werl"
+    },
+    {
+      "id": "9be59bf3cb663690",
+      "name": "Stadtbücherei Wertheim",
+      "location": "97877 Wertheim",
+      "url": "http://opac.winbiap.net/wertheim"
+    },
+    {
+      "id": "fa50a8ece420bfcb",
+      "name": "Stadtbücherei Wiehl",
+      "location": "51674 Wiehl",
+      "url": "http://opac.winbiap.net/wiehl"
+    },
+    {
+      "id": "559b3d2fd2902ee2",
+      "name": "Stadtbücherei Windischeschenbach",
+      "location": "92670 Windischeschenbach",
+      "url": "http://opac.winbiap.de/windischeschenbach"
+    },
+    {
+      "id": "002fc1f4808bbe96",
+      "name": "Stadtbücherei Windsbach",
+      "location": "91575 Windsbach",
+      "url": "http://webopac.winbiap.de/windsbach"
+    },
+    {
+      "id": "78a074e8169b7095",
+      "name": "Stadtbücherei Wolfratshausen",
+      "location": "82515 Wolfratshausen",
+      "url": "https://webopac.wolfratshausen.de/"
+    },
+    {
+      "id": "b3ad6df78d1d432e",
+      "name": "Stadtbücherei Wörth a. d. Donau",
+      "location": "93086 Wörth a. d. Donau",
+      "url": "http://opac.winbiap.net/woerth-donau"
+    },
+    {
+      "id": "27f929fdb330ca53",
+      "name": "Stadtbücherei Würselen",
+      "location": "52146 Würselen",
+      "url": "http://opac.winbiap.de/wuerselen"
+    },
+    {
+      "id": "1cc4ba598915b7d2",
+      "name": "Stadtbücherei Würzburg",
+      "location": "97070 Würzburg",
+      "url": "http://opac.winbiap.net/wuerzburg"
+    },
+    {
+      "id": "3d87663a93113db0",
+      "name": "Stadtbücherei Zwingenberg",
+      "location": "64673 Zwingenberg",
+      "url": "http://webopac.winbiap.de/zwingenberg"
+    },
+    {
+      "id": "fc14c0c1fdf3287a",
+      "name": "Stadtbüchereien Obertshausen",
+      "location": "63179 Obertshausen",
+      "url": "http://opac.winbiap.net/obertshausen"
+    },
+    {
+      "id": "fc0e673672b99632",
+      "name": "Stadtibliothek Roding",
+      "location": "93426 Roding",
+      "url": "http://webopac.winbiap.de/roding"
+    },
+    {
+      "id": "70094a85bbad0615",
+      "name": "Stadtteilbücherei Fasanenhof e.V.",
+      "location": "34125 Kassel",
+      "url": "http://opac.winbiap.de/fasanenhof"
+    },
+    {
+      "id": "6c8d83ca9d2db7a2",
+      "name": "Städt. Bücherei Arnsberg",
+      "location": "59821 Arnsberg",
+      "url": "https://webopac.kommunale.it/arnsberg"
+    },
+    {
+      "id": "f801e610d3e345d4",
+      "name": "Treffpunkt Bücherei Uhldingen-Mühlhofen",
+      "location": "88690 Uhldingen-Mühlhofen",
+      "url": "http://opac.winbiap.net/uhldingen-muehlhofen"
+    },
+    {
+      "id": "66855529a701b2b4",
+      "name": "UBiZ - Umweltbibliothek Oberschleichach",
+      "location": "97514 Oberaurach",
+      "url": "http://webopac.winbiap.de/ubiz"
+    },
+    {
+      "id": "5f80734336ca0ceb",
+      "name": "Universitätsklinikum Augsburg / Patientenbücherei / Anästhesiologie",
+      "location": "86156 Augsburg",
+      "url": "https://opac.uk-augsburg.de/"
+    },
+    {
+      "id": "61a71f6b6b1fb645",
+      "name": "Verbandsbücherei Odelzhausen",
+      "location": "85235 Odelzhausen",
+      "url": "http://opac.winbiap.net/odelzhausen"
+    },
+    {
+      "id": "1d78cb354ebec77b",
+      "name": "Volksschule Lochham",
+      "location": "82166 Gräfelfing",
+      "url": "http://webopac.winbiap.de/lochham_vs"
+    },
+    {
+      "id": "bcdc35c07bcb1829",
+      "name": "Wilhelm-Leuschner-Schule",
+      "location": "34266 Niestetal",
+      "url": "http://opac.winbiap.net/niestetal"
+    },
+    {
+      "id": "bf14237022f8cec9",
+      "name": "Zentrum Verkündigung der EKHN - Bibliothek",
+      "location": "60487 Frankfurt am Main",
+      "url": "http://opac.winbiap.de/zentrum-verkuendigung"
+    },
+    {
+      "id": "7de9f3260d358366",
+      "name": "Öffentliche Bibliothek der Gemeinde Wickede (Ruhr)",
+      "location": "58739 Wickede",
+      "url": "https://webopac.kommunale.it/wickede"
+    },
+    {
+      "id": "89e25f5cf463bab5",
+      "name": "Öffentliche Bibliothek Kerpen",
+      "location": "50170 Kerpen",
+      "url": "http://webopac.winbiap.de/kerpen"
+    },
+    {
+      "id": "4d139c5d7696ecb6",
+      "name": "Öffentliche Bibliothek Rangsdorf",
+      "location": "15834 Rangsdorf",
+      "url": "http://opac.winbiap.de/rangsdorf"
+    },
+    {
+      "id": "caacca1a23a31520",
+      "name": "Öffentliche Bücherei Balve",
+      "location": "58802 Balve",
+      "url": "http://opac.winbiap.de/balve"
+    },
+    {
+      "id": "ef21df81f3669123",
+      "name": "Öffentliche Bücherei Buseck",
+      "location": "35418 Buseck",
+      "url": "http://opac.winbiap.de/buseck"
+    },
+    {
+      "id": "2f7e31ef88cb421c",
+      "name": "Öffentliche Bücherei Gaimersheim",
+      "location": "85080 Gaimersheim",
+      "url": "http://opac.winbiap.net/gaimersheim"
+    },
+    {
+      "id": "a756508cc2268328",
+      "name": "Öffentliche Bücherei Gangkofen",
+      "location": "84140 Gangkofen",
+      "url": "http://webopac.winbiap.de/gangkofen"
+    },
+    {
+      "id": "05cb9d45d82bb2cc",
+      "name": "Öffentliche Bücherei Kissing",
+      "location": "86438 Kissing",
+      "url": "http://opac.winbiap.net/kissing"
+    },
+    {
+      "id": "c7c8614f967c3318",
+      "name": "Öffentliche Bücherei Mitterfels",
+      "location": "94360 Mitterfels",
+      "url": "http://opac.winbiap.net/mitterfels"
+    },
+    {
+      "id": "0bb27f2755bb009b",
+      "name": "Ökumenische Bücherei Vaterunserkirche/St.Thomas",
+      "location": "81925 München",
+      "url": "http://webopac.winbiap.de/vuk"
+    }
+  ]
+}

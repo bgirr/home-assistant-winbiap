@@ -8,17 +8,38 @@
       "cannot_connect": "Failed to connect",
       "invalid_auth": "Invalid library card number or password",
       "unsupported_page": "Login succeeded, but this WebOPAC account layout is not supported yet",
+      "invalid_library": "The selected library is no longer available in the bundled catalog",
+      "invalid_url": "Enter a valid WebOPAC URL",
       "unknown": "Unexpected error"
     },
     "step": {
       "user": {
         "data": {
-          "base_url": "WebOPAC URL",
+          "library": "Library"
+        },
+        "data_description": {
+          "library": "Search by library name, city, or postal code. Choose the manual option if your library is missing."
+        },
+        "description": "Select your library from the official WinBIAP provider directory.",
+        "title": "Select library"
+      },
+      "manual": {
+        "data": {
+          "base_url": "WebOPAC URL"
+        },
+        "data_description": {
+          "base_url": "Root address of the WinBIAP WebOPAC, for example https://opac.winbiap.net/koenigsbrunn/"
+        },
+        "description": "Enter the WebOPAC address if your library is not listed.",
+        "title": "Enter library manually"
+      },
+      "credentials": {
+        "data": {
           "library_card": "Library card number",
           "password": "Password"
         },
-        "description": "Connect a library account hosted by WinBIAP.",
-        "title": "Connect library account"
+        "description": "Enter your account details for {library}. They are sent only to the selected library server.",
+        "title": "Connect account"
       },
       "reauth_confirm": {
         "data": {

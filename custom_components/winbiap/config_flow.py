@@ -10,6 +10,7 @@ from aiohttp import CookieJar
 from homeassistant import config_entries
 from homeassistant.const import CONF_PASSWORD
 from homeassistant.data_entry_flow import FlowResult
+from homeassistant.helpers import selector
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
 
 from .api import (
@@ -21,24 +22,70 @@ from .api import (
     library_title,
     normalize_base_url,
 )
-from .const import CONF_BASE_URL, CONF_LIBRARY_CARD, DOMAIN
+from .const import (
+    CONF_BASE_URL,
+    CONF_LIBRARY_CARD,
+    CONF_LIBRARY_ID,
+    CONF_LIBRARY_LOCATION,
+    CONF_LIBRARY_NAME,
+    CONF_LIBRARY_SELECTION,
+    DOMAIN,
+)
+from .library_catalog import (
+    MANUAL_LIBRARY_ID,
+    WinBiapLibrary,
+    library_by_id,
+    load_library_catalog,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
 
-def _schema(defaults: dict[str, Any] | None = None) -> vol.Schema:
+def _credentials_schema(defaults: dict[str, Any] | None = None) -> vol.Schema:
+    defaults = defaults or {}
+    return vol.Schema(
+        {
+            vol.Required(
+                CONF_LIBRARY_CARD,
+                default=defaults.get(CONF_LIBRARY_CARD, ""),
+            ): str,
+            vol.Required(CONF_PASSWORD): str,
+        }
+    )
+
+
+def _library_schema(libraries: tuple[WinBiapLibrary, ...]) -> vol.Schema:
+    options: list[selector.SelectOptionDict] = [
+        {
+            "value": MANUAL_LIBRARY_ID,
+            "label": "Other / manual WebOPAC URL",
+        },
+        *(
+            {"value": library.library_id, "label": library.label}
+            for library in libraries
+        ),
+    ]
+    return vol.Schema(
+        {
+            vol.Required(CONF_LIBRARY_SELECTION): selector.SelectSelector(
+                selector.SelectSelectorConfig(
+                    options=options,
+                    mode=selector.SelectSelectorMode.DROPDOWN,
+                    sort=False,
+                )
+            )
+        }
+    )
+
+
+def _manual_schema(defaults: dict[str, Any] | None = None) -> vol.Schema:
     defaults = defaults or {}
     return vol.Schema(
         {
             vol.Required(
                 CONF_BASE_URL,
                 default=defaults.get(CONF_BASE_URL, "https://opac.winbiap.net/"),
-            ): str,
-            vol.Required(
-                CONF_LIBRARY_CARD,
-                default=defaults.get(CONF_LIBRARY_CARD, ""),
-            ): str,
-            vol.Required(CONF_PASSWORD): str,
+            ): str
         }
     )
 
@@ -64,15 +111,74 @@ class WinBiapConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     VERSION = 1
 
+    _base_url: str
+    _selected_library: WinBiapLibrary | None = None
+
+    async def _async_libraries(self) -> tuple[WinBiapLibrary, ...]:
+        """Load the bundled catalog outside the event loop."""
+        return await self.hass.async_add_executor_job(load_library_catalog)
+
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
-        """Handle initial configuration."""
+        """Let the user select a library from the provider catalog."""
+        errors: dict[str, str] = {}
+        libraries = await self._async_libraries()
+
+        if user_input is not None:
+            library_id = user_input[CONF_LIBRARY_SELECTION]
+            if library_id == MANUAL_LIBRARY_ID:
+                return await self.async_step_manual()
+            if library := library_by_id(libraries, library_id):
+                self._selected_library = library
+                self._base_url = library.url
+                return await self.async_step_credentials()
+            errors["base"] = "invalid_library"
+
+        return self.async_show_form(
+            step_id="user",
+            data_schema=_library_schema(libraries),
+            errors=errors,
+        )
+
+    async def async_step_manual(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+        """Accept a WebOPAC URL for a library missing from the catalog."""
+        errors: dict[str, str] = {}
+        if user_input is not None:
+            try:
+                self._base_url = normalize_base_url(user_input[CONF_BASE_URL])
+            except ValueError:
+                errors["base"] = "invalid_url"
+            else:
+                self._selected_library = None
+                return await self.async_step_credentials()
+
+        return self.async_show_form(
+            step_id="manual",
+            data_schema=_manual_schema(user_input),
+            errors=errors,
+        )
+
+    async def async_step_credentials(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+        """Validate credentials and create the config entry."""
         errors: dict[str, str] = {}
 
         if user_input is not None:
+            entry_data = {**user_input, CONF_BASE_URL: self._base_url}
+            if self._selected_library is not None:
+                entry_data.update(
+                    {
+                        CONF_LIBRARY_ID: self._selected_library.library_id,
+                        CONF_LIBRARY_NAME: self._selected_library.name,
+                        CONF_LIBRARY_LOCATION: self._selected_library.location,
+                    }
+                )
             try:
-                user_input[CONF_BASE_URL] = await _validate(self.hass, user_input)
+                entry_data[CONF_BASE_URL] = await _validate(self.hass, entry_data)
             except WinBiapInvalidAuth:
                 errors["base"] = "invalid_auth"
             except WinBiapUnsupportedPage:
@@ -84,19 +190,28 @@ class WinBiapConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 errors["base"] = "unknown"
             else:
                 unique_id = account_unique_id(
-                    user_input[CONF_BASE_URL], user_input[CONF_LIBRARY_CARD]
+                    entry_data[CONF_BASE_URL], entry_data[CONF_LIBRARY_CARD]
                 )
                 await self.async_set_unique_id(unique_id)
                 self._abort_if_unique_id_configured()
-                return self.async_create_entry(
-                    title=library_title(user_input[CONF_BASE_URL]),
-                    data=user_input,
+                title = (
+                    self._selected_library.name
+                    if self._selected_library is not None
+                    else library_title(entry_data[CONF_BASE_URL])
                 )
+                return self.async_create_entry(title=title, data=entry_data)
 
         return self.async_show_form(
-            step_id="user",
-            data_schema=_schema(user_input),
+            step_id="credentials",
+            data_schema=_credentials_schema(user_input),
             errors=errors,
+            description_placeholders={
+                "library": (
+                    self._selected_library.label
+                    if self._selected_library is not None
+                    else self._base_url
+                )
+            },
         )
 
     async def async_step_reauth(self, _entry_data: dict[str, Any]) -> FlowResult:
