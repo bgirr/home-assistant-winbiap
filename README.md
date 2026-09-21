@@ -5,13 +5,13 @@ by WinBIAP WebOPAC. It exposes current loans and due dates without sending
 library credentials anywhere except the configured library server.
 
 > [!WARNING]
-> `0.1.0-beta.2` is a protocol-validation release. The public login form of the
+> `0.1.0-beta.3` is a protocol-validation release. The public login form of the
 > Stadtbücherei Königsbrunn is supported, but its authenticated account layout
 > still needs to be verified with sanitized fixtures before a stable release.
 
 ## Current functionality
 
-- searchable library selection from the official WinBIAP provider directory
+- searchable library selection sorted by postal code from the official WinBIAP provider directory
 - manual WebOPAC URL fallback for libraries missing from the bundled catalog
 - live credential and page-layout validation before an entry is created
 - isolated cookie session with ASP.NET `VIEWSTATE` form handling
@@ -43,6 +43,13 @@ The integration currently bundles 806 library entries sourced from the
 [official WinBIAP reference directory](https://www.winbiap.de/referenzen). If
 your library is missing, choose **Other / manual WebOPAC URL** and enter its
 root address, for example `https://opac.winbiap.net/koenigsbrunn/`.
+
+The setup checks the account within 30 seconds. If it cannot complete, the
+form shows an error. For a login diagnosis, enable debug logs for
+`custom_components.winbiap` via Home Assistant's Logger integration before
+retrying; see [docs/login-debugging.md](docs/login-debugging.md). The trace
+contains request stages and HTTP status codes, without account credentials or
+raw account pages.
 
 ## Entities
 
