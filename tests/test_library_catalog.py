@@ -1,6 +1,8 @@
 """Tests for the generated provider catalog."""
 
 from custom_components.winbiap.library_catalog import (
+    WinBiapLibrary,
+    _postal_sort_key,
     library_by_id,
     load_library_catalog,
 )
@@ -24,3 +26,17 @@ def test_catalog_contains_koenigsbrunn() -> None:
     assert library.location == "86343 Königsbrunn"
     assert library.url == "http://opac.winbiap.net/koenigsbrunn"
     assert library_by_id(load_library_catalog(), library.library_id) == library
+
+
+def test_catalog_is_sorted_by_postal_code() -> None:
+    """The selector order follows postal codes, including four-digit codes."""
+    libraries = load_library_catalog()
+
+    assert libraries == tuple(sorted(libraries, key=_postal_sort_key))
+    assert next(
+        library for library in libraries if "Königsbrunn" in library.name
+    ).label.startswith("86343 Königsbrunn — ")
+    without_code = WinBiapLibrary(
+        "other", "Unknown", "No postcode", "https://example.org"
+    )
+    assert _postal_sort_key(without_code) > _postal_sort_key(libraries[-1])
