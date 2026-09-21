@@ -6,8 +6,9 @@
     },
     "error": {
       "cannot_connect": "Failed to connect",
-      "invalid_auth": "Invalid library card number or password",
-      "unsupported_page": "Login succeeded, but this WebOPAC account layout is not supported yet",
+      "timeout": "The library server did not respond within 30 seconds",
+      "invalid_auth": "The WebOPAC returned its login page; check your card number and password",
+      "unsupported_page": "The WebOPAC login form or account layout is not supported yet",
       "invalid_library": "The selected library is no longer available in the bundled catalog",
       "invalid_url": "Enter a valid WebOPAC URL",
       "unknown": "Unexpected error"

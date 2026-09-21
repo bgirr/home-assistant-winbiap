@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from typing import Any
 
@@ -56,14 +57,14 @@ def _credentials_schema(defaults: dict[str, Any] | None = None) -> vol.Schema:
 
 def _library_schema(libraries: tuple[WinBiapLibrary, ...]) -> vol.Schema:
     options: list[selector.SelectOptionDict] = [
-        {
-            "value": MANUAL_LIBRARY_ID,
-            "label": "Other / manual WebOPAC URL",
-        },
         *(
             {"value": library.library_id, "label": library.label}
             for library in libraries
         ),
+        {
+            "value": MANUAL_LIBRARY_ID,
+            "label": "Other / manual WebOPAC URL",
+        },
     ]
     return vol.Schema(
         {
@@ -90,6 +91,9 @@ def _manual_schema(defaults: dict[str, Any] | None = None) -> vol.Schema:
     )
 
 
+VALIDATION_TIMEOUT = 30
+
+
 async def _validate(hass, user_input: dict[str, Any]) -> str:
     base_url = normalize_base_url(user_input[CONF_BASE_URL])
     session = async_create_clientsession(hass, cookie_jar=CookieJar())
@@ -100,7 +104,8 @@ async def _validate(hass, user_input: dict[str, Any]) -> str:
         user_input[CONF_PASSWORD],
     )
     try:
-        await client.async_get_account()
+        async with asyncio.timeout(VALIDATION_TIMEOUT):
+            await client.async_get_account()
     finally:
         await client.async_close()
     return base_url
@@ -178,17 +183,28 @@ class WinBiapConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     }
                 )
             try:
+                _LOGGER.debug("WinBIAP setup validation started")
                 entry_data[CONF_BASE_URL] = await _validate(self.hass, entry_data)
             except WinBiapInvalidAuth:
+                _LOGGER.warning("WinBIAP setup validation failed: invalid_auth")
                 errors["base"] = "invalid_auth"
             except WinBiapUnsupportedPage:
+                _LOGGER.warning("WinBIAP setup validation failed: unsupported_page")
                 errors["base"] = "unsupported_page"
+            except TimeoutError:
+                _LOGGER.warning("WinBIAP setup validation failed: timeout")
+                errors["base"] = "timeout"
             except (WinBiapCannotConnect, ValueError):
+                _LOGGER.warning("WinBIAP setup validation failed: cannot_connect")
                 errors["base"] = "cannot_connect"
-            except Exception:
-                _LOGGER.exception("Unexpected exception validating WinBIAP account")
+            except Exception as err:
+                _LOGGER.error(
+                    "WinBIAP setup validation failed: unexpected %s",
+                    type(err).__name__,
+                )
                 errors["base"] = "unknown"
             else:
+                _LOGGER.debug("WinBIAP setup validation succeeded")
                 unique_id = account_unique_id(
                     entry_data[CONF_BASE_URL], entry_data[CONF_LIBRARY_CARD]
                 )
@@ -232,6 +248,8 @@ class WinBiapConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 errors["base"] = "invalid_auth"
             except WinBiapUnsupportedPage:
                 errors["base"] = "unsupported_page"
+            except TimeoutError:
+                errors["base"] = "timeout"
             except (WinBiapCannotConnect, ValueError):
                 errors["base"] = "cannot_connect"
             else:

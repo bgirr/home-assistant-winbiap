@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import re
 from dataclasses import dataclass, field
 from datetime import date, datetime
@@ -13,6 +14,8 @@ from urllib.parse import urljoin, urlparse
 from aiohttp import ClientError, ClientResponse, ClientSession
 
 from .models import WinBiapAccount, WinBiapLoan
+
+_LOGGER = logging.getLogger(__name__)
 
 LOGIN_PATH = "user/login.aspx"
 LOGIN_NAME = "ctl00$ContentPlaceHolderMain$TextBoxLoginName"
@@ -375,9 +378,17 @@ class WinBiapClient:
     async def async_login(self) -> tuple[str, str]:
         """Authenticate and return the landing page HTML and URL."""
         login_url = urljoin(self.base_url, LOGIN_PATH)
+        stage = "login_page"
         try:
+            _LOGGER.debug("WinBIAP request started: login_page")
             async with self._session.get(login_url) as response:
+                _LOGGER.debug("WinBIAP login page response: HTTP %d", response.status)
                 login_html = await self._text(response)
+            if LOGIN_NAME not in login_html or LOGIN_PASSWORD not in login_html:
+                _LOGGER.warning(
+                    "WinBIAP login page is unsupported: missing form fields"
+                )
+                raise WinBiapUnsupportedPage("Expected WebOPAC login form not found")
             payload = parse_hidden_fields(login_html)
             payload.update(
                 {
@@ -386,15 +397,27 @@ class WinBiapClient:
                     LOGIN_BUTTON: "Anmelden",
                 }
             )
+            stage = "login_submit"
+            _LOGGER.debug("WinBIAP request started: login_submit")
             async with self._session.post(login_url, data=payload) as response:
+                _LOGGER.debug("WinBIAP login submit response: HTTP %d", response.status)
                 html = await self._text(response)
                 response_url = str(response.url)
         except (ClientError, TimeoutError, UnicodeError) as err:
+            _LOGGER.warning(
+                "WinBIAP request failed at %s: %s", stage, type(err).__name__
+            )
             raise WinBiapCannotConnect(str(err)) from err
 
         if page_is_login(html, response_url):
+            _LOGGER.warning("WinBIAP login returned the login page")
             raise WinBiapInvalidAuth("The WebOPAC rejected the supplied credentials")
-        self._account_url = find_account_url(html, response_url) or response_url
+        account_link = find_account_url(html, response_url)
+        self._account_url = account_link or response_url
+        _LOGGER.debug(
+            "WinBIAP login submit completed; account link found: %s",
+            bool(account_link),
+        )
         return html, response_url
 
     async def async_get_account(self) -> WinBiapAccount:
@@ -405,12 +428,20 @@ class WinBiapClient:
 
         if account_url != landing_url:
             try:
+                _LOGGER.debug("WinBIAP request started: account_page")
                 async with self._session.get(account_url) as response:
+                    _LOGGER.debug(
+                        "WinBIAP account page response: HTTP %d", response.status
+                    )
                     html = await self._text(response)
                     account_url = str(response.url)
             except (ClientError, TimeoutError, UnicodeError) as err:
+                _LOGGER.warning(
+                    "WinBIAP request failed at account_page: %s", type(err).__name__
+                )
                 raise WinBiapCannotConnect(str(err)) from err
             if page_is_login(html, account_url):
+                _LOGGER.warning("WinBIAP account page redirected to login")
                 raise WinBiapInvalidAuth("The WebOPAC session expired after login")
 
         loans = parse_loans(html, account_url)
@@ -423,9 +454,14 @@ class WinBiapClient:
             )
         )
         if not loans and not empty_account:
+            _LOGGER.warning(
+                "WinBIAP account page is unsupported: no loans or empty marker"
+            )
             raise WinBiapUnsupportedPage(
                 "The account page was reached, but its loan layout is not supported"
             )
+
+        _LOGGER.debug("WinBIAP account page parsed successfully")
 
         library_name = None
         root = _tree(html)
