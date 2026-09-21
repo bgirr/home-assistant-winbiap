@@ -1,11 +1,13 @@
 {
   "config": {
     "abort": {
-      "already_configured": "This library account is already configured."
+      "already_configured": "This library account is already configured.",
+      "reauth_successful": "Re-authentication was successful."
     },
     "error": {
       "cannot_connect": "Failed to connect",
       "invalid_auth": "Invalid library card number or password",
+      "unsupported_page": "Login succeeded, but this WebOPAC account layout is not supported yet",
       "unknown": "Unexpected error"
     },
     "step": {
@@ -15,7 +17,15 @@
           "library_card": "Library card number",
           "password": "Password"
         },
-        "description": "Connect a library account hosted by WinBIAP."
+        "description": "Connect a library account hosted by WinBIAP.",
+        "title": "Connect library account"
+      },
+      "reauth_confirm": {
+        "data": {
+          "password": "Password"
+        },
+        "description": "Enter the current password for this library account.",
+        "title": "Re-authenticate library account"
       }
     }
   }
