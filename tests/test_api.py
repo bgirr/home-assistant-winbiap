@@ -5,6 +5,8 @@ from __future__ import annotations
 from datetime import date
 from pathlib import Path
 
+import pytest
+
 from custom_components.winbiap.api import (
     account_unique_id,
     find_account_url,
@@ -33,6 +35,11 @@ def test_normalize_base_url() -> None:
         normalize_base_url("https://example.org/library/index.aspx?ignored=true")
         == "https://example.org/library/"
     )
+    assert normalize_base_url("http://example.org/library") == (
+        "https://example.org/library/"
+    )
+    with pytest.raises(ValueError):
+        normalize_base_url("ftp://example.org/library")
 
 
 def test_unique_id_is_stable_and_does_not_contain_card() -> None:
