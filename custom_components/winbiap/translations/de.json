@@ -6,8 +6,9 @@
     },
     "error": {
       "cannot_connect": "Verbindung fehlgeschlagen",
-      "invalid_auth": "Ungültige Ausweisnummer oder ungültiges Passwort",
-      "unsupported_page": "Die Anmeldung war erfolgreich, aber diese WebOPAC-Kontoansicht wird noch nicht unterstützt",
+      "timeout": "Der Bibliotheksserver hat innerhalb von 30 Sekunden nicht geantwortet",
+      "invalid_auth": "Der WebOPAC zeigt erneut die Anmeldeseite; prüfe Ausweisnummer und Passwort",
+      "unsupported_page": "Das WebOPAC-Anmeldeformular oder die Kontoansicht wird noch nicht unterstützt",
       "invalid_library": "Die ausgewählte Bibliothek ist im mitgelieferten Katalog nicht mehr verfügbar",
       "invalid_url": "Gib eine gültige WebOPAC-URL ein",
       "unknown": "Unerwarteter Fehler"
