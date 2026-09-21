@@ -1,0 +1,22 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Dieses Bibliothekskonto ist bereits eingerichtet."
+    },
+    "error": {
+      "cannot_connect": "Verbindung fehlgeschlagen",
+      "invalid_auth": "Ungültige Ausweisnummer oder ungültiges Passwort",
+      "unknown": "Unerwarteter Fehler"
+    },
+    "step": {
+      "user": {
+        "data": {
+          "base_url": "WebOPAC-URL",
+          "library_card": "Bibliotheksausweisnummer",
+          "password": "Passwort"
+        },
+        "description": "Verbinde ein Bibliothekskonto, das von WinBIAP bereitgestellt wird."
+      }
+    }
+  }
+}
