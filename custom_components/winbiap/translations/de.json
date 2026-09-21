@@ -8,17 +8,38 @@
       "cannot_connect": "Verbindung fehlgeschlagen",
       "invalid_auth": "Ungültige Ausweisnummer oder ungültiges Passwort",
       "unsupported_page": "Die Anmeldung war erfolgreich, aber diese WebOPAC-Kontoansicht wird noch nicht unterstützt",
+      "invalid_library": "Die ausgewählte Bibliothek ist im mitgelieferten Katalog nicht mehr verfügbar",
+      "invalid_url": "Gib eine gültige WebOPAC-URL ein",
       "unknown": "Unerwarteter Fehler"
     },
     "step": {
       "user": {
         "data": {
-          "base_url": "WebOPAC-URL",
+          "library": "Bibliothek"
+        },
+        "data_description": {
+          "library": "Suche nach Bibliotheksname, Ort oder Postleitzahl. Wähle die manuelle Option, falls deine Bibliothek fehlt."
+        },
+        "description": "Wähle deine Bibliothek aus dem offiziellen WinBIAP-Anbieterverzeichnis aus.",
+        "title": "Bibliothek auswählen"
+      },
+      "manual": {
+        "data": {
+          "base_url": "WebOPAC-URL"
+        },
+        "data_description": {
+          "base_url": "Stammadresse des WinBIAP-WebOPAC, zum Beispiel https://opac.winbiap.net/koenigsbrunn/"
+        },
+        "description": "Gib die WebOPAC-Adresse ein, wenn deine Bibliothek nicht aufgeführt ist.",
+        "title": "Bibliothek manuell eingeben"
+      },
+      "credentials": {
+        "data": {
           "library_card": "Bibliotheksausweisnummer",
           "password": "Passwort"
         },
-        "description": "Verbinde ein Bibliothekskonto, das von WinBIAP bereitgestellt wird.",
-        "title": "Bibliothekskonto verbinden"
+        "description": "Gib deine Zugangsdaten für {library} ein. Sie werden nur an den ausgewählten Bibliotheksserver gesendet.",
+        "title": "Konto verbinden"
       },
       "reauth_confirm": {
         "data": {
