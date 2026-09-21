@@ -1,0 +1,22 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "This library account is already configured."
+    },
+    "error": {
+      "cannot_connect": "Failed to connect",
+      "invalid_auth": "Invalid library card number or password",
+      "unknown": "Unexpected error"
+    },
+    "step": {
+      "user": {
+        "data": {
+          "base_url": "WebOPAC URL",
+          "library_card": "Library card number",
+          "password": "Password"
+        },
+        "description": "Connect a library account hosted by WinBIAP."
+      }
+    }
+  }
+}
