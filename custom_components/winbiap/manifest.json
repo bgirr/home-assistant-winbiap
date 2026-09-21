@@ -1,12 +1,12 @@
 {
+  "domain": "winbiap",
+  "name": "WinBIAP Library",
   "codeowners": ["@bgirr"],
   "config_flow": true,
   "documentation": "https://github.com/bgirr/home-assistant-winbiap",
-  "domain": "winbiap",
   "integration_type": "service",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/bgirr/home-assistant-winbiap/issues",
-  "name": "WinBIAP Library",
   "requirements": [],
   "version": "0.0.0"
 }
