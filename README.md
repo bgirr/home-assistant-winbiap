@@ -1,119 +1,108 @@
 # WinBIAP Library for Home Assistant
 
-An unofficial Home Assistant custom integration for library accounts hosted by
-WinBIAP. It is intended to expose current loans, due dates, renewal eligibility,
-reservations, and account status without sending library credentials anywhere
-except the configured library's WinBIAP server.
+An unofficial, read-only Home Assistant integration for library accounts hosted
+by WinBIAP WebOPAC. It exposes current loans and due dates without sending
+library credentials anywhere except the configured library server.
 
-> [!IMPORTANT]
-> This repository is an implementation scaffold. It is not ready for end users
-> or HACS default inclusion yet.
+> [!WARNING]
+> `0.1.0-beta.1` is a protocol-validation release. The public login form of the
+> Stadtbücherei Königsbrunn is supported, but its authenticated account layout
+> still needs to be verified with sanitized fixtures before a stable release.
 
-## Proposed Home Assistant model
+## Current functionality
 
-Each library account becomes one Home Assistant device. Version 1 will create
-summary sensors and expose structured loan data through individual entities:
+- UI configuration with a WebOPAC URL, card number, and password
+- live credential and page-layout validation before an entry is created
+- isolated cookie session with ASP.NET `VIEWSTATE` form handling
+- automatic reauthentication prompt after rejected credentials
+- 30-minute coordinator polling and automatic retry after connection failures
+- account sensors for loan count, next due date, and overdue count
+- one due-date sensor per loan with author, media type, barcode, branch, cover,
+  days remaining, and renewal eligibility when provided by the server
+- German and English configuration texts
+- privacy-safe diagnostics
 
-- `sensor.<account>_loans` — number of current loans
-- `sensor.<account>_next_due` — earliest due date
-- `sensor.<account>_overdue` — number of overdue items
-- one timestamp sensor per loan, with title, author, media type, barcode,
-  branch, cover URL, days remaining, and renewal eligibility
+The integration deliberately does not renew, reserve, or otherwise change
+library data.
 
-The first release is deliberately read-only. Renewal actions will only be
-considered after the read-only implementation is stable across several WinBIAP
-installations.
+## Installation through HACS
 
-## Configuration
+Until the integration is accepted into the HACS default catalog:
 
-The integration will use a UI config flow with:
+1. Open **HACS > Integrations**.
+2. Open the menu and choose **Custom repositories**.
+3. Enter `https://github.com/bgirr/home-assistant-winbiap`.
+4. Select **Integration** and add the repository.
+5. Download **WinBIAP Library** and restart Home Assistant.
+6. Open **Settings > Devices & services > Add integration**.
+7. Select **WinBIAP Library** and enter the root URL of your WebOPAC, your
+   card number, and password.
 
-- WebOPAC base URL, for example `https://opac.winbiap.net/koenigsbrunn`
-- library card number
-- password
+Example URL: `https://opac.winbiap.net/koenigsbrunn/`
 
-Credentials are stored in the Home Assistant config entry and are never logged
-or included in diagnostics. The update coordinator will poll no more than every
-30 minutes by default.
+## Entities
 
-## Architecture
+| Entity | State | Important attributes |
+| --- | --- | --- |
+| Loans | Number of active loans | Sanitized structured loan list |
+| Next due date | Earliest due date | — |
+| Overdue items | Number of overdue loans | — |
+| One entity per loan | Due date | Title, author, type, barcode, branch, cover, remaining days, renewable |
 
-```text
-Config flow
-    -> WinBIAP client (session, ASP.NET form state, parsing)
-    -> DataUpdateCoordinator (authentication and refresh lifecycle)
-    -> Home Assistant entities (account and loans)
+Returned loan entities become unavailable instead of silently changing their
+identity. New loans are added automatically after the next update.
+
+## Privacy and security
+
+- Credentials are stored in the Home Assistant config entry.
+- Credentials, cookies, and card numbers are never logged or returned in
+  diagnostics.
+- Each account uses its own HTTP cookie session.
+- Account HTML is processed locally inside Home Assistant.
+- Do not attach raw account pages to public issues. Follow the sanitizing guide
+  in [docs/fixtures.md](docs/fixtures.md).
+
+## Compatibility
+
+| Installation | Public login | Account parser | Status |
+| --- | --- | --- | --- |
+| Stadtbücherei Königsbrunn, WebOPAC 4.7.3 | Inspected | Fixture required | Initial target |
+| Other WinBIAP WebOPAC 4.x sites | Generic ASP.NET form | Table/card parser | Community testing needed |
+| B24 mobile app | Not used | Not used | Out of scope |
+
+The client is an independent implementation. No source code from libopac or
+other third-party clients was copied.
+
+## Development
+
+```bash
+python -m venv .venv
+.venv/bin/pip install aiohttp pytest ruff
+.venv/bin/ruff check custom_components tests
+.venv/bin/pytest
 ```
 
-The client implementation will be written independently. No source code from
-the discontinued GPL-licensed libopac/opacclient project will be copied.
+The parser tests use synthetic, anonymized fixtures only. See
+[CONTRIBUTING.md](CONTRIBUTING.md) before contributing a new WebOPAC layout.
 
-## Delivery plan
+## Release path
 
-### Phase 0 — protocol fixture and design
+- [x] Repository, HACS metadata, brand assets, Hassfest, and HACS validation
+- [x] Independent async client, parser models, coordinator, config flow,
+  reauthentication, sensors, diagnostics, and unit tests
+- [ ] Verify an anonymized authenticated Königsbrunn account fixture
+- [ ] Test at least two additional independently hosted WinBIAP installations
+- [ ] Publish `v0.1.0` and collect HACS custom-repository feedback
+- [ ] Publish a stable release and submit the repository to `hacs/default`
+- [ ] Consider explicit renewal actions only after the read-only integration is
+  stable; automatic renewal will never be enabled by default
 
-- Record sanitized HTML fixtures from the Königsbrunn WebOPAC login and loans
-  pages.
-- Document login failure, expired session, empty account, and pagination cases.
-- Confirm stable selectors for title, author, item ID, due date, cover,
-  reservation state, and renewal eligibility.
+## Troubleshooting
 
-### Phase 1 — read-only MVP
-
-- Implement the async HTTP client and ASP.NET hidden-field handling.
-- Parse loans into typed dataclasses.
-- Add config flow with connection validation and duplicate prevention.
-- Add coordinator-based polling, reauthentication, and meaningful errors.
-- Create summary and per-loan entities with stable unique IDs.
-- Add German and English translations.
-
-### Phase 2 — quality and compatibility
-
-- Unit-test all parsers with sanitized fixtures and mocked HTTP responses.
-- Add reauthentication, options flow, diagnostics, and entity migration tests.
-- Test against at least three independently hosted WinBIAP libraries.
-- Add a compatibility matrix to the documentation.
-
-### Phase 3 — first public release
-
-- Add brand assets, screenshots, installation instructions, and privacy notes.
-- Pass Ruff, pytest, Hassfest, and HACS validation in GitHub Actions.
-- Publish a semantic versioned GitHub release, starting with `v0.1.0`.
-- Invite installation as a HACS custom repository and collect field reports.
-
-### Phase 4 — HACS default submission
-
-- Resolve beta feedback and publish a stable release.
-- Ensure the repository is public, active, has issues enabled, a description,
-  topics, brand assets, passing actions, and at least one GitHub release.
-- Submit an alphabetically placed pull request to `hacs/default` as the
-  repository owner.
-
-### Later — renewal actions
-
-- Add explicit `winbiap.renew_item` and `winbiap.renew_all` actions.
-- Require confirmation in dashboard examples and report the server response.
-- Never renew automatically by default.
-
-## HACS installation during development
-
-1. Open HACS.
-2. Add this repository as a custom repository of type **Integration**.
-3. Download **WinBIAP Library**.
-4. Restart Home Assistant.
-5. Add **WinBIAP Library** from **Settings > Devices & services**.
-
-## Supported installations
-
-The initial target is the Stadtbücherei Königsbrunn WebOPAC. The goal is broad
-WinBIAP compatibility; B24 itself is not scraped and is not required.
-
-## Project status
-
-See the milestone plan above. Contributions and sanitized test fixtures from
-other WinBIAP libraries will be welcome once the parser contract is documented.
-
-## Disclaimer
+If setup reports **Connection failed**, first confirm that the URL opens a
+WinBIAP login page in a browser. If login succeeds in a browser but setup still
+fails, download diagnostics and open an issue without including credentials or
+raw account HTML.
 
 This project is not affiliated with or endorsed by datronicsoft, WinBIAP, B24,
 or any participating library. Product names may be trademarks of their owners.
