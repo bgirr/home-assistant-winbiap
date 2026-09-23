@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import logging
 import shutil
+from dataclasses import replace
 from datetime import date
 from pathlib import Path
 from types import MappingProxyType
@@ -24,7 +25,11 @@ from homeassistant.setup import async_setup_component
 
 from custom_components.winbiap.api import WinBiapClient, WinBiapInvalidAuth
 from custom_components.winbiap.config_flow import _validate
-from custom_components.winbiap.models import WinBiapAccount, WinBiapLoan
+from custom_components.winbiap.models import (
+    WinBiapAccount,
+    WinBiapLoan,
+    WinBiapReservation,
+)
 
 ROOT = Path(__file__).parents[1]
 
@@ -87,7 +92,17 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                 await hass.config_entries.async_add(entry)
                 await hass.async_block_till_done()
                 assert entry.state is config_entries.ConfigEntryState.LOADED
-                states = hass.states.async_all("sensor")
+                reservation_entity = next(
+                    s
+                    for s in hass.states.async_all("sensor")
+                    if s.entity_id.endswith("vorbestellungen")
+                )
+                assert reservation_entity.state == "unavailable"
+                states = [
+                    s
+                    for s in hass.states.async_all("sensor")
+                    if s.entity_id != reservation_entity.entity_id
+                ]
                 assert len(states) == 4
                 assert all(s.state not in {"unknown", "unavailable"} for s in states)
                 assert sorted(s.state for s in states) == [
@@ -129,6 +144,43 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                     )
                     == 1
                 )
+                reservation = WinBiapReservation(
+                    "reservation-1",
+                    "Synthetic reservation",
+                    status="Abholbereit",
+                    ready_for_pickup=True,
+                    pickup_deadline=date(2030, 1, 4),
+                    cover_url="https://covers.example.org/reserved.png",
+                )
+                coordinator.async_set_updated_data(
+                    replace(account, reservations=(reservation,))
+                )
+                await hass.async_block_till_done()
+                reservation_state = hass.states.get(reservation_entity.entity_id)
+                assert reservation_state.state == "1"
+                assert reservation_state.attributes["ready_for_pickup"] == 1
+                assert (
+                    reservation_state.attributes["reservations"][0]["pickup_deadline"]
+                    == "2030-01-04"
+                )
+                covers = [
+                    s
+                    for s in hass.states.async_all("image")
+                    if s.attributes.get("reservation_id") == "reservation-1"
+                ]
+                assert len(covers) == 1 and covers[0].state != "unavailable"
+                cover_id = covers[0].entity_id
+                coordinator.async_set_updated_data(
+                    replace(
+                        account, reservations=(replace(reservation, status="Geändert"),)
+                    )
+                )
+                await hass.async_block_till_done()
+                assert hass.states.get(cover_id).state != "unavailable"
+                coordinator.async_set_updated_data(replace(account, reservations=()))
+                await hass.async_block_till_done()
+                assert hass.states.get(reservation_entity.entity_id).state == "0"
+                assert hass.states.get(cover_id).state == "unavailable"
                 old_session = entry.runtime_data.client._session
                 assert cover_session is not old_session
                 assert not old_session.closed

@@ -57,6 +57,7 @@ async def async_setup_entry(
         hass, auto_cleanup=True, cookie_jar=DummyCookieJar()
     )
     known: set[str] = set()
+    known_reservations: set[str] = set()
 
     @callback
     def add_covers() -> None:
@@ -71,6 +72,19 @@ async def async_setup_entry(
         async_add_entities(
             WinBiapCoverImage(hass, coordinator, entry, session, loan.item_id)
             for loan in new
+        )
+
+        reservations = [
+            r
+            for r in coordinator.data.reservations or ()
+            if r.item_id not in known_reservations
+            and r.cover_url
+            and _safe_cover_url(r.cover_url)
+        ]
+        known_reservations.update(r.item_id for r in reservations)
+        async_add_entities(
+            WinBiapReservationCover(hass, coordinator, entry, session, r.item_id)
+            for r in reservations
         )
 
     add_covers()
@@ -192,3 +206,44 @@ class WinBiapCoverImage(CoordinatorEntity[WinBiapCoordinator], ImageEntity):
             except (ClientError, TimeoutError, ValueError):
                 _LOGGER.debug("WinBIAP cover unavailable: image_request_failed")
             return None
+
+
+class WinBiapReservationCover(WinBiapCoverImage):
+    """Reservation covers share the bounded cookie-free image transport."""
+
+    def __init__(self, hass, coordinator, entry, session, item_id):
+        super().__init__(hass, coordinator, entry, session, item_id)
+        self._attr_unique_id = f"{entry.unique_id}_reservation_cover_{item_id}"
+
+    @property
+    def loan(self):
+        return next(
+            (
+                r
+                for r in self.coordinator.data.reservations or ()
+                if r.item_id == self._item_id
+            ),
+            None,
+        )
+
+    @property
+    def name(self):
+        return (
+            f"{self.loan.title} Vorbestellung Cover"
+            if self.loan
+            else "Vorbestellung Cover"
+        )
+
+    @property
+    def extra_state_attributes(self):
+        if not (item := self.loan):
+            return None
+        return {
+            "reservation_id": item.item_id,
+            "title": item.title,
+            "author": item.author,
+            "pickup_deadline": item.pickup_deadline.isoformat()
+            if item.pickup_deadline
+            else None,
+            "ready_for_pickup": item.ready_for_pickup,
+        }

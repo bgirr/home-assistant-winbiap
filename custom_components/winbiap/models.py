@@ -27,10 +27,24 @@ class WinBiapLoan:
 
 
 @dataclass(frozen=True, slots=True)
+class WinBiapReservation:
+    """A reservation without any account-changing action."""
+
+    item_id: str
+    title: str
+    author: str | None = None
+    status: str | None = None
+    ready_for_pickup: bool | None = None
+    pickup_deadline: date | None = None
+    cover_url: str | None = None
+
+
+@dataclass(frozen=True, slots=True)
 class WinBiapAccount:
     """Current read-only state of a WinBIAP account."""
 
     loans: tuple[WinBiapLoan, ...]
+    reservations: tuple[WinBiapReservation, ...] | None = None
     library_name: str | None = None
     account_status: str | None = None
 

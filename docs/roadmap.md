@@ -4,7 +4,7 @@ The next account features remain read-only. They are planned work, not entities
 provided by the current version. Implement them incrementally after the cover
 release; do not treat an unrecognized page as an empty account or a zero balance.
 
-## 1. Reservations (Vorbestellungen)
+## 1. Reservations (Vorbestellungen) — delivered in 0.1.0-beta.7
 
 - A count sensor per account, with explicit zero only when the page confirms it.
 - Structured records with title, author, status and cover when present.

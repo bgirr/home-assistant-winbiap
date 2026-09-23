@@ -61,3 +61,9 @@ content: >-
 
 Keep the dashboard restricted to the intended users: loan titles and due dates
 are personal account data even though the cover pictures themselves are public.
+
+## Complete dynamic view
+
+`examples/buecherei.json` contains the responsive loan view and reservation overview.
+It discovers WinBIAP entities dynamically and uses the installed card-mod resource
+for styling. Import it as the Bücherei view in a storage dashboard.

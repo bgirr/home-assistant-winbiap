@@ -634,4 +634,22 @@ class WinBiapClient:
             if "logo" in image.attrs.get("src", "").casefold():
                 library_name = image.attrs.get("alt") or None
                 break
-        return WinBiapAccount(loans=loans, library_name=library_name)
+        from .account_features import account_link, parse_reservations
+
+        reservations = None
+        if link := account_link(html, account_url, "reservations.aspx"):
+            try:
+                page, page_url = await self._request("GET", link)
+                if not page_is_login(page, page_url):
+                    reservations = parse_reservations(page, page_url)
+            except (
+                ClientError,
+                TimeoutError,
+                UnicodeError,
+                ValueError,
+                WinBiapUnsupportedPage,
+            ):
+                _LOGGER.debug("WinBIAP reservations unavailable")
+        return WinBiapAccount(
+            loans=loans, library_name=library_name, reservations=reservations
+        )

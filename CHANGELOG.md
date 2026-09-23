@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.0-beta.7 — Reservations
+
+- Add a read-only reservation count with structured status, pickup readiness and
+  pickup deadline. Explicit empty pages produce zero; unknown layouts remain unavailable.
+- Add stable reservation cover entities using the existing bounded, cookie-free image proxy.
+- Include the dynamic Bücherei dashboard example with a reservation overview.
+- Validate empty, pending and ready states, stable identities, optional failures and
+  actual Home Assistant registration/removal. Live check: 7 loans, 0 reservations.
+- Populated reservation layouts are covered by synthetic fixtures; the live account
+  currently has no reservations. No account-changing operations are implemented.
+
 ## 0.1.0-beta.6
 
 - Add Home Assistant image entities for borrowed-media covers, with on-demand

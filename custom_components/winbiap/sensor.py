@@ -33,6 +33,14 @@ class WinBiapSensorDescription(SensorEntityDescription):
 
 SUMMARY_SENSORS = (
     WinBiapSensorDescription(
+        key="reservations",
+        name="Vorbestellungen",
+        icon="mdi:book-clock",
+        value_fn=lambda account: (
+            len(account.reservations) if account.reservations is not None else None
+        ),
+    ),
+    WinBiapSensorDescription(
         key="loans",
         name="Loans",
         value_fn=lambda account: len(account.loans),
@@ -119,6 +127,14 @@ class WinBiapSummarySensor(WinBiapEntity):
         self._attr_icon = description.icon
 
     @property
+    def available(self) -> bool:
+        """Keep unsupported optional sections unavailable, without losing loans."""
+        return super().available and (
+            self.entity_description.key != "reservations"
+            or self.coordinator.data.reservations is not None
+        )
+
+    @property
     def native_value(self) -> Any:
         """Return the current summary value."""
         return self.entity_description.value_fn(self.coordinator.data)
@@ -126,6 +142,26 @@ class WinBiapSummarySensor(WinBiapEntity):
     @property
     def extra_state_attributes(self) -> dict[str, Any] | None:
         """Expose structured loan data on the loan-count sensor."""
+        if self.entity_description.key == "reservations":
+            records = self.coordinator.data.reservations
+            if records is None:
+                return None
+            return {
+                "reservations": [
+                    {
+                        "id": r.item_id,
+                        "title": r.title,
+                        "author": r.author,
+                        "status": r.status,
+                        "ready_for_pickup": r.ready_for_pickup,
+                        "pickup_deadline": r.pickup_deadline.isoformat()
+                        if r.pickup_deadline
+                        else None,
+                    }
+                    for r in records
+                ],
+                "ready_for_pickup": sum(r.ready_for_pickup is True for r in records),
+            }
         if self.entity_description.key != "loans":
             return None
         return {

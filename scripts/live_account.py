@@ -98,6 +98,9 @@ async def run(card: str, password: str, base_url: str) -> int:
                 client = ObservedClient(session, base_url, card, password)
                 account = await client.async_get_account()
                 print(f"loans={len(account.loans)}")
+                print(
+                    f"reservations={len(account.reservations) if account.reservations is not None else 'unavailable'}"
+                )
         return 0
     except Exception as err:
         category = (
