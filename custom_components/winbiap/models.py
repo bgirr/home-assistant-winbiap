@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import date, datetime
+from decimal import Decimal
 
 
 @dataclass(frozen=True, slots=True)
@@ -40,11 +41,20 @@ class WinBiapReservation:
 
 
 @dataclass(frozen=True, slots=True)
+class WinBiapBalance:
+    """Explicit current balance, never a sum of transaction history."""
+
+    amount: Decimal
+    currency: str
+
+
+@dataclass(frozen=True, slots=True)
 class WinBiapAccount:
     """Current read-only state of a WinBIAP account."""
 
     loans: tuple[WinBiapLoan, ...]
     reservations: tuple[WinBiapReservation, ...] | None = None
+    fees: WinBiapBalance | None = None
     library_name: str | None = None
     account_status: str | None = None
 

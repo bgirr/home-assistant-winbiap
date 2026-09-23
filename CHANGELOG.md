@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-beta.8 — Fees
+
+- Add an EUR monetary sensor for the explicit current account balance, parsed
+  with Decimal; support settled accounts, outstanding fees and credits.
+- Never derive the balance from recent transactions; do not expose transaction history.
+- Add a dynamic fees card to the Bücherei dashboard with settled, due and credit states.
+- Validate 91 unit tests and 22 real HA runtime tests, including monetary state writing.
+  Live verification confirms an explicitly settled account.
+
 ## 0.1.0-beta.7 — Reservations
 
 - Add a read-only reservation count with structured status, pickup readiness and

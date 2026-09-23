@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import re
+from decimal import Decimal
 from hashlib import sha256
 from urllib.parse import parse_qs, urljoin, urlparse
 
 from .api import WinBiapUnsupportedPage, _cover_url, _parse_date, _tree
-from .models import WinBiapReservation
+from .models import WinBiapBalance, WinBiapReservation
 
 
 def account_link(html: str, response_url: str, filename: str) -> str | None:
@@ -105,3 +106,29 @@ def parse_reservations(html: str, base_url: str) -> tuple[WinBiapReservation, ..
     if not records or empty or len({r.item_id for r in records}) != len(records):
         raise WinBiapUnsupportedPage("reservation_layout")
     return tuple(records)
+
+
+def parse_fees(html: str) -> WinBiapBalance:
+    """Read only the explicit current balance and confirmed currency."""
+    root = _tree(html)
+    balances = [
+        n.text
+        for n in root.descendants("span")
+        if n.attrs.get("id", "").endswith("LabelToolbarTotalCharge")
+    ]
+    if len(balances) != 1 or not re.search(r"€|\bEUR\b", root.text):
+        raise WinBiapUnsupportedPage("fee_balance_or_currency")
+    text = balances[0]
+    if re.fullmatch(r"Kontostand:\s*ausgeglichen", text, re.I):
+        return WinBiapBalance(Decimal("0.00"), "EUR")
+    match = re.fullmatch(
+        r"(?:Kontostand|Offene Gebühren|Guthaben):\s*([+-]?(?:[0-9]{1,3}(?:\.[0-9]{3})+|[0-9]+),[0-9]{2})\s*(?:€|EUR)",
+        text,
+        re.I,
+    )
+    if not match:
+        raise WinBiapUnsupportedPage("fee_balance_format")
+    amount = Decimal(match[1].replace(".", "").replace(",", "."))
+    if text.casefold().startswith("guthaben"):
+        amount = -abs(amount)
+    return WinBiapBalance(amount, "EUR")

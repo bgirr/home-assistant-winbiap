@@ -7,6 +7,7 @@ import logging
 import shutil
 from dataclasses import replace
 from datetime import date
+from decimal import Decimal
 from pathlib import Path
 from types import MappingProxyType
 from unittest.mock import AsyncMock, patch
@@ -27,6 +28,7 @@ from custom_components.winbiap.api import WinBiapClient, WinBiapInvalidAuth
 from custom_components.winbiap.config_flow import _validate
 from custom_components.winbiap.models import (
     WinBiapAccount,
+    WinBiapBalance,
     WinBiapLoan,
     WinBiapReservation,
 )
@@ -92,6 +94,12 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                 await hass.config_entries.async_add(entry)
                 await hass.async_block_till_done()
                 assert entry.state is config_entries.ConfigEntryState.LOADED
+                fee_entity = next(
+                    s
+                    for s in hass.states.async_all("sensor")
+                    if s.entity_id.endswith("gebuhren")
+                )
+                assert fee_entity.state == "unavailable"
                 reservation_entity = next(
                     s
                     for s in hass.states.async_all("sensor")
@@ -101,7 +109,8 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                 states = [
                     s
                     for s in hass.states.async_all("sensor")
-                    if s.entity_id != reservation_entity.entity_id
+                    if s.entity_id
+                    not in {reservation_entity.entity_id, fee_entity.entity_id}
                 ]
                 assert len(states) == 4
                 assert all(s.state not in {"unknown", "unavailable"} for s in states)
@@ -181,6 +190,18 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                 await hass.async_block_till_done()
                 assert hass.states.get(reservation_entity.entity_id).state == "0"
                 assert hass.states.get(cover_id).state == "unavailable"
+                for amount in (Decimal("0.00"), Decimal("2.50"), Decimal("-1.25")):
+                    coordinator.async_set_updated_data(
+                        replace(account, fees=WinBiapBalance(amount, "EUR"))
+                    )
+                    await hass.async_block_till_done()
+                    fee_state = hass.states.get(fee_entity.entity_id)
+                    assert Decimal(fee_state.state) == amount
+                    assert fee_state.attributes["device_class"] == "monetary"
+                    assert fee_state.attributes["unit_of_measurement"] == "EUR"
+                coordinator.async_set_updated_data(account)
+                await hass.async_block_till_done()
+                assert hass.states.get(fee_entity.entity_id).state == "unavailable"
                 old_session = entry.runtime_data.client._session
                 assert cover_session is not old_session
                 assert not old_session.closed

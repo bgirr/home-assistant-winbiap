@@ -35,6 +35,16 @@
               "ha-markdown$": "td { padding: 12px 8px !important; vertical-align: top !important; } img {max-width:70px;} h2 {font-size:20px;}"
             }
           }
+        },
+        {
+          "type": "markdown",
+          "content": "{%- set ns = namespace(found=false, offline=false, total=0) -%}\n{%- for s in expand(integration_entities('winbiap')) if s.attributes.account_section | default('') == 'fees' -%}\n{%- set ns.found = true -%}\n{%- if s.state in ['unknown','unavailable'] -%}{%- set ns.offline = true -%}\n{%- else -%}{%- set ns.total = ns.total + (s.state | float) -%}{%- endif -%}\n{%- endfor -%}\n## Gebührenkonto\n{% if not ns.found or ns.offline %}\n<ha-alert alert-type=\"info\">Der Gebührenstand ist derzeit nicht verfügbar.</ha-alert>\n{% else %}\n# {{ ('%.2f' | format(ns.total)) | replace('.', ',') }} €\n{% if ns.total == 0 %}\n<ha-alert alert-type=\"success\">Das Gebührenkonto ist ausgeglichen.</ha-alert>\n{% elif ns.total > 0 %}\n<ha-alert alert-type=\"warning\">Offene Gebühren · bitte bei der Bücherei begleichen.</ha-alert>\n{% else %}\n<ha-alert alert-type=\"info\">Guthaben auf dem Gebührenkonto.</ha-alert>\n{% endif %}\n{% endif %}",
+          "grid_options": {
+            "columns": "full"
+          },
+          "card_mod": {
+            "style": "ha-card {border-radius:18px;}"
+          }
         }
       ]
     }

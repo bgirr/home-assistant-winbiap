@@ -33,6 +33,16 @@ class WinBiapSensorDescription(SensorEntityDescription):
 
 SUMMARY_SENSORS = (
     WinBiapSensorDescription(
+        key="fees",
+        name="Gebühren",
+        icon="mdi:cash",
+        device_class=SensorDeviceClass.MONETARY,
+        native_unit_of_measurement="EUR",
+        value_fn=lambda account: (
+            account.fees.amount if account.fees is not None else None
+        ),
+    ),
+    WinBiapSensorDescription(
         key="reservations",
         name="Vorbestellungen",
         icon="mdi:book-clock",
@@ -125,13 +135,15 @@ class WinBiapSummarySensor(WinBiapEntity):
         self._attr_name = description.name
         self._attr_device_class = description.device_class
         self._attr_icon = description.icon
+        self._attr_native_unit_of_measurement = description.native_unit_of_measurement
 
     @property
     def available(self) -> bool:
         """Keep unsupported optional sections unavailable, without losing loans."""
+        key = self.entity_description.key
         return super().available and (
-            self.entity_description.key != "reservations"
-            or self.coordinator.data.reservations is not None
+            key not in {"reservations", "fees"}
+            or getattr(self.coordinator.data, key) is not None
         )
 
     @property
@@ -142,6 +154,8 @@ class WinBiapSummarySensor(WinBiapEntity):
     @property
     def extra_state_attributes(self) -> dict[str, Any] | None:
         """Expose structured loan data on the loan-count sensor."""
+        if self.entity_description.key == "fees":
+            return {"account_section": "fees"}
         if self.entity_description.key == "reservations":
             records = self.coordinator.data.reservations
             if records is None:

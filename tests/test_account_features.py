@@ -91,3 +91,40 @@ def test_optional_failure_preserves_loans():
         c._request.assert_awaited_once_with("GET", BASE + "reservations.aspx")
 
     asyncio.run(run())
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("Kontostand: ausgeglichen", "0.00"),
+        ("Kontostand: 12,50 €", "12.50"),
+        ("Offene Gebühren: 1.234,56 EUR", "1234.56"),
+        ("Guthaben: 2,00 €", "-2.00"),
+        ("Kontostand: -0,50 €", "-0.50"),
+    ],
+)
+def test_explicit_fee_balance(text, expected):
+    from decimal import Decimal
+
+    from custom_components.winbiap.account_features import parse_fees
+
+    html = f'<span id="ctl00_ContentPlaceHolderMain_LabelToolbarTotalCharge">{text}</span><table><tr><td>Letzte Buchungen (gekürzt): 999,00 €</td></tr></table>'
+    result = parse_fees(html)
+    assert result.amount == Decimal(expected)
+    assert result.currency == "EUR"
+
+
+@pytest.mark.parametrize(
+    "html",
+    [
+        "<table><td>1,00 €</td></table>",
+        '<span id="LabelToolbarTotalCharge">Kontostand: ausgeglichen</span>',
+        '<span id="LabelToolbarTotalCharge">Kontostand: 2.00 USD</span>',
+        '<span id="LabelToolbarTotalCharge">Kontostand: unbekannt €</span>',
+    ],
+)
+def test_unknown_fee_balance_not_zero(html):
+    from custom_components.winbiap.account_features import parse_fees
+
+    with pytest.raises(WinBiapUnsupportedPage):
+        parse_fees(html)

@@ -14,7 +14,7 @@ release; do not treat an unrecognized page as an empty account or a zero balance
 - Acceptance: synthetic fixtures for empty, pending and ready reservations;
   repeated updates preserve entity identity and never modify reservations.
 
-## 2. Fees (Gebühren)
+## 2. Fees (Gebühren) — delivered in 0.1.0-beta.8
 
 - A monetary sensor for the current outstanding account balance, currency EUR
   when confirmed by the library; parse locale-specific amounts with Decimal.
