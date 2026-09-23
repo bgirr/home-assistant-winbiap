@@ -98,6 +98,9 @@ async def run(card: str, password: str, base_url: str) -> int:
                 client = ObservedClient(session, base_url, card, password)
                 account = await client.async_get_account()
                 print(f"loans={len(account.loans)}")
+                print(
+                    f"wishlist={len(account.wishlist) if account.wishlist is not None else 'unavailable'}"
+                )
                 print(f"fees_available={account.fees is not None}")
                 print(
                     f"fees_settled={account.fees.amount == 0 if account.fees else None}"

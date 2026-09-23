@@ -1,8 +1,8 @@
 # Account feature plan
 
-The next account features remain read-only. They are planned work, not entities
-provided by the current version. Implement them incrementally after the cover
-release; do not treat an unrecognized page as an empty account or a zero balance.
+The account features below were delivered sequentially in beta.7–beta.9. They
+remain read-only. Unrecognized layouts are unavailable, never an empty account
+or a zero balance. See [feature log](feature-log.md) for delivery and validation.
 
 ## 1. Reservations (Vorbestellungen) — delivered in 0.1.0-beta.7
 
@@ -26,7 +26,7 @@ release; do not treat an unrecognized page as an empty account or a zero balance
 - Acceptance: settled balance, positive balance, comma decimals, credits and
   truncated booking-list fixtures; Home Assistant monetary-sensor runtime tests.
 
-## 3. Wishlist (Merkliste)
+## 3. Wishlist (Merkliste) — delivered in 0.1.0-beta.9
 
 - A per-account count and structured list with titles, authors and covers when
   available. Preserve stable media identifiers without exposing account secrets.

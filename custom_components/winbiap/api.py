@@ -590,6 +590,30 @@ class WinBiapClient:
         )
         return html, response_url
 
+    async def _async_get_wishlist(self, url: str):
+        """Fetch the signed-in own list with bounded, read-only pagination."""
+        from .account_features import parse_wishlist, wishlist_next_page
+
+        records = {}
+        page_number, method, payload = 1, "GET", None
+        for _ in range(20):
+            page, response_url = await self._request(method, url, data=payload)
+            if page_is_login(page, response_url):
+                raise WinBiapUnsupportedPage("wishlist_session_expired")
+            items = parse_wishlist(page, response_url)
+            if any(item.item_id in records for item in items):
+                raise WinBiapUnsupportedPage("wishlist_duplicate_page")
+            records.update((item.item_id, item) for item in items)
+            action = wishlist_next_page(page, response_url, page_number)
+            if action is None:
+                return tuple(records.values())
+            if not items:
+                raise WinBiapUnsupportedPage("wishlist_empty_pagination")
+            page_number, method, url, payload = action
+            if method == "POST":
+                payload = {**parse_hidden_fields(page), **payload}
+        raise WinBiapUnsupportedPage("wishlist_page_limit")
+
     async def async_get_account(self) -> WinBiapAccount:
         """Fetch and parse the current account state."""
         landing_html, landing_url = await self.async_login()
@@ -664,6 +688,23 @@ class WinBiapClient:
                 WinBiapUnsupportedPage,
             ):
                 _LOGGER.debug("WinBIAP fees unavailable")
+        wishlist = None
+        if link := account_link(html, account_url, "favorites.aspx"):
+            try:
+                async with asyncio.timeout(45):
+                    wishlist = await self._async_get_wishlist(link)
+            except (
+                ClientError,
+                TimeoutError,
+                UnicodeError,
+                ValueError,
+                WinBiapUnsupportedPage,
+            ):
+                _LOGGER.debug("WinBIAP wishlist unavailable")
         return WinBiapAccount(
-            loans=loans, library_name=library_name, reservations=reservations, fees=fees
+            wishlist=wishlist,
+            loans=loans,
+            library_name=library_name,
+            reservations=reservations,
+            fees=fees,
         )

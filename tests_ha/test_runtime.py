@@ -31,6 +31,7 @@ from custom_components.winbiap.models import (
     WinBiapBalance,
     WinBiapLoan,
     WinBiapReservation,
+    WinBiapWishlistItem,
 )
 
 ROOT = Path(__file__).parents[1]
@@ -94,6 +95,12 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                 await hass.config_entries.async_add(entry)
                 await hass.async_block_till_done()
                 assert entry.state is config_entries.ConfigEntryState.LOADED
+                wishlist_entity = next(
+                    s
+                    for s in hass.states.async_all("sensor")
+                    if s.entity_id.endswith("merkliste")
+                )
+                assert wishlist_entity.state == "unavailable"
                 fee_entity = next(
                     s
                     for s in hass.states.async_all("sensor")
@@ -110,7 +117,11 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                     s
                     for s in hass.states.async_all("sensor")
                     if s.entity_id
-                    not in {reservation_entity.entity_id, fee_entity.entity_id}
+                    not in {
+                        reservation_entity.entity_id,
+                        fee_entity.entity_id,
+                        wishlist_entity.entity_id,
+                    }
                 ]
                 assert len(states) == 4
                 assert all(s.state not in {"unknown", "unavailable"} for s in states)
@@ -202,6 +213,24 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                 coordinator.async_set_updated_data(account)
                 await hass.async_block_till_done()
                 assert hass.states.get(fee_entity.entity_id).state == "unavailable"
+                wished = WinBiapWishlistItem(
+                    "wish-1",
+                    "Synthetic wished book",
+                    cover_url="https://covers.example.org/wish.png",
+                )
+                coordinator.async_set_updated_data(replace(account, wishlist=(wished,)))
+                await hass.async_block_till_done()
+                assert hass.states.get(wishlist_entity.entity_id).state == "1"
+                wish_covers = [
+                    s
+                    for s in hass.states.async_all("image")
+                    if s.attributes.get("wishlist_id") == "wish-1"
+                ]
+                assert len(wish_covers) == 1 and wish_covers[0].state != "unavailable"
+                coordinator.async_set_updated_data(replace(account, wishlist=()))
+                await hass.async_block_till_done()
+                assert hass.states.get(wishlist_entity.entity_id).state == "0"
+                assert hass.states.get(wish_covers[0].entity_id).state == "unavailable"
                 old_session = entry.runtime_data.client._session
                 assert cover_session is not old_session
                 assert not old_session.closed

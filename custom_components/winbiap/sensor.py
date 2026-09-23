@@ -33,6 +33,14 @@ class WinBiapSensorDescription(SensorEntityDescription):
 
 SUMMARY_SENSORS = (
     WinBiapSensorDescription(
+        key="wishlist",
+        name="Merkliste",
+        icon="mdi:bookmark-multiple",
+        value_fn=lambda account: (
+            len(account.wishlist) if account.wishlist is not None else None
+        ),
+    ),
+    WinBiapSensorDescription(
         key="fees",
         name="Gebühren",
         icon="mdi:cash",
@@ -142,7 +150,7 @@ class WinBiapSummarySensor(WinBiapEntity):
         """Keep unsupported optional sections unavailable, without losing loans."""
         key = self.entity_description.key
         return super().available and (
-            key not in {"reservations", "fees"}
+            key not in {"reservations", "fees", "wishlist"}
             or getattr(self.coordinator.data, key) is not None
         )
 
@@ -154,6 +162,18 @@ class WinBiapSummarySensor(WinBiapEntity):
     @property
     def extra_state_attributes(self) -> dict[str, Any] | None:
         """Expose structured loan data on the loan-count sensor."""
+        if self.entity_description.key == "wishlist":
+            records = self.coordinator.data.wishlist
+            return (
+                {
+                    "wishlist": [
+                        {"id": r.item_id, "title": r.title, "author": r.author}
+                        for r in records
+                    ]
+                }
+                if records is not None
+                else None
+            )
         if self.entity_description.key == "fees":
             return {"account_section": "fees"}
         if self.entity_description.key == "reservations":

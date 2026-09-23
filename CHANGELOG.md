@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-beta.9 — Wishlist
+
+- Add the authenticated account’s wishlist count, structured titles/authors and
+  separate stable cover entities; never add, remove or reserve items.
+- Follow consecutive own-list pages via restricted GET links or read-only ASP.NET
+  grid pagination. Bound traversal to 20 pages / 45 seconds; incomplete or unknown
+  layouts remain unavailable instead of returning a partial total.
+- Support adjacent lazy cover rows without mixing nested metadata or other titles.
+- Add a dynamic wishlist card and synthetic dashboard tests for all three features.
+- Validate 103 unit tests and 23 HA/runtime/template tests. Live account: seven loans,
+  no reservations, settled fees and an explicitly empty wishlist. Populated and
+  paginated wishlists are tested synthetically because the live list is empty.
+
 ## 0.1.0-beta.8 — Fees
 
 - Add an EUR monetary sensor for the explicit current account balance, parsed

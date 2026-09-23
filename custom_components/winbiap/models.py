@@ -41,6 +41,16 @@ class WinBiapReservation:
 
 
 @dataclass(frozen=True, slots=True)
+class WinBiapWishlistItem:
+    """A media item on the authenticated account's own wishlist."""
+
+    item_id: str
+    title: str
+    author: str | None = None
+    cover_url: str | None = None
+
+
+@dataclass(frozen=True, slots=True)
 class WinBiapBalance:
     """Explicit current balance, never a sum of transaction history."""
 
@@ -55,6 +65,7 @@ class WinBiapAccount:
     loans: tuple[WinBiapLoan, ...]
     reservations: tuple[WinBiapReservation, ...] | None = None
     fees: WinBiapBalance | None = None
+    wishlist: tuple[WinBiapWishlistItem, ...] | None = None
     library_name: str | None = None
     account_status: str | None = None
 

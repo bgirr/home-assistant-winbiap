@@ -58,6 +58,7 @@ async def async_setup_entry(
     )
     known: set[str] = set()
     known_reservations: set[str] = set()
+    known_wishlist: set[str] = set()
 
     @callback
     def add_covers() -> None:
@@ -85,6 +86,19 @@ async def async_setup_entry(
         async_add_entities(
             WinBiapReservationCover(hass, coordinator, entry, session, r.item_id)
             for r in reservations
+        )
+
+        wishlist = [
+            r
+            for r in coordinator.data.wishlist or ()
+            if r.item_id not in known_wishlist
+            and r.cover_url
+            and _safe_cover_url(r.cover_url)
+        ]
+        known_wishlist.update(r.item_id for r in wishlist)
+        async_add_entities(
+            WinBiapWishlistCover(hass, coordinator, entry, session, r.item_id)
+            for r in wishlist
         )
 
     add_covers()
@@ -247,3 +261,32 @@ class WinBiapReservationCover(WinBiapCoverImage):
             else None,
             "ready_for_pickup": item.ready_for_pickup,
         }
+
+
+class WinBiapWishlistCover(WinBiapCoverImage):
+    """Own-list cover, isolated from loan and reservation entity identities."""
+
+    def __init__(self, hass, coordinator, entry, session, item_id):
+        super().__init__(hass, coordinator, entry, session, item_id)
+        self._attr_unique_id = f"{entry.unique_id}_wishlist_cover_{item_id}"
+
+    @property
+    def loan(self):
+        return next(
+            (
+                r
+                for r in self.coordinator.data.wishlist or ()
+                if r.item_id == self._item_id
+            ),
+            None,
+        )
+
+    @property
+    def name(self):
+        return f"{self.loan.title} Merkliste Cover" if self.loan else "Merkliste Cover"
+
+    @property
+    def extra_state_attributes(self):
+        if not (item := self.loan):
+            return None
+        return {"wishlist_id": item.item_id, "title": item.title, "author": item.author}

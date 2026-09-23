@@ -64,6 +64,6 @@ are personal account data even though the cover pictures themselves are public.
 
 ## Complete dynamic view
 
-`examples/buecherei.json` contains the responsive loan view and reservation overview.
+`examples/buecherei.json` contains the responsive loan view, reservations, current fees and wishlist overview.
 It discovers WinBIAP entities dynamically and uses the installed card-mod resource
 for styling. Import it as the Bücherei view in a storage dashboard.
