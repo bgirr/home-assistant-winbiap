@@ -5,9 +5,9 @@ by WinBIAP WebOPAC. It exposes current loans and due dates without sending
 library credentials anywhere except the configured library server.
 
 > [!WARNING]
-> `0.1.0-beta.3` is a protocol-validation release. The public login form of the
-> Stadtbücherei Königsbrunn is supported, but its authenticated account layout
-> still needs to be verified with sanitized fixtures before a stable release.
+> `0.1.0-beta.4` is a protocol-validation release. The BunkerWeb challenge, login
+> and account parser have been live-tested with Stadtbücherei Königsbrunn.
+> Broader account-layout coverage still needs sanitized fixtures before a stable release.
 
 ## Current functionality
 
@@ -15,6 +15,7 @@ library credentials anywhere except the configured library server.
 - manual WebOPAC URL fallback for libraries missing from the bundled catalog
 - live credential and page-layout validation before an entry is created
 - isolated cookie session with ASP.NET `VIEWSTATE` form handling
+- bounded BunkerWeb proof-of-work support before login
 - automatic reauthentication prompt after rejected credentials
 - 30-minute coordinator polling and automatic retry after connection failures
 - account sensors for loan count, next due date, and overdue count
@@ -77,7 +78,7 @@ identity. New loans are added automatically after the next update.
 
 | Installation | Public login | Account parser | Status |
 | --- | --- | --- | --- |
-| Stadtbücherei Königsbrunn, WebOPAC 4.7.3 | Inspected | Fixture required | Initial target |
+| Stadtbücherei Königsbrunn, WebOPAC 4.7.3 | Live-tested with challenge | Live-tested; broader fixtures pending | Initial target |
 | Other WinBIAP WebOPAC 4.x sites | Generic ASP.NET form | Table/card parser | Community testing needed |
 | B24 mobile app | Not used | Not used | Out of scope |
 
@@ -89,9 +90,40 @@ other third-party clients was copied.
 ```bash
 python -m venv .venv
 .venv/bin/pip install aiohttp pytest ruff
-.venv/bin/ruff check custom_components tests
-.venv/bin/pytest
+.venv/bin/ruff check custom_components tests scripts
+.venv/bin/ruff format --check custom_components tests scripts
+.venv/bin/pytest -q
 ```
+
+### Optional local account test
+
+Run `.venv/bin/python scripts/live_account.py --prompt` in a local terminal
+for hidden card/password input. Without `--prompt`, the script uses
+`WINBIAP_CARD` and `WINBIAP_PASSWORD` from the environment, falling back to
+an optional `.winbiap-credentials` file in the repository root:
+
+```text
+WINBIAP_CARD=
+WINBIAP_PASSWORD=
+```
+
+Create that file with mode `0600` (owner read/write only). Put values directly
+after `=`, without quotes; special characters are literal, not shell syntax.
+Never source the file in a shell. It and similarly named editor backups are
+ignored by Git. Never force-add or share this file. Missing credentials skip
+the test without making network requests.
+
+The default URL is `https://opac.winbiap.net/koenigsbrunn/`; override it with
+`WINBIAP_BASE_URL` if needed. The standalone harness owns its `aiohttp` session,
+closes it through `async with`, and applies a 45-second overall timeout. It
+prints only HTTP phases/statuses, page categories, challenge/login outcomes,
+loan counts and categorical failures. It never saves HTML or prints credentials,
+cookies, request parameters, exception messages or media details.
+
+The client borrows its session. Home Assistant owns ongoing account sessions;
+config-flow validation uses `auto_cleanup=False` and always detaches afterward.
+The unit suite exercises these lifecycle contracts with Home Assistant doubles
+and real aiohttp sessions; it does not replace a full Home Assistant runtime test.
 
 Refresh the bundled provider catalog with:
 

@@ -1,0 +1,12 @@
+<!doctype html>
+<!-- Synthetic protocol fixture: no server seed, token, cookie or account data. -->
+<form id="form" action="/challenge" method="post">
+  <input id="challenge" type="hidden" name="challenge" value="">
+  <input type="hidden" name="next" value="/demo/user/login.aspx">
+</form>
+<script>
+// Only recognition markers and solver structure; no copied hash implementation.
+var sha256_K=[1116352408,1899447441];
+function hex(a){return rstr2hex(rstr(a,sha256_K))}
+async function digestMessage(a){return hex(a)}(async()=>{for(var a=0;!(await digestMessage("SYNTHETICSEED"+a.toString())).startsWith("0000");)a++;document.getElementById("challenge").value=a.toString(),document.getElementById("form").submit()})()
+</script>

@@ -40,9 +40,7 @@ class ReferenceParser(HTMLParser):
         self._location_parts: list[str] = []
         self._url = ""
 
-    def handle_starttag(
-        self, tag: str, attrs: list[tuple[str, str | None]]
-    ) -> None:
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attributes = dict(attrs)
         classes = set((attributes.get("class") or "").split())
         if "data_card" in classes:

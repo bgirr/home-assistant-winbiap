@@ -3,3 +3,6 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 *.py[cod]
+
+# Local live-test credentials (including editor backups)
+.winbiap-credentials*
