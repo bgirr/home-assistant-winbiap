@@ -6,3 +6,5 @@ __pycache__/
 
 # Local live-test credentials (including editor backups)
 .winbiap-credentials*
+
+.venv-ha/

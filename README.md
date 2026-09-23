@@ -5,7 +5,7 @@ by WinBIAP WebOPAC. It exposes current loans and due dates without sending
 library credentials anywhere except the configured library server.
 
 > [!WARNING]
-> `0.1.0-beta.4` is a protocol-validation release. The BunkerWeb challenge, login
+> `0.1.0-beta.5` is a protocol-validation release. The BunkerWeb challenge, login
 > and account parser have been live-tested with Stadtbücherei Königsbrunn.
 > Broader account-layout coverage still needs sanitized fixtures before a stable release.
 
@@ -35,7 +35,9 @@ Until the integration is accepted into the HACS default catalog:
 2. Open the menu and choose **Custom repositories**.
 3. Enter `https://github.com/bgirr/home-assistant-winbiap`.
 4. Select **Integration** and add the repository.
-5. Download **WinBIAP Library** and restart Home Assistant.
+5. Open **WinBIAP Library** in HACS, enable beta versions in its menu, and
+   download **v0.1.0-beta.5** (or a newer release). Restart Home Assistant.
+   A commit on the `develop` branch does not update an installed HACS version.
 6. Open **Settings > Devices & services > Add integration**.
 7. Select **WinBIAP Library**, search for your library by name, city, or postal
    code, and then enter your card number and password.
@@ -90,8 +92,8 @@ other third-party clients was copied.
 ```bash
 python -m venv .venv
 .venv/bin/pip install aiohttp pytest ruff
-.venv/bin/ruff check custom_components tests scripts
-.venv/bin/ruff format --check custom_components tests scripts
+.venv/bin/ruff check custom_components tests tests_ha scripts
+.venv/bin/ruff format --check custom_components tests tests_ha scripts
 .venv/bin/pytest -q
 ```
 
@@ -122,8 +124,18 @@ cookies, request parameters, exception messages or media details.
 
 The client borrows its session. Home Assistant owns ongoing account sessions;
 config-flow validation uses `auto_cleanup=False` and always detaches afterward.
-The unit suite exercises these lifecycle contracts with Home Assistant doubles
-and real aiohttp sessions; it does not replace a full Home Assistant runtime test.
+The fast unit suite uses Home Assistant doubles and real aiohttp sessions.
+A separate suite loads the integration into actual Home Assistant 2026.2.3,
+registers sensors, checks their states, and exercises reload and session cleanup:
+
+```bash
+python3.13 -m venv .venv-ha
+.venv-ha/bin/pip install -r requirements-test-ha.txt
+.venv-ha/bin/python -m pytest -q tests_ha
+```
+
+Run the two suites separately so the lightweight test doubles do not replace
+Home Assistant modules in the runtime suite. Both suites run in GitHub Actions.
 
 Refresh the bundled provider catalog with:
 

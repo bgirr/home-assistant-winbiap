@@ -7,7 +7,11 @@ from dataclasses import dataclass
 from datetime import date
 from typing import Any
 
-from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
+from homeassistant.components.sensor import (
+    SensorDeviceClass,
+    SensorEntity,
+    SensorEntityDescription,
+)
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.device_registry import DeviceInfo
@@ -21,14 +25,10 @@ from .models import WinBiapAccount, WinBiapLoan
 
 
 @dataclass(frozen=True, kw_only=True)
-class WinBiapSensorDescription:
+class WinBiapSensorDescription(SensorEntityDescription):
     """Description of an account summary sensor."""
 
-    key: str
-    name: str
     value_fn: Callable[[WinBiapAccount], Any]
-    device_class: SensorDeviceClass | None = None
-    icon: str | None = None
 
 
 SUMMARY_SENSORS = (

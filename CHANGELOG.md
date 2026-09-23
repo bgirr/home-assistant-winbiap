@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-beta.5
+
+- Fix summary-sensor registration in Home Assistant by inheriting the complete
+  `SensorEntityDescription` contract instead of using an unrelated dataclass.
+- Add real Home Assistant runtime coverage for sensor registration, state
+  writing, entry reload and automatic session cleanup, alongside the fast tests.
+- Publish a tagged prerelease that HACS can select and install; a push to
+  `develop` alone does not update an existing HACS installation.
+
 ## 0.1.0-beta.4
 
 - Handle the recognized BunkerWeb SHA-256 proof-of-work challenge before login,
