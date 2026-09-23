@@ -96,18 +96,20 @@ VALIDATION_TIMEOUT = 30
 
 async def _validate(hass, user_input: dict[str, Any]) -> str:
     base_url = normalize_base_url(user_input[CONF_BASE_URL])
-    session = async_create_clientsession(hass, cookie_jar=CookieJar())
-    client = WinBiapClient(
-        session,
-        base_url,
-        user_input[CONF_LIBRARY_CARD],
-        user_input[CONF_PASSWORD],
+    session = async_create_clientsession(
+        hass, auto_cleanup=False, cookie_jar=CookieJar()
     )
     try:
+        client = WinBiapClient(
+            session,
+            base_url,
+            user_input[CONF_LIBRARY_CARD],
+            user_input[CONF_PASSWORD],
+        )
         async with asyncio.timeout(VALIDATION_TIMEOUT):
             await client.async_get_account()
     finally:
-        await client.async_close()
+        session.detach()
     return base_url
 
 

@@ -14,7 +14,9 @@ from .coordinator import WinBiapCoordinator
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up WinBIAP Library from a config entry."""
-    session = async_create_clientsession(hass, cookie_jar=CookieJar())
+    session = async_create_clientsession(
+        hass, auto_cleanup=True, cookie_jar=CookieJar()
+    )
     client = WinBiapClient(
         session,
         entry.data[CONF_BASE_URL],
@@ -30,7 +32,4 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Unload a config entry."""
-    unloaded = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
-    if unloaded:
-        await entry.runtime_data.client.async_close()
-    return unloaded
+    return await hass.config_entries.async_unload_platforms(entry, PLATFORMS)

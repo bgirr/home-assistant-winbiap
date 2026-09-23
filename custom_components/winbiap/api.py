@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import logging
 import re
 from dataclasses import dataclass, field
@@ -9,7 +10,7 @@ from datetime import date, datetime
 from hashlib import sha256
 from html.parser import HTMLParser
 from typing import ClassVar
-from urllib.parse import urljoin, urlparse
+from urllib.parse import unquote, urljoin, urlparse
 
 from aiohttp import ClientError, ClientResponse, ClientSession
 
@@ -171,6 +172,94 @@ def parse_hidden_fields(html: str) -> dict[str, str]:
         if name := node.attrs.get("name"):
             result[name] = node.attrs.get("value", "")
     return result
+
+
+MAX_POW_ATTEMPTS = 2_000_000
+# Deliberately accept only the observed BunkerWeb solver, never execute JS.
+_POW_SCRIPT = re.compile(
+    r"async function digestMessage\(a\)\{return hex\(a\)\}"
+    r"\(async\(\)=>\{for\(var a=0;!\(await digestMessage\("
+    r'"([A-Za-z0-9]{1,128})"\+a\.toString\(\)\)\)'
+    r'\.startsWith\("0000"\);\)a\+\+;'
+    r'document\.getElementById\("challenge"\)\.value=a\.toString\(\),'
+    r'document\.getElementById\("form"\)\.submit\(\)\}\)\(\)\s*$'
+)
+
+
+def has_login_form(html: str) -> bool:
+    """Require one ASP.NET form containing the actual credential inputs."""
+    return any(
+        {LOGIN_NAME, LOGIN_PASSWORD, "__VIEWSTATE"}.issubset(
+            {node.attrs.get("name") for node in form.descendants("input")}
+        )
+        for form in _tree(html).descendants("form")
+    )
+
+
+def _relative_path(value: str) -> bool:
+    """Reject ambiguous, absolute, encoded or non-path redirect targets."""
+    parsed = urlparse(value)
+    return bool(
+        value.startswith("/")
+        and not value.startswith("//")
+        and not parsed.scheme
+        and not parsed.netloc
+        and not parsed.fragment
+        and "\\" not in value
+        and unquote(value) == value
+        and all(ord(char) > 32 and ord(char) != 127 for char in value)
+        and not any(part in {".", ".."} for part in parsed.path.split("/"))
+    )
+
+
+def parse_challenge(html: str) -> tuple[str, str] | None:
+    """Recognize only the supported form and SHA-256 four-zero solver."""
+    root = _tree(html)
+    forms = root.descendants("form")
+    candidates = [
+        form
+        for form in forms
+        if form.attrs.get("action") == "/challenge"
+        or any(n.attrs.get("name") == "challenge" for n in form.descendants("input"))
+    ]
+    if not candidates:
+        return None
+    if len(candidates) != 1:
+        raise WinBiapUnsupportedPage("unsupported_challenge")
+    form = candidates[0]
+    inputs = form.descendants("input")
+    fields = {n.attrs.get("name"): n for n in inputs}
+    scripts = "\n".join("".join(n.text_parts) for n in root.descendants("script"))
+    match = _POW_SCRIPT.search(scripts)
+    if (
+        form.attrs.get("action") != "/challenge"
+        or form.attrs.get("method", "").lower() != "post"
+        or form.attrs.get("id") != "form"
+        or len(inputs) != 2
+        or set(fields) != {"challenge", "next"}
+        or any(n.attrs.get("type", "").lower() != "hidden" for n in inputs)
+        or fields["challenge"].attrs.get("id") != "challenge"
+        or not match
+        or "sha256_K=[1116352408,1899447441" not in scripts
+        or "function hex(a){return rstr2hex(rstr(a,sha256_K))}" not in scripts
+    ):
+        raise WinBiapUnsupportedPage("unsupported_challenge")
+    next_path = fields["next"].attrs.get("value", "")
+    if not _relative_path(next_path):
+        raise WinBiapUnsupportedPage("unsafe_challenge_next")
+    return match[1], next_path
+
+
+def solve_challenge(seed: str, max_attempts: int = MAX_POW_ATTEMPTS) -> str:
+    """Bound CPU work; called outside the event loop."""
+    if not re.fullmatch(r"[A-Za-z0-9]{1,128}", seed):
+        raise WinBiapUnsupportedPage("unsupported_challenge_seed")
+    if not 0 <= max_attempts <= MAX_POW_ATTEMPTS:
+        raise WinBiapUnsupportedPage("invalid_challenge_work_limit")
+    for nonce in range(max_attempts):
+        if sha256(f"{seed}{nonce}".encode()).digest()[:2] == b"\x00\x00":
+            return str(nonce)
+    raise WinBiapUnsupportedPage("challenge_work_limit")
 
 
 def _parse_date(value: str):
@@ -352,7 +441,7 @@ def page_is_login(html: str, response_url: str) -> bool:
 
 
 class WinBiapClient:
-    """Read-only asynchronous WinBIAP WebOPAC client."""
+    """Read-only client; the caller owns and cleans up the supplied session."""
 
     def __init__(
         self,
@@ -371,9 +460,38 @@ class WinBiapClient:
         response.raise_for_status()
         return await response.text(errors="replace")
 
-    async def async_close(self) -> None:
-        """Close the account-specific HTTP session."""
-        await self._session.close()
+    def _safe_url(self, url: str) -> str:
+        expected = urlparse(self.base_url)
+        actual = urlparse(url)
+        if (
+            (actual.scheme, actual.hostname, actual.port)
+            != (expected.scheme, expected.hostname, expected.port)
+            or actual.username is not None
+            or actual.password is not None
+        ):
+            raise WinBiapUnsupportedPage("cross_origin_response")
+        return url
+
+    async def _request(self, method: str, url: str, *, data=None) -> tuple[str, str]:
+        """Keep credentials, challenge answers and cookies on the library origin."""
+        for _ in range(6):
+            self._safe_url(url)
+            async with self._session.request(
+                method, url, data=data, allow_redirects=False
+            ) as response:
+                _LOGGER.debug("WinBIAP response: HTTP %d", response.status)
+                if response.status in {301, 302, 303, 307, 308}:
+                    location = response.headers.get("Location")
+                    if not location:
+                        raise WinBiapUnsupportedPage("missing_redirect_target")
+                    url = self._safe_url(urljoin(url, location))
+                    if response.status == 303 or (
+                        response.status in {301, 302} and method == "POST"
+                    ):
+                        method, data = "GET", None
+                    continue
+                return await self._text(response), str(response.url)
+        raise WinBiapUnsupportedPage("redirect_limit")
 
     async def async_login(self) -> tuple[str, str]:
         """Authenticate and return the landing page HTML and URL."""
@@ -381,10 +499,21 @@ class WinBiapClient:
         stage = "login_page"
         try:
             _LOGGER.debug("WinBIAP request started: login_page")
-            async with self._session.get(login_url) as response:
-                _LOGGER.debug("WinBIAP login page response: HTTP %d", response.status)
-                login_html = await self._text(response)
-            if LOGIN_NAME not in login_html or LOGIN_PASSWORD not in login_html:
+            login_html, _ = await self._request("GET", login_url)
+            if challenge := parse_challenge(login_html):
+                stage = "challenge"
+                _LOGGER.debug("WinBIAP bot challenge detected")
+                seed, next_path = challenge
+                nonce = await asyncio.to_thread(solve_challenge, seed)
+                login_html, _ = await self._request(
+                    "POST",
+                    urljoin(self.base_url, "/challenge"),
+                    data={"challenge": nonce, "next": next_path},
+                )
+                if not has_login_form(login_html):
+                    raise WinBiapUnsupportedPage("challenge_not_completed")
+                _LOGGER.debug("WinBIAP bot challenge completed")
+            if not has_login_form(login_html):
                 _LOGGER.warning(
                     "WinBIAP login page is unsupported: missing form fields"
                 )
@@ -399,15 +528,12 @@ class WinBiapClient:
             )
             stage = "login_submit"
             _LOGGER.debug("WinBIAP request started: login_submit")
-            async with self._session.post(login_url, data=payload) as response:
-                _LOGGER.debug("WinBIAP login submit response: HTTP %d", response.status)
-                html = await self._text(response)
-                response_url = str(response.url)
+            html, response_url = await self._request("POST", login_url, data=payload)
         except (ClientError, TimeoutError, UnicodeError) as err:
             _LOGGER.warning(
                 "WinBIAP request failed at %s: %s", stage, type(err).__name__
             )
-            raise WinBiapCannotConnect(str(err)) from err
+            raise WinBiapCannotConnect("request_failed") from None
 
         if page_is_login(html, response_url):
             _LOGGER.warning("WinBIAP login returned the login page")
@@ -429,17 +555,12 @@ class WinBiapClient:
         if account_url != landing_url:
             try:
                 _LOGGER.debug("WinBIAP request started: account_page")
-                async with self._session.get(account_url) as response:
-                    _LOGGER.debug(
-                        "WinBIAP account page response: HTTP %d", response.status
-                    )
-                    html = await self._text(response)
-                    account_url = str(response.url)
+                html, account_url = await self._request("GET", account_url)
             except (ClientError, TimeoutError, UnicodeError) as err:
                 _LOGGER.warning(
                     "WinBIAP request failed at account_page: %s", type(err).__name__
                 )
-                raise WinBiapCannotConnect(str(err)) from err
+                raise WinBiapCannotConnect("request_failed") from None
             if page_is_login(html, account_url):
                 _LOGGER.warning("WinBIAP account page redirected to login")
                 raise WinBiapInvalidAuth("The WebOPAC session expired after login")
