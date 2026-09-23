@@ -33,7 +33,7 @@ def modules(monkeypatch):
     stub(
         "homeassistant.const",
         CONF_PASSWORD="password",
-        Platform=SimpleNamespace(SENSOR="sensor"),
+        Platform=SimpleNamespace(SENSOR="sensor", IMAGE="image"),
     )
     stub("homeassistant.core", HomeAssistant=object)
     stub("homeassistant.data_entry_flow", FlowResult=dict)

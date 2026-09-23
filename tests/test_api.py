@@ -104,3 +104,38 @@ def test_account_summary() -> None:
     )
     assert account.next_due == date(2026, 9, 30)
     assert 0 <= account.overdue_count <= 2
+
+
+def test_lazy_covers_follow_their_own_detail_rows():
+    loans = parse_loans(
+        fixture("account_lazy_covers.html"), "https://example.org/demo/"
+    )
+    assert len(loans) == 2
+    assert loans[0].cover_url == "https://covers.example.org/one.jpg"
+    assert loans[1].cover_url == "https://example.org/covers/two.jpg"
+
+
+def test_missing_detail_does_not_take_next_loans_cover():
+    html = fixture("account_lazy_covers.html").replace(
+        'class="rowDetails"', 'class="unrelated"', 1
+    )
+    loans = parse_loans(html, "https://example.org/demo/")
+    assert loans[0].cover_url is None
+    assert loans[1].cover_url == "https://example.org/covers/two.jpg"
+
+
+@pytest.mark.parametrize(
+    "source",
+    [
+        "javascript:alert(1)",
+        "https://[invalid/cover",
+        "data:image/svg+xml,unsafe",
+        "https://user:secret@example.org/image.jpg",
+    ],
+)
+def test_unsafe_cover_sources_rejected(source):
+    html = fixture("account_lazy_covers.html").replace(
+        "https://covers.example.org/one.jpg", source
+    )
+    loans = parse_loans(html, "https://example.org/demo/")
+    assert loans[0].cover_url is None

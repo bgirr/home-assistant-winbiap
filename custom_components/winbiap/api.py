@@ -5,7 +5,7 @@ from __future__ import annotations
 import asyncio
 import logging
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import date, datetime
 from hashlib import sha256
 from html.parser import HTMLParser
@@ -308,11 +308,25 @@ def _node_identifier(node: _Node, title: str, due_date: date) -> str:
 
 def _cover_url(node: _Node, base_url: str) -> str | None:
     for image in node.descendants("img"):
-        source = image.attrs.get("src", "")
-        if source and not any(
-            word in source.casefold() for word in ("logo", "icon", "spacer")
-        ):
-            return urljoin(base_url, source)
+        # WebOPAC loads real covers lazily; src initially holds a media icon.
+        for attribute in ("data-src", "data-original", "src"):
+            source = image.attrs.get(attribute, "").strip()
+            if not source or any(
+                word in source.casefold() for word in ("logo", "icon", "spacer")
+            ):
+                continue
+            try:
+                candidate = urljoin(base_url, source)
+                parsed = urlparse(candidate)
+            except ValueError:
+                continue
+            if (
+                parsed.scheme == "https"
+                and parsed.hostname
+                and parsed.username is None
+                and parsed.password is None
+            ):
+                return candidate
     return None
 
 
@@ -368,6 +382,36 @@ def parse_loans(html: str, base_url: str) -> tuple[WinBiapLoan, ...]:
     """Parse loan rows or cards from a WinBIAP account page."""
     root = _tree(html)
     loans: list[WinBiapLoan] = []
+    parents = {
+        id(child): parent
+        for parent in [root, *root.descendants()]
+        for child in parent.children
+    }
+
+    def with_cover(loan: WinBiapLoan, node: _Node) -> WinBiapLoan:
+        # Desktop WebOPAC nests a metadata table beside the lazy-loaded cover.
+        # Stay inside the nearest single-media wrapper; never borrow a sibling's image.
+        if loan.cover_url:
+            return loan
+        parent = parents.get(id(node))
+        if parent and "toggleDetails" in node.attrs.get("class", "").split():
+            siblings = parent.children
+            index = next(i for i, child in enumerate(siblings) if child is node)
+            if index + 1 < len(siblings):
+                detail = siblings[index + 1]
+                if (
+                    detail.tag == "tr"
+                    and "rowDetails" in detail.attrs.get("class", "").split()
+                ):
+                    return replace(loan, cover_url=_cover_url(detail, base_url))
+        current = node
+        while parent := parents.get(id(current)):
+            current = parent
+            if "media-wrapper" in current.attrs.get("class", "").split():
+                return replace(
+                    loan, cover_url=loan.cover_url or _cover_url(current, base_url)
+                )
+        return loan
 
     for table in root.descendants("table"):
         rows = table.descendants("tr")
@@ -390,7 +434,7 @@ def parse_loans(html: str, base_url: str) -> tuple[WinBiapLoan, ...]:
                 if index < len(cells)
             }
             if loan := _loan_from_mapping(mapping, row, base_url):
-                loans.append(loan)
+                loans.append(with_cover(loan, row))
 
     if not loans:
         for node in root.descendants():

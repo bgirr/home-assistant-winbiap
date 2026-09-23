@@ -11,7 +11,10 @@ from types import MappingProxyType
 from unittest.mock import AsyncMock, patch
 
 import pytest
+from aiohttp import DummyCookieJar
 from homeassistant import config_entries, loader
+from homeassistant.auth import auth_manager_from_config
+from homeassistant.components.image.const import DATA_COMPONENT as IMAGE_COMPONENT
 from homeassistant.components.network import async_get_adapters
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import device_registry as dr
@@ -48,12 +51,14 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
         await hass.config_entries.async_initialize()
         await dr.async_load(hass)
         await er.async_load(hass)
+        hass.auth = await auth_manager_from_config(hass, [], [])
         account = WinBiapAccount(
             loans=(
                 WinBiapLoan(
                     item_id="synthetic-item",
                     title="Synthetic loan",
                     due_date=date(2030, 1, 2),
+                    cover_url="https://covers.example.org/synthetic.png",
                 ),
             )
         )
@@ -91,11 +96,46 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                     "2030-01-02",
                     "2030-01-02",
                 ]
+                images = hass.states.async_all("image")
+                assert len(images) == 1
+                assert images[0].state not in {"unknown", "unavailable"}
+                assert (
+                    images[0]
+                    .attributes["entity_picture"]
+                    .startswith("/api/image_proxy/")
+                )
+                cover_session = (
+                    hass.data[IMAGE_COMPONENT].get_entity(images[0].entity_id)._session
+                )
+                assert isinstance(cover_session.cookie_jar, DummyCookieJar)
+                second = WinBiapLoan(
+                    item_id="synthetic-second",
+                    title="Second synthetic book",
+                    due_date=date(2030, 1, 3),
+                    cover_url="https://covers.example.org/two.png",
+                )
+                coordinator = entry.runtime_data
+                coordinator.async_set_updated_data(
+                    WinBiapAccount(loans=(*account.loans, second))
+                )
+                await hass.async_block_till_done()
+                assert len(hass.states.async_all("image")) == 2
+                coordinator.async_set_updated_data(account)
+                await hass.async_block_till_done()
+                assert (
+                    sum(
+                        state.state == "unavailable"
+                        for state in hass.states.async_all("image")
+                    )
+                    == 1
+                )
                 old_session = entry.runtime_data.client._session
+                assert cover_session is not old_session
                 assert not old_session.closed
                 assert await hass.config_entries.async_reload(entry.entry_id)
                 await hass.async_block_till_done()
                 assert old_session.closed
+                assert cover_session.closed
                 new_session = entry.runtime_data.client._session
                 assert new_session is not old_session
                 assert new_session.cookie_jar is not old_session.cookie_jar

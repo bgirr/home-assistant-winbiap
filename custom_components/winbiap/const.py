@@ -5,7 +5,7 @@ from datetime import timedelta
 from homeassistant.const import Platform
 
 DOMAIN = "winbiap"
-PLATFORMS = [Platform.SENSOR]
+PLATFORMS = [Platform.SENSOR, Platform.IMAGE]
 DEFAULT_SCAN_INTERVAL = timedelta(minutes=30)
 
 CONF_BASE_URL = "base_url"

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-beta.6
+
+- Add Home Assistant image entities for borrowed-media covers, with on-demand
+  fetching, bounded in-memory caching and isolated cookie-free cover requests.
+- Recognize lazy `data-src` images in WebOPAC's adjacent `rowDetails` layout and
+  keep each image associated with its own loan.
+- Add image parser and real HA runtime tests, cover dashboard examples and a
+  roadmap for reservations, current fees and wishlist entities.
+
 ## 0.1.0-beta.5
 
 - Fix summary-sensor registration in Home Assistant by inheriting the complete

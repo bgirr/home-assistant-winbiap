@@ -5,7 +5,7 @@ by WinBIAP WebOPAC. It exposes current loans and due dates without sending
 library credentials anywhere except the configured library server.
 
 > [!WARNING]
-> `0.1.0-beta.5` is a protocol-validation release. The BunkerWeb challenge, login
+> `0.1.0-beta.6` is a protocol-validation release. The BunkerWeb challenge, login
 > and account parser have been live-tested with Stadtbücherei Königsbrunn.
 > Broader account-layout coverage still needs sanitized fixtures before a stable release.
 
@@ -19,6 +19,7 @@ library credentials anywhere except the configured library server.
 - automatic reauthentication prompt after rejected credentials
 - 30-minute coordinator polling and automatic retry after connection failures
 - account sensors for loan count, next due date, and overdue count
+- cover image entities for dashboard cards, including lazy-loaded WebOPAC covers
 - one due-date sensor per loan with author, media type, barcode, branch, cover,
   days remaining, and renewal eligibility when provided by the server
 - German and English configuration texts
@@ -36,7 +37,7 @@ Until the integration is accepted into the HACS default catalog:
 3. Enter `https://github.com/bgirr/home-assistant-winbiap`.
 4. Select **Integration** and add the repository.
 5. Open **WinBIAP Library** in HACS, enable beta versions in its menu, and
-   download **v0.1.0-beta.5** (or a newer release). Restart Home Assistant.
+   download **v0.1.0-beta.6** (or a newer release). Restart Home Assistant.
    A commit on the `develop` branch does not update an installed HACS version.
 6. Open **Settings > Devices & services > Add integration**.
 7. Select **WinBIAP Library**, search for your library by name, city, or postal
@@ -62,6 +63,10 @@ raw account pages.
 | Next due date | Earliest due date | — |
 | Overdue items | Number of overdue loans | — |
 | One entity per loan | Due date | Title, author, type, barcode, branch, cover, remaining days, renewable |
+| One image per available loan cover | Image update time | Cover via HA image proxy; title, author, due date, remaining days, renewable |
+
+See [Cover dashboards](docs/dashboard.md) for picture cards and an automatic loan list.
+Reservations, fees and wishlist entities are planned in the [feature roadmap](docs/roadmap.md).
 
 Returned loan entities become unavailable instead of silently changing their
 identity. New loans are added automatically after the next update.
