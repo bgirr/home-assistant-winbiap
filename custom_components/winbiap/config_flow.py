@@ -10,6 +10,7 @@ import voluptuous as vol
 from aiohttp import CookieJar
 from homeassistant import config_entries
 from homeassistant.const import CONF_PASSWORD
+from homeassistant.core import callback
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers import selector
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
@@ -38,6 +39,7 @@ from .library_catalog import (
     library_by_id,
     load_library_catalog,
 )
+from .opening_hours import parse_exceptions
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -117,6 +119,11 @@ class WinBiapConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Handle a config flow for WinBIAP Library."""
 
     VERSION = 1
+
+    @staticmethod
+    @callback
+    def async_get_options_flow(config_entry):
+        return WinBiapOptionsFlow()
 
     _base_url: str
     _selected_library: WinBiapLibrary | None = None
@@ -263,5 +270,35 @@ class WinBiapConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_show_form(
             step_id="reauth_confirm",
             data_schema=vol.Schema({vol.Required(CONF_PASSWORD): str}),
+            errors=errors,
+        )
+
+
+class WinBiapOptionsFlow(config_entries.OptionsFlow):
+    """Date-specific opening overrides without changing regular library hours."""
+
+    async def async_step_init(self, user_input=None):
+        errors = {}
+        if user_input is not None:
+            try:
+                parse_exceptions(user_input.get("opening_exceptions", ""))
+            except (ValueError, IndexError):
+                errors["base"] = "invalid_opening_exceptions"
+            else:
+                return self.async_create_entry(
+                    title="", data={**self.config_entry.options, **user_input}
+                )
+        return self.async_show_form(
+            step_id="init",
+            data_schema=vol.Schema(
+                {
+                    vol.Optional(
+                        "opening_exceptions",
+                        default=self.config_entry.options.get("opening_exceptions", ""),
+                    ): selector.TextSelector(
+                        selector.TextSelectorConfig(multiline=True)
+                    )
+                }
+            ),
             errors=errors,
         )

@@ -50,5 +50,19 @@
         "title": "Bibliothekskonto erneut authentifizieren"
       }
     }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Sonderöffnungszeiten",
+        "description": "Eine Zeile je Datum, z. B. 2026-12-24: geschlossen oder 2026-12-31: 10:00-12:00. Diese Angaben überschreiben den Wochenplan.",
+        "data": {
+          "opening_exceptions": "Schließtage und Sonderöffnungszeiten"
+        }
+      }
+    },
+    "error": {
+      "invalid_opening_exceptions": "Bitte Datum und Zeitfenster prüfen."
+    }
   }
 }

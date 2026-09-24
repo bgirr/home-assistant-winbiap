@@ -31,3 +31,13 @@ private backup is kept before every dashboard change.
 Explicit desktop group headings now populate the existing renewable attribute.
 Every book card displays its three-state renewal status. Verified by 104 unit
 and 24 HA/runtime/template tests; no automatic renewal is performed.
+
+## 0.1.0-beta.11 — Opening hours
+
+Official Königsbrunn schedule, independent daily retrieval, 48-hour freshness limit,
+weekly windows and dated exceptions. The integration options accept one line per
+date: `2030-12-24: geschlossen` or `2030-12-31: 10:00-12:00`. Manual entries win.
+The official schedule lists Monday–Saturday; unlisted Sunday is treated as closed.
+Only unambiguous dated public closure/special-opening statements are parsed;
+other short-notice changes are not inferred. Other libraries remain unsupported.
+113 unit and 25 HA/runtime/template tests; live Tuesday windows verified.

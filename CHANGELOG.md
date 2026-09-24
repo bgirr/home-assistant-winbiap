@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.0-beta.11 — Opening hours
+
+- Fetch Königsbrunn’s official public weekly schedule independently with a cookie-free
+  session, daily cache and 48-hour maximum freshness. Preserve split opening windows.
+- Add an opening-hours sensor, source/fetch metadata, supported explicit public date
+  exceptions and validated options for manual closures/special hours.
+- Add the opening-hours dashboard card and periodic template refresh after HA startup.
+- Validate 113 unit tests, 25 HA/runtime/template tests and the current public schedule.
+
 ## 0.1.0-beta.10 — Renewal status
 
 - Read explicit renewal group headings in desktop WebOPAC, preserving unknown

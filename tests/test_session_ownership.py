@@ -28,19 +28,30 @@ def modules(monkeypatch):
         monkeypatch.setitem(sys.modules, name, module)
         return module
 
-    entries = stub("homeassistant.config_entries", ConfigFlow=Flow, ConfigEntry=object)
+    entries = stub(
+        "homeassistant.config_entries",
+        ConfigFlow=Flow,
+        ConfigEntry=object,
+        OptionsFlow=Flow,
+    )
     stub("homeassistant", config_entries=entries)
     stub(
         "homeassistant.const",
         CONF_PASSWORD="password",
         Platform=SimpleNamespace(SENSOR="sensor", IMAGE="image"),
     )
-    stub("homeassistant.core", HomeAssistant=object)
+    stub("homeassistant.core", HomeAssistant=object, callback=lambda f: f)
     stub("homeassistant.data_entry_flow", FlowResult=dict)
     stub("homeassistant.helpers", selector=SimpleNamespace())
     stub("homeassistant.helpers.aiohttp_client", async_create_clientsession=Mock())
     stub("voluptuous")
     stub("custom_components.winbiap.coordinator", WinBiapCoordinator=Mock())
+    stub(
+        "custom_components.winbiap.opening_coordinator",
+        OpeningHoursCoordinator=Mock(
+            side_effect=lambda *a: SimpleNamespace(async_refresh=AsyncMock())
+        ),
+    )
     # Unload imports that depend on these doubles after each test.
     monkeypatch.delitem(sys.modules, "custom_components.winbiap.const", raising=False)
     loaded = []
@@ -188,11 +199,13 @@ def test_entry_isolated_cookies_ha_cleanup(modules, monkeypatch, refresh_failure
         )
         for _ in range(2):
             entry = SimpleNamespace(
+                async_on_unload=Mock(),
+                add_update_listener=Mock(),
                 data={
                     "base_url": "https://example.org/",
                     "library_card": "SYNTHETIC",
                     "password": "SYNTHETIC",
-                }
+                },
             )
             if refresh_failure:
                 with pytest.raises(TimeoutError):

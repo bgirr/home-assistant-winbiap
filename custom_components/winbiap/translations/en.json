@@ -50,5 +50,19 @@
         "title": "Re-authenticate library account"
       }
     }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Opening exceptions",
+        "description": "One line per date, e.g. 2026-12-24: geschlossen or 2026-12-31: 10:00-12:00. These entries override regular hours.",
+        "data": {
+          "opening_exceptions": "Closed dates and special hours"
+        }
+      }
+    },
+    "error": {
+      "invalid_opening_exceptions": "Check dates and time intervals."
+    }
   }
 }

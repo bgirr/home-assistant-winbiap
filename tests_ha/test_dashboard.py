@@ -20,6 +20,7 @@ def render(card, states):
             integration_entities=lambda _: [],
             expand=lambda _: states,
             as_datetime=datetime.fromisoformat,
+            now=lambda: datetime(2030, 1, 1),
         )
     )
 

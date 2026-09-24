@@ -91,6 +91,8 @@ async def async_setup_entry(
         for description in SUMMARY_SENSORS
     )
 
+    async_add_entities([WinBiapOpeningHoursSensor(coordinator.opening_hours, entry)])
+
     known_loan_ids: set[str] = set()
 
     @callback
@@ -269,4 +271,50 @@ class WinBiapLoanSensor(WinBiapEntity):
             "cover_url": loan.cover_url,
             "days_remaining": loan.days_remaining,
             "renewable": loan.renewable,
+        }
+
+
+class WinBiapOpeningHoursSensor(CoordinatorEntity, SensorEntity):
+    """Normalized public weekly hours and explicit date overrides."""
+
+    _attr_has_entity_name = True
+    _attr_name = "Öffnungszeiten"
+    _attr_icon = "mdi:clock-outline"
+
+    def __init__(self, coordinator, entry):
+        super().__init__(coordinator)
+        self._attr_unique_id = f"{entry.unique_id}_opening_hours"
+        self._attr_device_info = DeviceInfo(identifiers={(DOMAIN, entry.entry_id)})
+
+    @property
+    def available(self):
+        from datetime import UTC, datetime
+
+        return bool(
+            self.coordinator.data and self.coordinator.data.fresh(datetime.now(UTC))
+        )
+
+    @property
+    def native_value(self):
+        return (
+            "regular_schedule"
+            if self.coordinator.last_update_success
+            else "cached_schedule"
+        )
+
+    @property
+    def extra_state_attributes(self):
+        from .opening_hours import DAYS
+
+        data = self.coordinator.data
+        if data is None:
+            return None
+        return {
+            "account_section": "opening_hours",
+            "weekly": {day: data.weekly[i] for i, day in enumerate(DAYS)},
+            "exceptions": dict(data.exceptions),
+            "source": data.source,
+            "fetched_at": data.fetched_at.isoformat(),
+            "basis": "regular_hours_with_known_exceptions",
+            "timezone": "Europe/Berlin",
         }

@@ -6,7 +6,7 @@ import asyncio
 import logging
 import shutil
 from dataclasses import replace
-from datetime import date
+from datetime import UTC, date, datetime
 from decimal import Decimal
 from pathlib import Path
 from types import MappingProxyType
@@ -95,6 +95,12 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                 await hass.config_entries.async_add(entry)
                 await hass.async_block_till_done()
                 assert entry.state is config_entries.ConfigEntryState.LOADED
+                opening_entity = next(
+                    s
+                    for s in hass.states.async_all("sensor")
+                    if s.entity_id.endswith("offnungszeiten")
+                )
+                assert opening_entity.state == "unavailable"
                 wishlist_entity = next(
                     s
                     for s in hass.states.async_all("sensor")
@@ -118,6 +124,7 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                     for s in hass.states.async_all("sensor")
                     if s.entity_id
                     not in {
+                        opening_entity.entity_id,
                         reservation_entity.entity_id,
                         fee_entity.entity_id,
                         wishlist_entity.entity_id,
@@ -231,6 +238,30 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                 await hass.async_block_till_done()
                 assert hass.states.get(wishlist_entity.entity_id).state == "0"
                 assert hass.states.get(wish_covers[0].entity_id).state == "unavailable"
+                from custom_components.winbiap.opening_hours import OpeningHours
+
+                schedule = OpeningHours(
+                    tuple((("10:00", "18:00"),) if i < 6 else () for i in range(7)),
+                    (),
+                    datetime.now(UTC),
+                )
+                coordinator.opening_hours.async_set_updated_data(schedule)
+                await hass.async_block_till_done()
+                opening_state = hass.states.get(opening_entity.entity_id)
+                assert opening_state.state == "regular_schedule"
+                assert opening_state.attributes["weekly"]["Di"] == (("10:00", "18:00"),)
+                options = await hass.config_entries.options.async_init(entry.entry_id)
+                assert options["type"] == "form"
+                options = await hass.config_entries.options.async_configure(
+                    options["flow_id"], {"opening_exceptions": "bad date"}
+                )
+                assert options["errors"]["base"] == "invalid_opening_exceptions"
+                options = await hass.config_entries.options.async_configure(
+                    options["flow_id"],
+                    {"opening_exceptions": "2030-12-24: geschlossen"},
+                )
+                assert options["type"] == "create_entry"
+                await hass.async_block_till_done()
                 old_session = entry.runtime_data.client._session
                 assert cover_session is not old_session
                 assert not old_session.closed
