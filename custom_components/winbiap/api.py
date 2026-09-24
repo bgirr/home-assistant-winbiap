@@ -382,6 +382,14 @@ def parse_loans(html: str, base_url: str) -> tuple[WinBiapLoan, ...]:
     """Parse loan rows or cards from a WinBIAP account page."""
     root = _tree(html)
     loans: list[WinBiapLoan] = []
+    renewal_groups: dict[int, bool | None] = {}
+    group = None
+    for node in root.descendants():
+        if node.tag in {"h1", "h2", "h3", "h4"}:
+            group = None
+            if "medien" in node.text.casefold() and _RENEWABLE_RE.search(node.text):
+                group = not bool(_NOT_RENEWABLE_RE.search(node.text))
+        renewal_groups[id(node)] = group
     parents = {
         id(child): parent
         for parent in [root, *root.descendants()]
@@ -391,6 +399,8 @@ def parse_loans(html: str, base_url: str) -> tuple[WinBiapLoan, ...]:
     def with_cover(loan: WinBiapLoan, node: _Node) -> WinBiapLoan:
         # Desktop WebOPAC nests a metadata table beside the lazy-loaded cover.
         # Stay inside the nearest single-media wrapper; never borrow a sibling's image.
+        if loan.renewable is None and renewal_groups.get(id(node)) is not None:
+            loan = replace(loan, renewable=renewal_groups[id(node)])
         if loan.cover_url:
             return loan
         parent = parents.get(id(node))
@@ -449,7 +459,7 @@ def parse_loans(html: str, base_url: str) -> tuple[WinBiapLoan, ...]:
                 if key := _header_key(child_classes):
                     mapping[key] = child.text
             if loan := _loan_from_mapping(mapping, node, base_url):
-                loans.append(loan)
+                loans.append(with_cover(loan, node))
 
     unique = {loan.item_id: loan for loan in loans}
     return tuple(sorted(unique.values(), key=lambda loan: (loan.due_date, loan.title)))

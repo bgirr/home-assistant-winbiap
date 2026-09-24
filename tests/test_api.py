@@ -139,3 +139,14 @@ def test_unsafe_cover_sources_rejected(source):
     )
     loans = parse_loans(html, "https://example.org/demo/")
     assert loans[0].cover_url is None
+
+
+def test_renewal_group_headers_do_not_leak_between_sections():
+    html = """<h3>Diese Medien können Sie nicht verlängern</h3><table><tr><th>Titel</th><th>Leihfrist</th></tr><tr data-id="a"><td>One</td><td>01.01.2030</td></tr></table>
+<h3>Diese Medien können Sie verlängern</h3><table><tr><th>Titel</th><th>Leihfrist</th></tr><tr data-id="b"><td>Two</td><td>02.01.2030</td></tr></table>
+<h3>Weitere Medien</h3><table><tr><th>Titel</th><th>Leihfrist</th></tr><tr data-id="c"><td>Three</td><td>03.01.2030</td></tr></table>"""
+    assert [loan.renewable for loan in parse_loans(html, "https://example.org/")] == [
+        False,
+        True,
+        None,
+    ]

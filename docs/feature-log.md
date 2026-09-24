@@ -25,3 +25,9 @@ share each account's isolated authenticated session; cover retrieval uses a
 separate cookie-free session. No reservation, payment or wishlist mutation is
 implemented. Existing dashboard views are preserved during deployment and a
 private backup is kept before every dashboard change.
+
+## 0.1.0-beta.10 — Renewal status
+
+Explicit desktop group headings now populate the existing renewable attribute.
+Every book card displays its three-state renewal status. Verified by 104 unit
+and 24 HA/runtime/template tests; no automatic renewal is performed.

@@ -52,3 +52,31 @@ def test_feature_dashboard_templates():
         assert label in render(
             cards[2], [S(state=amount, attributes=S(account_section="fees"))]
         )
+
+
+def test_loan_renewal_labels():
+    from types import SimpleNamespace
+
+    template = Environment().from_string(cards[0]["content"])
+    for value, label in [
+        (True, "✓ Verlängerbar"),
+        (False, "✕ Nicht verlängerbar"),
+        (None, "Verlängerbarkeit unbekannt"),
+    ]:
+        loan = {
+            "id": "test",
+            "title": "Test",
+            "author": None,
+            "due_date": "2030-01-02",
+            "renewable": value,
+        }
+        state = SimpleNamespace(
+            entity_id="sensor.test", state="1", attributes=SimpleNamespace(loans=[loan])
+        )
+        text = template.render(
+            integration_entities=lambda _: [],
+            expand=lambda _, state=state: [state],
+            now=lambda: datetime(2030, 1, 1),
+            as_datetime=lambda v, default=None: datetime.fromisoformat(v),
+        )
+        assert label in text

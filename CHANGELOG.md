@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0-beta.10 — Renewal status
+
+- Read explicit renewal group headings in desktop WebOPAC, preserving unknown
+  states and preventing status leakage between groups.
+- Display renewable / not renewable / unknown on every dashboard book card.
+- Validate 104 unit tests and 24 HA/runtime/template tests. No renewal action is sent.
+
 ## 0.1.0-beta.9 — Wishlist
 
 - Add the authenticated account’s wishlist count, structured titles/authors and
