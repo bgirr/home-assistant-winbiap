@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.0-beta.12 — Last in-person return deadline
+
+- Add an aware timestamp sensor combining the earliest active due date with the
+  last opening window on or before that date, including known dated exceptions.
+- Recalculate on account updates, opening-hours updates and minute ticks. Preserve
+  actual due dates; never shift missed deadlines forward or assume a renewal.
+- Add a prominent dashboard banner with local date, closing time, all daily
+  opening windows, affected item count and a clear regular-hours qualification.
+- Show unavailable planning rather than invented deadlines for absent/stale hours;
+  avoid zero loan counters while account data is loading.
+- Validate 118 unit tests, 26 HA/runtime/template tests and a live combined calculation.
+
 ## 0.1.0-beta.11 — Opening hours
 
 - Fetch Königsbrunn’s official public weekly schedule independently with a cookie-free

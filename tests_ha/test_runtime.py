@@ -95,6 +95,12 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                 await hass.config_entries.async_add(entry)
                 await hass.async_block_till_done()
                 assert entry.state is config_entries.ConfigEntryState.LOADED
+                return_entity = next(
+                    s
+                    for s in hass.states.async_all("sensor")
+                    if s.entity_id.endswith("letzter_abgabetermin")
+                )
+                assert return_entity.state == "unavailable"
                 opening_entity = next(
                     s
                     for s in hass.states.async_all("sensor")
@@ -125,6 +131,7 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                     if s.entity_id
                     not in {
                         opening_entity.entity_id,
+                        return_entity.entity_id,
                         reservation_entity.entity_id,
                         fee_entity.entity_id,
                         wishlist_entity.entity_id,
@@ -250,6 +257,17 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                 opening_state = hass.states.get(opening_entity.entity_id)
                 assert opening_state.state == "regular_schedule"
                 assert opening_state.attributes["weekly"]["Di"] == (("10:00", "18:00"),)
+                return_state = hass.states.get(return_entity.entity_id)
+                assert return_state.state == "2030-01-02T17:00:00+00:00"
+                assert return_state.attributes["opening_windows"] == (
+                    ("10:00", "18:00"),
+                )
+                assert return_state.attributes["due_date"] == "2030-01-02"
+                coordinator.async_set_updated_data(replace(account, loans=()))
+                await hass.async_block_till_done()
+                assert hass.states.get(return_entity.entity_id).state == "unavailable"
+                coordinator.async_set_updated_data(account)
+                await hass.async_block_till_done()
                 options = await hass.config_entries.options.async_init(entry.entry_id)
                 assert options["type"] == "form"
                 options = await hass.config_entries.options.async_configure(

@@ -41,3 +41,14 @@ The official schedule lists Monday–Saturday; unlisted Sunday is treated as clo
 Only unambiguous dated public closure/special-opening statements are parsed;
 other short-notice changes are not inferred. Other libraries remain unsupported.
 113 unit and 25 HA/runtime/template tests; live Tuesday windows verified.
+
+## 0.1.0-beta.12 — Last in-person return deadline
+
+Combines the earliest due date (including renewable media) with the final closing
+time on or before it. Uses Europe/Berlin and all windows for that day. The timestamp
+sensor exposes original due date, return date, windows, affected items, source and
+upcoming/missed status. Updates on both coordinators and every minute. Empty loans,
+stale or absent hours produce no deadline. Missed deadlines are never moved forward.
+The banner describes regular hours with known exceptions, not a changed library due date.
+118 unit and 26 HA/runtime/template tests cover closures, overrides, DST and empty/stale
+inputs. The return machine is deliberately excluded.

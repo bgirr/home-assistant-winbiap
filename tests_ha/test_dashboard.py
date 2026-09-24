@@ -81,3 +81,49 @@ def test_loan_renewal_labels():
             as_datetime=lambda v, default=None: datetime.fromisoformat(v),
         )
         assert label in text
+
+
+def test_return_banner_upcoming_missed_and_unavailable():
+    from zoneinfo import ZoneInfo
+
+    loan = {
+        "id": "test",
+        "title": "Test",
+        "author": None,
+        "due_date": "2030-01-02",
+        "renewable": False,
+    }
+    loans = S(entity_id="sensor.loans", state="1", attributes=S(loans=[loan]))
+    planning = S(
+        entity_id="sensor.return",
+        state="2030-01-01T17:00:00+00:00",
+        attributes=S(
+            account_section="return_deadline",
+            status="upcoming",
+            opening_windows=[["10:00", "12:00"], ["14:00", "18:00"]],
+            due_date="2030-01-02",
+            affected_count=1,
+        ),
+    )
+
+    def render_banner(states):
+        return (
+            Environment()
+            .from_string(cards[0]["content"])
+            .render(
+                integration_entities=lambda _: [],
+                expand=lambda _: states,
+                now=lambda: datetime(2030, 1, 1),
+                as_datetime=lambda v, default=None: datetime.fromisoformat(v),
+                as_local=lambda dt: dt.astimezone(ZoneInfo("Europe/Berlin")),
+            )
+        )
+
+    text = render_banner([loans, planning])
+    assert "Spätestens Dienstag, 01.01.2030, bis 18:00 Uhr zurückgeben" in text
+    assert "10:00\u201312:00 und 14:00\u201318:00 Uhr" in text
+    planning.attributes.status = "missed"
+    assert "Rückgabemöglichkeit verstrichen" in render_banner([loans, planning])
+    assert "derzeit nicht berechenbar" in render_banner([loans])
+    loans.attributes.loans = []
+    assert "Spätestens" not in render_banner([loans, planning])

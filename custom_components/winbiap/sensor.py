@@ -93,6 +93,8 @@ async def async_setup_entry(
 
     async_add_entities([WinBiapOpeningHoursSensor(coordinator.opening_hours, entry)])
 
+    async_add_entities([WinBiapReturnDeadlineSensor(coordinator, entry)])
+
     known_loan_ids: set[str] = set()
 
     @callback
@@ -316,5 +318,79 @@ class WinBiapOpeningHoursSensor(CoordinatorEntity, SensorEntity):
             "source": data.source,
             "fetched_at": data.fetched_at.isoformat(),
             "basis": "regular_hours_with_known_exceptions",
+            "timezone": "Europe/Berlin",
+        }
+
+
+class WinBiapReturnDeadlineSensor(WinBiapEntity):
+    """Last in-person return window, recalculated on both sources and time ticks."""
+
+    _attr_name = "Letzter Abgabetermin"
+    _attr_icon = "mdi:calendar-clock"
+    _attr_device_class = SensorDeviceClass.TIMESTAMP
+
+    def __init__(self, coordinator, entry):
+        super().__init__(coordinator, entry)
+        self._attr_unique_id = f"{entry.unique_id}_return_deadline"
+
+    async def async_added_to_hass(self):
+        from datetime import timedelta
+
+        from homeassistant.helpers.event import async_track_time_interval
+
+        await super().async_added_to_hass()
+        self.async_on_remove(
+            self.coordinator.opening_hours.async_add_listener(
+                self._handle_coordinator_update
+            )
+        )
+        self.async_on_remove(
+            async_track_time_interval(self.hass, self._tick, timedelta(minutes=1))
+        )
+
+    @callback
+    def _tick(self, _now):
+        self.async_write_ha_state()
+
+    @property
+    def plan(self):
+        from homeassistant.util import dt as dt_util
+
+        from .return_planning import calculate_return_plan
+
+        return calculate_return_plan(
+            self.coordinator.data.loans,
+            self.coordinator.opening_hours.data,
+            dt_util.utcnow(),
+        )
+
+    @property
+    def available(self):
+        return super().available and self.plan is not None
+
+    @property
+    def native_value(self):
+        plan = self.plan
+        return plan.deadline if plan else None
+
+    @property
+    def extra_state_attributes(self):
+        from homeassistant.util import dt as dt_util
+
+        if not (plan := self.plan):
+            return None
+        hours = self.coordinator.opening_hours.data
+        return {
+            "account_section": "return_deadline",
+            "due_date": plan.due_date.isoformat(),
+            "return_day": plan.deadline.date().isoformat(),
+            "opening_windows": plan.windows,
+            "affected_count": len(plan.item_ids),
+            "item_ids": plan.item_ids,
+            "titles": plan.titles,
+            "status": "missed" if dt_util.utcnow() >= plan.deadline else "upcoming",
+            "basis": "regular_hours_with_known_exceptions",
+            "source": hours.source,
+            "hours_fetched_at": hours.fetched_at.isoformat(),
             "timezone": "Europe/Berlin",
         }
