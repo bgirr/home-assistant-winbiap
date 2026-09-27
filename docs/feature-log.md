@@ -78,3 +78,12 @@ browser instrumentation. It is classified as `browser_verification_required`;
 no untrusted page scripts are executed by the integration. Historical connection
 errors could not be reproduced during the current DNS/HTTPS check. A successful
 new library fetch remains blocked by the changed browser verification.
+
+Deployment verified on 2026-09-27: HACS reports beta.13 installed with no pending
+upgrade; the config entry loads after a full HA restart despite source verification
+failure. Existing recorder records were recovered into the private snapshot without
+altering recorder history. Live dashboard: seven retained loans and seven successfully
+loaded cover images, dated stale notices on all four account sections, independent
+opening hours and a return deadline calculated from the retained loans. All other
+dashboard views were preserved. Fresh account retrieval remains blocked as described
+above; recovery is not reported as a successful library refresh.
