@@ -44,3 +44,10 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 async def _async_options_updated(hass, entry):
     await hass.config_entries.async_reload(entry.entry_id)
+
+
+async def async_remove_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
+    """Delete private cached account records when removing the integration."""
+    from homeassistant.helpers.storage import Store
+
+    await Store(hass, 1, f"winbiap.{entry.entry_id}", private=True).async_remove()

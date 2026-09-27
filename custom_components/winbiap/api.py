@@ -554,6 +554,11 @@ class WinBiapClient:
         try:
             _LOGGER.debug("WinBIAP request started: login_page")
             login_html, _ = await self._request("GET", login_url)
+            if any(
+                frame.attrs.get("id") == "capjs-frame"
+                for frame in _tree(login_html).descendants("iframe")
+            ):
+                raise WinBiapUnsupportedPage("browser_verification_required")
             if challenge := parse_challenge(login_html):
                 stage = "challenge"
                 _LOGGER.debug("WinBIAP bot challenge detected")

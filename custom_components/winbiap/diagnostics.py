@@ -22,6 +22,7 @@ async def async_get_config_entry_diagnostics(
     return {
         "config_entry": async_redact_data(dict(entry.data), TO_REDACT),
         "last_update_success": coordinator.last_update_success,
+        "source_freshness": coordinator.freshness(),
         "library_name": account.library_name if account else None,
         "loan_count": len(account.loans) if account else None,
     }

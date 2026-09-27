@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-beta.13
+
+- Persist the last successful account snapshot privately in Home Assistant and
+  restore it during startup before polling. Failed updates retain loan, cover and
+  optional-section entities instead of making all account data unavailable.
+- Expose per-section data timestamps, stale flags, last attempt and safe error
+  categories. Partial failures retain only affected sections; confirmed empty
+  lists and zero balances still replace old data. Removal deletes the snapshot.
+- Show dated cached-data warnings on the Bücherei dashboard; never show an
+  invented zero when no account data exists. Existing recorder history is unchanged.
+- Identify the new Cap.js browser-verification page before submitting credentials.
+  This is a diagnosed upstream compatibility limitation, not a completed fresh-login
+  fix: HashWX plus browser instrumentation is not supported by the HTTP client.
+
 ## 0.1.0-beta.12 — Last in-person return deadline
 
 - Add an aware timestamp sensor combining the earliest active due date with the

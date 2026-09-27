@@ -202,3 +202,15 @@ def test_logs_never_include_exception_or_credentials(caplog):
     with caplog.at_level("DEBUG"), pytest.raises(api.WinBiapCannotConnect):
         asyncio.run(client_for(session).async_login())
     assert "SYNTHETIC" not in caplog.text
+
+
+def test_browser_verification_is_classified_before_sending_credentials():
+    session = session_for(
+        Response('<iframe id="capjs-frame" src="/challenge?frame=1"></iframe>')
+    )
+    with pytest.raises(
+        api.WinBiapUnsupportedPage, match="browser_verification_required"
+    ):
+        asyncio.run(client_for(session).async_login())
+    assert session.request.call_count == 1
+    assert session.request.call_args.args[0] == "GET"

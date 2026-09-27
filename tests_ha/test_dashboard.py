@@ -127,3 +127,40 @@ def test_return_banner_upcoming_missed_and_unavailable():
     assert "derzeit nicht berechenbar" in render_banner([loans])
     loans.attributes.loans = []
     assert "Spätestens" not in render_banner([loans, planning])
+
+
+def test_cached_books_and_last_update_warning():
+    from zoneinfo import ZoneInfo
+
+    loan = {
+        "id": "book",
+        "title": "Stored book",
+        "author": None,
+        "due_date": "2030-01-02",
+        "renewable": False,
+    }
+    state = S(
+        entity_id="sensor.loans",
+        state="1",
+        attributes=S(
+            loans=[loan],
+            data_stale=True,
+            last_known_update="2029-12-31T18:15:00+00:00",
+            refresh_error="browser_verification_required",
+        ),
+    )
+    text = (
+        Environment()
+        .from_string(cards[0]["content"])
+        .render(
+            integration_entities=lambda _: [],
+            expand=lambda _: [state],
+            now=lambda: datetime(2030, 1, 1),
+            as_datetime=lambda v, default=None: datetime.fromisoformat(v),
+            as_local=lambda v: v.astimezone(ZoneInfo("Europe/Berlin")),
+        )
+    )
+    assert "Stored book" in text and "Noch 1 Tage" not in text
+    assert "Gespeicherter Datenstand" in text and "31.12.2029 um 19:15" in text
+    assert "Browserprüfung" in text
+    assert "<strong>1</strong><span>Ausgeliehen" in text

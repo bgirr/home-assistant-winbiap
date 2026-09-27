@@ -24,7 +24,11 @@ from homeassistant.helpers import entity_registry as er
 from homeassistant.helpers import frame
 from homeassistant.setup import async_setup_component
 
-from custom_components.winbiap.api import WinBiapClient, WinBiapInvalidAuth
+from custom_components.winbiap.api import (
+    WinBiapCannotConnect,
+    WinBiapClient,
+    WinBiapInvalidAuth,
+)
 from custom_components.winbiap.config_flow import _validate
 from custom_components.winbiap.models import (
     WinBiapAccount,
@@ -89,7 +93,7 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
         try:
             with patch.object(
                 WinBiapClient, "async_get_account", AsyncMock(return_value=account)
-            ):
+            ) as fetch:
                 await async_get_adapters(hass)
                 assert await async_setup_component(hass, "sensor", {})
                 await hass.config_entries.async_add(entry)
@@ -138,6 +142,27 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                     }
                 ]
                 assert len(states) == 4
+                fetch.side_effect = WinBiapCannotConnect("request_failed")
+                await entry.runtime_data.async_refresh()
+                await hass.async_block_till_done()
+                loan_summary = next(
+                    s
+                    for s in hass.states.async_all("sensor")
+                    if "loans" in s.attributes
+                )
+                assert loan_summary.state == "1"
+                assert loan_summary.attributes["data_stale"] is True
+                assert loan_summary.attributes["last_successful_update"] is not None
+                assert all(
+                    hass.states.get(s.entity_id).state != "unavailable" for s in states
+                )
+                fetch.side_effect = None
+                await entry.runtime_data.async_refresh()
+                assert (
+                    hass.states.get(loan_summary.entity_id).attributes["data_stale"]
+                    is False
+                )
+
                 assert all(s.state not in {"unknown", "unavailable"} for s in states)
                 assert sorted(s.state for s in states) == [
                     "0",

@@ -52,3 +52,29 @@ stale or absent hours produce no deadline. Missed deadlines are never moved forw
 The banner describes regular hours with known exceptions, not a changed library due date.
 118 unit and 26 HA/runtime/template tests cover closures, overrides, DST and empty/stale
 inputs. The return machine is deliberately excluded.
+
+
+## 0.1.0-beta.13 — Last-known data during outages
+
+Account snapshots use Home Assistant's private Store (mode 0600), scoped by entry.
+They contain typed account records and section timestamps, never credentials,
+cookies, challenge tokens or raw pages. Connection, parser, timeout and login
+failures retain known records. Authentication failures also request reauthentication.
+A section with a successful empty result replaces its old snapshot; a failed optional
+section retains its own timestamp and stale flag. Uninstalling removes the cache.
+
+Dashboard notices distinguish last successful refresh from recovered recorder
+state. The latter is labelled saved data because recorder timestamps do not prove
+when the library was last polled. Return-day calculations based on retained loans
+are explicitly labelled accordingly. No recorder rows are modified.
+
+119 fast tests and 36 HA/runtime/template tests cover persistence, restart during
+outage, partial failure, real empty results, corrupt/missing cache, reauthentication,
+source timestamp preservation and visible cached-book warnings. The real HA runtime
+also verifies sensor availability throughout failure and recovery.
+
+Known upstream limitation: the current WinBIAP login presents Cap.js HashWX plus
+browser instrumentation. It is classified as `browser_verification_required`;
+no untrusted page scripts are executed by the integration. Historical connection
+errors could not be reproduced during the current DNS/HTTPS check. A successful
+new library fetch remains blocked by the changed browser verification.

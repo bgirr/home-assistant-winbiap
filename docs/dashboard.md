@@ -76,3 +76,20 @@ opening-hours metadata, not a hard-coded weekly schedule. Missing/stale hours ke
 the library due date visible without inventing a visit deadline. Configure dated
 closures or special hours through the integration options. Source support currently
 covers Königsbrunn; the weekly schedule alone cannot guarantee unannounced closures.
+
+
+### Abruffehler und gespeicherte Daten (beta.13)
+
+Der letzte erfolgreiche Kontostand bleibt auch nach einem Home-Assistant-Neustart
+verfügbar. Jede Zusammenfassung enthält `last_successful_update`, `last_known_update`,
+`last_attempt`, `data_stale`, `refresh_error` und `stale_sections`. Zeitstempel beziehen
+sich auf die jeweilige Kontosektion. Bei einer Wiederherstellung aus Recorder-Daten
+ist nur `last_known_update` bekannt; `snapshot_origin` ist `recorder_recovery`.
+Das Dashboard zeigt dann einen datierten Warnhinweis und weiterhin die gespeicherten
+Bücher und Kontowerte. Tagesangaben werden aus den gespeicherten Fristen berechnet.
+Erst ein erfolgreicher Abruf bestätigt wieder den aktuellen Bestand.
+
+Ohne vorherigen Datenstand bleiben Sensoren unverfügbar und Zähler zeigen einen
+Gedankenstrich. Eine Browserprüfung (`browser_verification_required`) erfordert
+weitere Kompatibilitätsarbeit beziehungsweise einen vom Betreiber unterstützten
+Zugangsweg. Der Cache behebt diese externe Zugriffsbeschränkung nicht.

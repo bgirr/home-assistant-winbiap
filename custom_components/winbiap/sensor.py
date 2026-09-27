@@ -164,7 +164,18 @@ class WinBiapSummarySensor(WinBiapEntity):
         return self.entity_description.value_fn(self.coordinator.data)
 
     @property
-    def extra_state_attributes(self) -> dict[str, Any] | None:
+    def extra_state_attributes(self) -> dict[str, Any]:
+        """Expose source freshness alongside the last known section data."""
+        section = self.entity_description.key
+        if section not in {"loans", "reservations", "fees", "wishlist"}:
+            section = "loans"
+        return {
+            **self.coordinator.freshness(section),
+            **(self._section_attributes or {}),
+        }
+
+    @property
+    def _section_attributes(self) -> dict[str, Any] | None:
         """Expose structured loan data on the loan-count sensor."""
         if self.entity_description.key == "wishlist":
             records = self.coordinator.data.wishlist
@@ -266,6 +277,7 @@ class WinBiapLoanSensor(WinBiapEntity):
         if (loan := self.loan) is None:
             return None
         return {
+            **self.coordinator.freshness(),
             "author": loan.author,
             "media_type": loan.media_type,
             "barcode": loan.barcode,
@@ -381,6 +393,7 @@ class WinBiapReturnDeadlineSensor(WinBiapEntity):
             return None
         hours = self.coordinator.opening_hours.data
         return {
+            **self.coordinator.freshness(),
             "account_section": "return_deadline",
             "due_date": plan.due_date.isoformat(),
             "return_day": plan.deadline.date().isoformat(),
