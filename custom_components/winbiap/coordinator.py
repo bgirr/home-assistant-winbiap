@@ -5,7 +5,7 @@ from __future__ import annotations
 import asyncio
 import logging
 from dataclasses import replace
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from decimal import InvalidOperation
 
 from homeassistant.config_entries import ConfigEntryAuthFailed
@@ -44,6 +44,9 @@ class WinBiapCoordinator(DataUpdateCoordinator[WinBiapAccount]):
         self.last_attempt: str | None = None
         self.refresh_error: str | None = None
         self.section_origins: dict[str, str] = {}
+        self.failure_count = 0
+        self.next_attempt: str | None = None
+        self._auth_failed = False
 
     def freshness(self, section: str = "loans") -> dict:
         """Safe metadata separate from HA's successful cache delivery flag."""
@@ -53,6 +56,9 @@ class WinBiapCoordinator(DataUpdateCoordinator[WinBiapAccount]):
             else None,
             "last_known_update": self.section_updated.get(section),
             "last_attempt": self.last_attempt,
+            "next_attempt": self.next_attempt,
+            "fetch_method": getattr(self.client, "fetch_method", "http"),
+            "consecutive_failures": self.failure_count,
             "data_stale": section in self.stale_sections,
             "refresh_error": self.refresh_error,
             "stale_sections": sorted(self.stale_sections),
@@ -80,9 +86,11 @@ class WinBiapCoordinator(DataUpdateCoordinator[WinBiapAccount]):
     async def _async_update_data(self) -> WinBiapAccount:
         if not self._loaded:
             await self._load_snapshot()
+        if self._auth_failed and self._snapshot is not None:
+            return self._snapshot
         self.last_attempt = datetime.now(UTC).isoformat()
         try:
-            async with asyncio.timeout(90):
+            async with asyncio.timeout(185):
                 account = await self.client.async_get_account()
         except (
             WinBiapInvalidAuth,
@@ -99,8 +107,24 @@ class WinBiapCoordinator(DataUpdateCoordinator[WinBiapAccount]):
                 and str(err) == "browser_verification_required"
                 else "unsupported_page"
                 if isinstance(err, WinBiapUnsupportedPage)
+                else str(err)
+                if isinstance(err, WinBiapCannotConnect)
+                and str(err).startswith("browser_")
+                else err.category
+                if isinstance(err, WinBiapCannotConnect)
+                else "timeout"
+                if isinstance(err, TimeoutError)
                 else "connection"
             )
+            self.failure_count += 1
+            delay = (5, 15, 30, 60)[min(self.failure_count - 1, 3)] * 60
+            delay = max(delay, getattr(err, "retry_after", 0))
+            self.update_interval = timedelta(seconds=delay)
+            self.next_attempt = (datetime.now(UTC) + self.update_interval).isoformat()
+            if isinstance(err, WinBiapInvalidAuth):
+                self._auth_failed = True
+                self.update_interval = None
+                self.next_attempt = None
             if self._snapshot is None:
                 if isinstance(err, WinBiapInvalidAuth):
                     raise ConfigEntryAuthFailed from err
@@ -114,6 +138,9 @@ class WinBiapCoordinator(DataUpdateCoordinator[WinBiapAccount]):
             return self._snapshot
 
         updated = datetime.now(UTC).isoformat()
+        self.failure_count = 0
+        self.update_interval = DEFAULT_SCAN_INTERVAL
+        self.next_attempt = (datetime.now(UTC) + self.update_interval).isoformat()
         self.stale_sections = set()
         for section in SECTIONS:
             if getattr(account, section) is not None:

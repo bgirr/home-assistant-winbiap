@@ -28,6 +28,18 @@ jobs:
       - run: python -m pip install -r requirements-test-ha.txt
       - run: python -m pytest -q tests_ha
 
+  browser-runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - run: python -m pip install 'playwright==1.63.0' aiohttp
+      - run: python -m playwright install-deps chromium
+      - run: mkdir -p /tmp/winbiap-browser-test && sh scripts/install_browser_runtime.sh "$(command -v python)" /tmp/winbiap-browser-test
+      - run: python scripts/browser_probe.py --production --browser-config /tmp/winbiap-browser-test
+
   hacs:
     runs-on: ubuntu-latest
     steps:

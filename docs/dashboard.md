@@ -93,3 +93,13 @@ Ohne vorherigen Datenstand bleiben Sensoren unverfügbar und Zähler zeigen eine
 Gedankenstrich. Eine Browserprüfung (`browser_verification_required`) erfordert
 weitere Kompatibilitätsarbeit beziehungsweise einen vom Betreiber unterstützten
 Zugangsweg. Der Cache behebt diese externe Zugriffsbeschränkung nicht.
+
+### Automatischer Browser-Fallback (beta.14)
+
+Nach erfolgreichem Browserabruf erscheint „Aktuell · Browser-Fallback“ mit dem
+Zeitpunkt der letzten erfolgreichen Aktualisierung. Bei Abruffehlern bleiben die
+Bücher und verfügbaren Kontodaten sichtbar; die Warnung nennt den gespeicherten
+Datenstand und den nächsten Versuch. Der Diagnose-Sensor „Abrufstatus“ ergänzt
+Abrufweg, Fehlerkategorie und Anzahl aufeinanderfolgender Fehler. Die zusätzliche
+Browser-Laufzeit wird einmalig auf dem HA-Server eingerichtet; siehe
+[Browser-Fallback](browser-fallback-status.md).

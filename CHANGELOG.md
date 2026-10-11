@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-beta.14 — Automatic fetch with local browser fallback
+
+- Reuse account sessions; retry transient read failures at most twice and respect
+  Retry-After. Use sandboxed local Chromium only for recognized browser verification.
+- Keep browser sessions in memory, bound fetches to 120 seconds, clean up on failure
+  and unload, and retry HTTP after six hours. No external browser service is needed.
+- Retry failed updates after 5/15/30/60 minutes; stop on confirmed authentication
+  failure. Preserve dated snapshots, entity IDs and recorder history.
+- Add an Abrufstatus diagnostic sensor and dashboard labels for current browser
+  results, retained data, last successful refresh and the next attempt.
+- Support the current explicit desktop fee-balance format.
+- Chromium and its OS libraries need one-time provisioning on the supported
+  Debian/x86-64 HA host; HACS updates the integration, not OS packages.
+
 ## 0.1.0-beta.13
 
 - Persist the last successful account snapshot privately in Home Assistant and

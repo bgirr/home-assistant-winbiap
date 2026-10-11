@@ -87,3 +87,21 @@ loaded cover images, dated stale notices on all four account sections, independe
 opening hours and a return deadline calculated from the retained loans. All other
 dashboard views were preserved. Fresh account retrieval remains blocked as described
 above; recovery is not reported as a successful library refresh.
+
+## 0.1.0-beta.14 — Automatic browser fallback and recovery
+
+HTTP sessions are reused, read failures have bounded retries, and recognized
+browser verification invokes local sandboxed Chromium. Sessions remain in memory;
+fetches are serialized and bounded, with cleanup on failure/unload/shutdown and
+an HTTP reprobe after six hours. Outages retain dated records, retry with backoff,
+and expose next-attempt metadata. Confirmed authentication failures stop retries.
+
+The Bücherei dashboard distinguishes current browser results from saved data.
+The new diagnostic Abrufstatus sensor reports transport, attempts and freshness.
+The current desktop fee-balance label is supported without summing transactions.
+
+Validation: 131 fast tests, 37 real HA runtime/template tests, synthetic delayed
+login navigation and live production retrieval of seven loans plus all optional
+sections, in two independent sessions and one reused session. Seven HA cover
+proxies return valid images. Post-release restart and automatic-cycle acceptance
+is pending. See [host prerequisites and acceptance](browser-fallback-status.md).

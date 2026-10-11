@@ -38,6 +38,7 @@ def modules(monkeypatch):
     stub(
         "homeassistant.const",
         CONF_PASSWORD="password",
+        EVENT_HOMEASSISTANT_STOP="homeassistant_stop",
         Platform=SimpleNamespace(SENSOR="sensor", IMAGE="image"),
     )
     stub("homeassistant.core", HomeAssistant=object, callback=lambda f: f)
@@ -192,10 +193,11 @@ def test_entry_isolated_cookies_ha_cleanup(modules, monkeypatch, refresh_failure
             ),
         )
         hass = SimpleNamespace(
+            bus=SimpleNamespace(async_listen_once=Mock()),
             config_entries=SimpleNamespace(
                 async_forward_entry_setups=AsyncMock(),
                 async_unload_platforms=AsyncMock(return_value=True),
-            )
+            ),
         )
         for _ in range(2):
             entry = SimpleNamespace(

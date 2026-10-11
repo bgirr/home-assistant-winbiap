@@ -73,6 +73,12 @@ def test_outage_restart_recovery_and_real_empty(tmp_path, error):
             assert restored.freshness()["data_stale"]
             if isinstance(error, WinBiapInvalidAuth):
                 entry.async_start_reauth.assert_called_with(hass)
+            if isinstance(error, WinBiapInvalidAuth):
+                # Auth failures require reauthentication/reload, no background retry.
+                client.async_get_account.reset_mock()
+                assert await restored._async_update_data() == ACCOUNT
+                client.async_get_account.assert_not_called()
+                restored = WinBiapCoordinator(hass, entry, client)
             # Explicit empty data is authoritative, never sticky old loans.
             client.async_get_account.side_effect = None
             client.async_get_account.return_value = WinBiapAccount(
@@ -161,6 +167,43 @@ def test_recorder_recovery_does_not_claim_successful_poll(tmp_path):
             assert coordinator.freshness()["last_successful_update"] is None
             assert coordinator.freshness()["last_known_update"] == stamp
             assert coordinator.freshness()["data_stale"]
+        finally:
+            await hass.async_stop(force=True)
+
+    asyncio.run(run())
+
+
+def test_retry_schedule_and_success_reset(tmp_path):
+    async def run():
+        from datetime import datetime
+
+        hass = HomeAssistant(str(tmp_path))
+        entry = SimpleNamespace(entry_id="test", async_on_unload=Mock())
+        client = SimpleNamespace(
+            async_get_account=AsyncMock(return_value=ACCOUNT), fetch_method="browser"
+        )
+        try:
+            coordinator = WinBiapCoordinator(hass, entry, client)
+            await coordinator._async_update_data()
+            stamp = coordinator.freshness()["last_successful_update"]
+            client.async_get_account.side_effect = WinBiapCannotConnect()
+            for minutes in (5, 15, 30, 60, 60):
+                assert await coordinator._async_update_data() == ACCOUNT
+                assert coordinator.update_interval.total_seconds() == minutes * 60
+                assert datetime.fromisoformat(
+                    coordinator.next_attempt
+                ) > datetime.fromisoformat(coordinator.last_attempt)
+                assert coordinator.freshness()["last_successful_update"] == stamp
+            client.async_get_account.side_effect = WinBiapCannotConnect(
+                category="rate_limited", retry_after=7200
+            )
+            await coordinator._async_update_data()
+            assert coordinator.update_interval.total_seconds() == 7200
+            client.async_get_account.side_effect = None
+            await coordinator._async_update_data()
+            assert coordinator.failure_count == 0
+            assert coordinator.update_interval.total_seconds() == 1800
+            assert coordinator.freshness()["fetch_method"] == "browser"
         finally:
             await hass.async_stop(force=True)
 

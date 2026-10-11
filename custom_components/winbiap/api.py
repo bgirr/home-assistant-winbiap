@@ -5,14 +5,23 @@ from __future__ import annotations
 import asyncio
 import logging
 import re
+from contextlib import suppress
 from dataclasses import dataclass, field, replace
-from datetime import date, datetime
+from datetime import UTC, date, datetime
+from email.utils import parsedate_to_datetime
 from hashlib import sha256
 from html.parser import HTMLParser
 from typing import ClassVar
 from urllib.parse import unquote, urljoin, urlparse
 
-from aiohttp import ClientError, ClientResponse, ClientSession
+from aiohttp import (
+    ClientConnectionError,
+    ClientConnectorCertificateError,
+    ClientConnectorDNSError,
+    ClientError,
+    ClientResponse,
+    ClientSession,
+)
 
 from .models import WinBiapAccount, WinBiapLoan
 
@@ -40,6 +49,13 @@ class WinBiapError(Exception):
 
 class WinBiapCannotConnect(WinBiapError):
     """Raised when the WebOPAC cannot be reached or parsed."""
+
+    def __init__(
+        self, message="request_failed", *, category="connection", retry_after=0
+    ):
+        super().__init__(message)
+        self.category = category
+        self.retry_after = retry_after
 
 
 class WinBiapInvalidAuth(WinBiapError):
@@ -527,6 +543,41 @@ class WinBiapClient:
         return url
 
     async def _request(self, method: str, url: str, *, data=None) -> tuple[str, str]:
+        for attempt in range(3):
+            try:
+                async with asyncio.timeout(15):
+                    return await self._request_once(method, url, data=data)
+            except (ClientError, TimeoutError, WinBiapCannotConnect) as err:
+                if isinstance(err, WinBiapCannotConnect):
+                    failure = err
+                else:
+                    category = (
+                        "tls"
+                        if isinstance(err, ClientConnectorCertificateError)
+                        else "dns"
+                        if isinstance(err, ClientConnectorDNSError)
+                        else "timeout"
+                        if isinstance(err, TimeoutError)
+                        else "connection"
+                    )
+                    failure = WinBiapCannotConnect(category=category)
+                if (
+                    (
+                        isinstance(err, ClientError)
+                        and not isinstance(err, ClientConnectionError)
+                    )
+                    or method != "GET"
+                    or attempt == 2
+                    or failure.category == "tls"
+                    or failure.retry_after > 3
+                ):
+                    raise failure from None
+                await asyncio.sleep(max((1, 3)[attempt], failure.retry_after))
+        raise AssertionError("unreachable")
+
+    async def _request_once(
+        self, method: str, url: str, *, data=None
+    ) -> tuple[str, str]:
         """Keep credentials, challenge answers and cookies on the library origin."""
         for _ in range(6):
             self._safe_url(url)
@@ -544,6 +595,23 @@ class WinBiapClient:
                     ):
                         method, data = "GET", None
                     continue
+                if response.status == 429 or response.status >= 500:
+                    retry_after = 0
+                    value = response.headers.get("Retry-After", "")
+                    try:
+                        retry_after = max(0, int(value))
+                    except ValueError:
+                        with suppress(ValueError, TypeError, OverflowError):
+                            retry_after = max(
+                                0,
+                                (
+                                    parsedate_to_datetime(value) - datetime.now(UTC)
+                                ).total_seconds(),
+                            )
+                    raise WinBiapCannotConnect(
+                        category="rate_limited" if response.status == 429 else "server",
+                        retry_after=retry_after,
+                    )
                 return await self._text(response), str(response.url)
         raise WinBiapUnsupportedPage("redirect_limit")
 
@@ -631,7 +699,19 @@ class WinBiapClient:
 
     async def async_get_account(self) -> WinBiapAccount:
         """Fetch and parse the current account state."""
-        landing_html, landing_url = await self.async_login()
+        landing_html = None
+        if self._account_url is not None:
+            landing_html, landing_url = await self._request("GET", self._account_url)
+            if page_is_login(landing_html, landing_url):
+                self._account_url = None
+                landing_html = None
+            elif any(
+                n.attrs.get("id") == "capjs-frame"
+                for n in _tree(landing_html).descendants("iframe")
+            ):
+                raise WinBiapUnsupportedPage("browser_verification_required")
+        if landing_html is None:
+            landing_html, landing_url = await self.async_login()
         account_url = self._account_url or landing_url
         html = landing_html
 
@@ -687,6 +767,7 @@ class WinBiapClient:
                 UnicodeError,
                 ValueError,
                 WinBiapUnsupportedPage,
+                WinBiapCannotConnect,
             ):
                 _LOGGER.debug("WinBIAP reservations unavailable")
         fees = None
@@ -701,6 +782,7 @@ class WinBiapClient:
                 UnicodeError,
                 ValueError,
                 WinBiapUnsupportedPage,
+                WinBiapCannotConnect,
             ):
                 _LOGGER.debug("WinBIAP fees unavailable")
         wishlist = None
@@ -714,6 +796,7 @@ class WinBiapClient:
                 UnicodeError,
                 ValueError,
                 WinBiapUnsupportedPage,
+                WinBiapCannotConnect,
             ):
                 _LOGGER.debug("WinBIAP wishlist unavailable")
         return WinBiapAccount(

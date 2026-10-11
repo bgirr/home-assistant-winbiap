@@ -91,6 +91,7 @@ async def async_setup_entry(
         for description in SUMMARY_SENSORS
     )
 
+    async_add_entities([WinBiapFetchStatusSensor(coordinator, entry)])
     async_add_entities([WinBiapOpeningHoursSensor(coordinator.opening_hours, entry)])
 
     async_add_entities([WinBiapReturnDeadlineSensor(coordinator, entry)])
@@ -130,6 +131,36 @@ class WinBiapEntity(CoordinatorEntity[WinBiapCoordinator], SensorEntity):
             model="WinBIAP WebOPAC account",
             configuration_url=entry.data[CONF_BASE_URL],
         )
+
+
+class WinBiapFetchStatusSensor(WinBiapEntity):
+    """Report source freshness independently of cache delivery success."""
+
+    _attr_name = "Abrufstatus"
+    _attr_icon = "mdi:cloud-sync"
+    _attr_entity_category = EntityCategory.DIAGNOSTIC
+
+    def __init__(self, coordinator, entry):
+        super().__init__(coordinator, entry)
+        self._attr_unique_id = f"{entry.unique_id}_fetch_status"
+
+    @property
+    def available(self):
+        return True
+
+    @property
+    def native_value(self):
+        if self.coordinator.refresh_error:
+            return (
+                "partial"
+                if self.coordinator.refresh_error == "partial_update"
+                else "cached"
+            )
+        return "current"
+
+    @property
+    def extra_state_attributes(self):
+        return {"account_section": "fetch_status", **self.coordinator.freshness()}
 
 
 class WinBiapSummarySensor(WinBiapEntity):

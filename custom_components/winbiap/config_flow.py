@@ -93,7 +93,7 @@ def _manual_schema(defaults: dict[str, Any] | None = None) -> vol.Schema:
     )
 
 
-VALIDATION_TIMEOUT = 30
+VALIDATION_TIMEOUT = 185
 
 
 async def _validate(hass, user_input: dict[str, Any]) -> str:
@@ -101,6 +101,7 @@ async def _validate(hass, user_input: dict[str, Any]) -> str:
     session = async_create_clientsession(
         hass, auto_cleanup=False, cookie_jar=CookieJar()
     )
+    transport = None
     try:
         client = WinBiapClient(
             session,
@@ -108,9 +109,23 @@ async def _validate(hass, user_input: dict[str, Any]) -> str:
             user_input[CONF_LIBRARY_CARD],
             user_input[CONF_PASSWORD],
         )
+        from .browser import BrowserClient
+        from .transport import AccountTransport
+
+        transport = AccountTransport(
+            client,
+            lambda: BrowserClient(
+                base_url,
+                user_input[CONF_LIBRARY_CARD],
+                user_input[CONF_PASSWORD],
+                hass.config.config_dir,
+            ),
+        )
         async with asyncio.timeout(VALIDATION_TIMEOUT):
-            await client.async_get_account()
+            await transport.async_get_account()
     finally:
+        if transport is not None:
+            await transport.async_close()
         session.detach()
     return base_url
 

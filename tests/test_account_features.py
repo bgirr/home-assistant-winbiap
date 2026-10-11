@@ -98,6 +98,9 @@ def test_optional_failure_preserves_loans():
     [
         ("Kontostand: ausgeglichen", "0.00"),
         ("Kontostand: 12,50 €", "12.50"),
+        ("2,50 € Gebühren", "2.50"),
+        ("0,00 € Gebühren", "0.00"),
+        ("-1,00 EUR Gebühren", "-1.00"),
         ("Offene Gebühren: 1.234,56 EUR", "1234.56"),
         ("Guthaben: 2,00 €", "-2.00"),
         ("Kontostand: -0,50 €", "-0.50"),

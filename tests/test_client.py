@@ -156,7 +156,7 @@ def test_challenge_must_yield_login_form():
 
 @pytest.mark.parametrize("failure", [TimeoutError(), ClientError("PRIVATE")])
 def test_network_errors_are_categorical(failure):
-    session = session_for(failure)
+    session = session_for(failure, failure, failure)
     with pytest.raises(api.WinBiapCannotConnect, match=r"^request_failed$"):
         asyncio.run(client_for(session).async_login())
     session.close.assert_not_called()
@@ -214,3 +214,51 @@ def test_browser_verification_is_classified_before_sending_credentials():
         asyncio.run(client_for(session).async_login())
     assert session.request.call_count == 1
     assert session.request.call_args.args[0] == "GET"
+
+
+def test_http_account_session_reused_and_expired_session_reauthenticates():
+    async def run():
+        account_url = BASE + "user/account.aspx"
+        session = session_for(
+            Response(fixture("login.html")),
+            Response(fixture("account_table.html"), account_url),
+            Response(fixture("account_table.html"), account_url),
+            Response(fixture("login.html")),
+            Response(fixture("login.html")),
+            Response(fixture("account_table.html"), account_url),
+        )
+        client = client_for(session)
+        for _ in range(3):
+            assert len((await client.async_get_account()).loans) == 2
+        assert [c.args[0] for c in session.request.call_args_list] == [
+            "GET",
+            "POST",
+            "GET",
+            "GET",
+            "GET",
+            "POST",
+        ]
+
+    asyncio.run(run())
+
+
+def test_get_retry_and_post_never_retried(monkeypatch):
+    monkeypatch.setattr(api.asyncio, "sleep", AsyncMock())
+    session = session_for(TimeoutError(), Response("ok"))
+    assert asyncio.run(client_for(session)._request("GET", LOGIN))[0] == "ok"
+    assert session.request.call_count == 2
+    session = session_for(TimeoutError())
+    with pytest.raises(api.WinBiapCannotConnect):
+        asyncio.run(client_for(session)._request("POST", LOGIN, data={}))
+    assert session.request.call_count == 1
+
+
+def test_long_retry_after_is_forwarded_without_hammering():
+    response = Response(status=429)
+    response.headers["Retry-After"] = "1200"
+    session = session_for(response)
+    with pytest.raises(api.WinBiapCannotConnect) as caught:
+        asyncio.run(client_for(session)._request("GET", LOGIN))
+    assert caught.value.retry_after == 1200
+    assert caught.value.category == "rate_limited"
+    assert session.request.call_count == 1

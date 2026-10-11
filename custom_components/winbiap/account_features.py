@@ -161,6 +161,13 @@ def parse_fees(html: str) -> WinBiapBalance:
         re.I,
     )
     if not match:
+        # Current desktop WebOPAC labels the explicit toolbar balance this way.
+        match = re.fullmatch(
+            r"([+-]?(?:[0-9]{1,3}(?:\.[0-9]{3})+|[0-9]+),[0-9]{2})\s*(?:€|EUR)\s+Gebühren",
+            text,
+            re.I,
+        )
+    if not match:
         raise WinBiapUnsupportedPage("fee_balance_format")
     amount = Decimal(match[1].replace(".", "").replace(",", "."))
     if text.casefold().startswith("guthaben"):

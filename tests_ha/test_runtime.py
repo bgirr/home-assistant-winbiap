@@ -129,11 +129,18 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                     if s.entity_id.endswith("vorbestellungen")
                 )
                 assert reservation_entity.state == "unavailable"
+                fetch_entity = next(
+                    s
+                    for s in hass.states.async_all("sensor")
+                    if s.attributes.get("account_section") == "fetch_status"
+                )
+                assert fetch_entity.state == "partial"
                 states = [
                     s
                     for s in hass.states.async_all("sensor")
                     if s.entity_id
                     not in {
+                        fetch_entity.entity_id,
                         opening_entity.entity_id,
                         return_entity.entity_id,
                         reservation_entity.entity_id,
@@ -305,14 +312,14 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                 )
                 assert options["type"] == "create_entry"
                 await hass.async_block_till_done()
-                old_session = entry.runtime_data.client._session
+                old_session = entry.runtime_data.client.http._session
                 assert cover_session is not old_session
                 assert not old_session.closed
                 assert await hass.config_entries.async_reload(entry.entry_id)
                 await hass.async_block_till_done()
                 assert old_session.closed
                 assert cover_session.closed
-                new_session = entry.runtime_data.client._session
+                new_session = entry.runtime_data.client.http._session
                 assert new_session is not old_session
                 assert new_session.cookie_jar is not old_session.cookie_jar
                 assert await hass.config_entries.async_unload(entry.entry_id)
