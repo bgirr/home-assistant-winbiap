@@ -49,4 +49,18 @@ and live production browser probes pass. HACS installed beta.14 and a full HA re
 successfully at 14:17:29 UTC. The live dashboard shows current browser results;
 all seven cover proxies return images and existing entity IDs remain unchanged.
 All five CI jobs pass (run 38146822283), including the sandboxed browser probe.
-Two scheduled post-restart fetches are still pending; their results follow below.
+Final acceptance passed on 2026-10-11. Home Assistant Recorder confirms:
+
+| Fetch | Attempt (UTC) | Successful completion (UTC) | Result |
+| --- | --- | --- | --- |
+| Full HA restart | 14:17:19 | 14:17:29 | Current via browser |
+| Automatic cycle 1 | 14:47:29 | 14:47:33 | Current via browser |
+| Automatic cycle 2 | 15:17:33 | 15:17:37 | Current via browser |
+
+Both follow-up attempts match the previously scheduled `next_attempt` within one
+second. No manual refresh was issued. All three records have `data_stale=false`,
+no refresh error and zero consecutive failures. The final state check confirms
+all account sections remain fresh; the next update is scheduled for 15:47:37 UTC.
+The local observer log stopped after its baseline, so acceptance uses HA's own
+persisted Recorder history rather than assuming the observer completed.
+The one-time follow-up is finished. Normal HA polling continues independently.

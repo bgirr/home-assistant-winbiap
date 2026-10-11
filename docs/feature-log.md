@@ -103,5 +103,9 @@ The current desktop fee-balance label is supported without summing transactions.
 Validation: 133 fast tests, 37 real HA runtime/template tests, synthetic delayed
 login navigation and live production retrieval of seven loans plus all optional
 sections, in two independent sessions and one reused session. Seven HA cover
-proxies return valid images. Post-release restart and automatic-cycle acceptance
-is pending. See [host prerequisites and acceptance](browser-fallback-status.md).
+proxies return valid images. Final deployment acceptance passed on 2026-10-11:
+HA Recorder confirms the restart fetch at 14:17:29 UTC and two automatic follow-up
+fetches at 14:47:33 and 15:17:37 UTC, each current via browser with no errors or
+stale sections. Follow-up attempts match their preceding scheduled times within
+one second; no manual refresh was sent. Existing entity IDs and recorder history
+are preserved. See [host prerequisites and acceptance](browser-fallback-status.md).
