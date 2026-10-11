@@ -45,5 +45,8 @@ and timing; the diagnostic Abrufstatus sensor exposes safe error categories.
 ## Acceptance
 
 133 fast tests and 37 real HA runtime/template tests pass locally. Both synthetic
-and live production browser probes pass. Release deployment and two scheduled
-post-restart fetches are still pending; this document will record their results.
+and live production browser probes pass. HACS installed beta.14 and a full HA restart fetched all account sections
+successfully at 14:17:29 UTC. The live dashboard shows current browser results;
+all seven cover proxies return images and existing entity IDs remain unchanged.
+All five CI jobs pass (run 38146822283), including the sandboxed browser probe.
+Two scheduled post-restart fetches are still pending; their results follow below.
