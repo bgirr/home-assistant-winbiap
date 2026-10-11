@@ -5,8 +5,8 @@ by WinBIAP WebOPAC. It exposes current loans and due dates without sending
 library credentials anywhere except the configured library server.
 
 > [!WARNING]
-> `0.1.0-beta.6` is a protocol-validation release. The BunkerWeb challenge, login
-> and account parser have been live-tested with Stadtbücherei Königsbrunn.
+> `0.1.0-beta.14` adds a local browser fallback, live-tested with Stadtbücherei
+> Königsbrunn on Debian/x86-64. Browser operation requires the runtime setup below.
 > Broader account-layout coverage still needs sanitized fixtures before a stable release.
 
 ## Current functionality
@@ -15,9 +15,11 @@ library credentials anywhere except the configured library server.
 - manual WebOPAC URL fallback for libraries missing from the bundled catalog
 - live credential and page-layout validation before an entry is created
 - isolated cookie session with ASP.NET `VIEWSTATE` form handling
-- bounded BunkerWeb proof-of-work support before login
+- HTTP session reuse and a bounded local Chromium fallback for browser verification
 - automatic reauthentication prompt after rejected credentials
-- 30-minute coordinator polling and automatic retry after connection failures
+- 30-minute polling, bounded retries and 5/15/30/60-minute failure backoff
+- dated persistent snapshots during outages, plus a diagnostic fetch-status sensor
+- reservations, current fees, wishlist, public opening hours and return-day planning
 - account sensors for loan count, next due date, and overdue count
 - cover image entities for dashboard cards, including lazy-loaded WebOPAC covers
 - one due-date sensor per loan with author, media type, barcode, branch, cover,
@@ -37,18 +39,25 @@ Until the integration is accepted into the HACS default catalog:
 3. Enter `https://github.com/bgirr/home-assistant-winbiap`.
 4. Select **Integration** and add the repository.
 5. Open **WinBIAP Library** in HACS, enable beta versions in its menu, and
-   download **v0.1.0-beta.6** (or a newer release). Restart Home Assistant.
+   download **v0.1.0-beta.14** (or a newer release). Restart Home Assistant.
    A commit on the `develop` branch does not update an installed HACS version.
 6. Open **Settings > Devices & services > Add integration**.
 7. Select **WinBIAP Library**, search for your library by name, city, or postal
    code, and then enter your card number and password.
+
+For sites requiring browser verification, provision the pinned Chromium runtime
+and its system libraries once on the Home Assistant host. The supported deployment
+is Debian 13/x86-64 with HA Core; HACS installs the integration and Python dependency,
+but cannot install operating-system packages. Follow the
+[browser runtime instructions](docs/browser-fallback-status.md). The integration
+runs its own sandboxed browser locally and needs no external service or running Mac.
 
 The integration currently bundles 806 library entries sourced from the
 [official WinBIAP reference directory](https://www.winbiap.de/referenzen). If
 your library is missing, choose **Other / manual WebOPAC URL** and enter its
 root address, for example `https://opac.winbiap.net/koenigsbrunn/`.
 
-The setup checks the account within 30 seconds. If it cannot complete, the
+The setup checks the account within 185 seconds, including any browser fallback. If it cannot complete, the
 form shows an error. For a login diagnosis, enable debug logs for
 `custom_components.winbiap` via Home Assistant's Logger integration before
 retrying; see [docs/login-debugging.md](docs/login-debugging.md). The trace
@@ -66,7 +75,7 @@ raw account pages.
 | One image per available loan cover | Image update time | Cover via HA image proxy; title, author, due date, remaining days, renewable |
 
 See [Cover dashboards](docs/dashboard.md) for picture cards and an automatic loan list.
-Reservations, fees and wishlist entities are planned in the [feature roadmap](docs/roadmap.md).
+Reservations, fees and wishlist entities are included; see the [feature log](docs/feature-log.md).
 
 Returned loan entities become unavailable instead of silently changing their
 identity. New loans are added automatically after the next update.

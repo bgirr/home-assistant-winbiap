@@ -29,7 +29,9 @@ jobs:
       - run: python -m pytest -q tests_ha
 
   browser-runtime:
-    runs-on: ubuntu-latest
+    # Ubuntu 24.04 restricts unprivileged namespaces for downloaded Chromium.
+    # Keep Chromium sandboxed on a runner supporting its namespace sandbox.
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6

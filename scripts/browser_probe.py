@@ -192,6 +192,8 @@ async def run(args):
                         details["category"] = (
                             str(err) if str(err) in allowed else "other"
                         )
+                    if not args.live and err.__context__:
+                        print(str(err.__context__)[:5000], flush=True)
                     cause = str(err.__context__ or "").lower()
                     details.update(
                         csp_error=any(
