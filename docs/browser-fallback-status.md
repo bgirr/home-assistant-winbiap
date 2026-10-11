@@ -44,6 +44,6 @@ and timing; the diagnostic Abrufstatus sensor exposes safe error categories.
 
 ## Acceptance
 
-131 fast tests and 37 real HA runtime/template tests pass locally. Both synthetic
+133 fast tests and 37 real HA runtime/template tests pass locally. Both synthetic
 and live production browser probes pass. Release deployment and two scheduled
 post-restart fetches are still pending; this document will record their results.

@@ -100,7 +100,7 @@ The Bücherei dashboard distinguishes current browser results from saved data.
 The new diagnostic Abrufstatus sensor reports transport, attempts and freshness.
 The current desktop fee-balance label is supported without summing transactions.
 
-Validation: 131 fast tests, 37 real HA runtime/template tests, synthetic delayed
+Validation: 133 fast tests, 37 real HA runtime/template tests, synthetic delayed
 login navigation and live production retrieval of seven loans plus all optional
 sections, in two independent sessions and one reused session. Seven HA cover
 proxies return valid images. Post-release restart and automatic-cycle acceptance

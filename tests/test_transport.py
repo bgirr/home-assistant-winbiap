@@ -112,3 +112,79 @@ def test_browser_failure_is_private_and_retryable():
         browser.async_close.assert_awaited_once()
 
     asyncio.run(run())
+
+
+def test_browser_deadline_cancels_and_closes(monkeypatch):
+    async def run():
+        original_timeout = asyncio.timeout
+        limits = []
+
+        def accelerated_timeout(seconds):
+            limits.append(seconds)
+            return original_timeout(0.01 if seconds == 120 else seconds)
+
+        monkeypatch.setattr(asyncio, "timeout", accelerated_timeout)
+        cancelled = asyncio.Event()
+
+        async def hung_browser():
+            try:
+                await asyncio.Event().wait()
+            finally:
+                cancelled.set()
+
+        browser = SimpleNamespace(
+            async_get_account=hung_browser, async_close=AsyncMock()
+        )
+        transport = AccountTransport(
+            SimpleNamespace(
+                async_get_account=AsyncMock(
+                    side_effect=WinBiapUnsupportedPage("browser_verification_required")
+                )
+            ),
+            lambda: browser,
+        )
+        with pytest.raises(WinBiapCannotConnect, match=r"^browser_timeout$"):
+            await transport.async_get_account()
+        assert limits == [60, 120]
+        assert cancelled.is_set()
+        browser.async_close.assert_awaited_once()
+
+    asyncio.run(run())
+
+
+def test_simultaneous_requests_reuse_one_serial_browser():
+    async def run():
+        entered = asyncio.Event()
+        release = asyncio.Event()
+        calls = 0
+
+        async def fetch():
+            nonlocal calls
+            calls += 1
+            entered.set()
+            await release.wait()
+            return WinBiapAccount(())
+
+        browser = SimpleNamespace(async_get_account=fetch, async_close=AsyncMock())
+        factory = Mock(return_value=browser)
+        transport = AccountTransport(
+            SimpleNamespace(
+                async_get_account=AsyncMock(
+                    side_effect=WinBiapUnsupportedPage("browser_verification_required")
+                )
+            ),
+            factory,
+        )
+        first = asyncio.create_task(transport.async_get_account())
+        await entered.wait()
+        second = asyncio.create_task(transport.async_get_account())
+        await asyncio.sleep(0)
+        assert calls == 1
+        release.set()
+        await asyncio.gather(first, second)
+        assert calls == 2
+        factory.assert_called_once()
+        await transport.async_close()
+        browser.async_close.assert_awaited_once()
+
+    asyncio.run(run())
