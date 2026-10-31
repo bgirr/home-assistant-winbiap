@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import json
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 from .api import (
     LOGIN_BUTTON,
@@ -15,6 +16,7 @@ from .api import (
     WinBiapClient,
     WinBiapInvalidAuth,
     WinBiapUnsupportedPage,
+    credentials_rejected,
     find_account_url,
     has_login_form,
     page_is_login,
@@ -46,11 +48,16 @@ def _load_runtime(config_dir):
 
 
 class BrowserClient(WinBiapClient):
-    """Keep one ephemeral browser context per account; never export cookies."""
+    """Keep an isolated browser session with optional private HA storage."""
 
-    def __init__(self, base_url, card, password, config_dir):
+    def __init__(self, base_url, card, password, config_dir, *, session_store=None):
         super().__init__(None, base_url, card, password)
         self._config_dir = config_dir
+        self._session_store = session_store
+        self._context = None
+        self._fingerprint = hashlib.sha256(
+            json.dumps([self.base_url, self._library_card, password]).encode()
+        ).hexdigest()
         self._playwright = None
         self._browser = None
         self._page = None
@@ -72,7 +79,37 @@ class BrowserClient(WinBiapClient):
                 handle_sigterm=False,
                 handle_sighup=False,
             )
-            context = await self._browser.new_context(accept_downloads=False)
+            saved = None
+            if self._session_store is not None:
+                try:
+                    candidate = await self._session_store.async_load()
+                    if (
+                        isinstance(candidate, dict)
+                        and candidate.get("account") == self._fingerprint
+                    ):
+                        self._safe_url(candidate["account_url"])
+                        saved = self._scoped_state(candidate["state"])
+                        self._account_url = candidate["account_url"]
+                except (
+                    ValueError,
+                    TypeError,
+                    KeyError,
+                    OSError,
+                    WinBiapUnsupportedPage,
+                ):
+                    saved = None
+            try:
+                context = await self._browser.new_context(
+                    accept_downloads=False, storage_state=saved
+                )
+            except Exception:
+                if saved is None:
+                    raise
+                # Invalid persisted state must not prevent fresh login forever.
+                self._account_url = None
+                await self._session_store.async_remove()
+                context = await self._browser.new_context(accept_downloads=False)
+            self._context = context
             self._page = await context.new_page()
             self._page.set_default_timeout(20000)
 
@@ -95,6 +132,47 @@ class BrowserClient(WinBiapClient):
         except BaseException:
             await self.async_close()
             raise
+
+    def _scoped_state(self, state):
+        """Keep cookies for this host and local storage for this exact origin."""
+        target = urlparse(self.base_url)
+        origin = f"{target.scheme}://{target.netloc}"
+        return {
+            "cookies": [
+                c
+                for c in state["cookies"]
+                if target.hostname == c["domain"].lstrip(".")
+                or (
+                    c["domain"].startswith(".")
+                    and target.hostname.endswith(c["domain"])
+                )
+            ],
+            "origins": [o for o in state["origins"] if o["origin"] == origin],
+        }
+
+    async def async_get_account(self):
+        # Restore the account URL before the base client chooses login vs reuse.
+        await self._ensure_browser()
+        try:
+            account = await super().async_get_account()
+        except WinBiapInvalidAuth:
+            if self._session_store is not None:
+                await self._session_store.async_remove()
+            raise
+        if self._session_store is not None:
+            try:
+                state = self._scoped_state(await self._context.storage_state())
+                await self._session_store.async_save(
+                    {
+                        "account": self._fingerprint,
+                        "account_url": self._account_url,
+                        "state": state,
+                    }
+                )
+            except OSError:
+                # A storage failure must not discard a successful live fetch.
+                pass
+        return account
 
     async def _settled_content(self):
         html = await self._page.content()
@@ -171,14 +249,18 @@ class BrowserClient(WinBiapClient):
             await self._page.locator(f'[name="{LOGIN_BUTTON}"]').click()
         html, url = await self._settled_content()
         if page_is_login(html, url):
-            raise WinBiapInvalidAuth("credentials_rejected")
+            if credentials_rejected(html):
+                raise WinBiapInvalidAuth("credentials_rejected")
+            raise WinBiapCannotConnect(
+                "login_not_completed", category="session_expired"
+            )
         self._account_url = find_account_url(html, url) or url
         return html, url
 
     async def async_close(self):
         """Close contexts, browser and driver, including partially started ones."""
         browser, driver = self._browser, self._playwright
-        self._page = self._browser = self._playwright = None
+        self._page = self._browser = self._playwright = self._context = None
         self._account_url = None
         try:
             if browser is not None:

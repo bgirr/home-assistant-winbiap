@@ -6,7 +6,6 @@ from unittest.mock import AsyncMock, Mock
 
 import pytest
 
-from custom_components.winbiap import transport as transport_module
 from custom_components.winbiap.api import (
     WinBiapCannotConnect,
     WinBiapInvalidAuth,
@@ -16,10 +15,8 @@ from custom_components.winbiap.models import WinBiapAccount
 from custom_components.winbiap.transport import AccountTransport
 
 
-def test_fallback_reuse_and_http_recovery(monkeypatch):
+def test_fallback_stays_on_working_browser():
     async def run():
-        clock = [100.0]
-        monkeypatch.setattr(transport_module, "monotonic", lambda: clock[0])
         account = WinBiapAccount(())
         http = SimpleNamespace(
             async_get_account=AsyncMock(
@@ -36,11 +33,13 @@ def test_fallback_reuse_and_http_recovery(monkeypatch):
         assert await transport.async_get_account() == account
         assert http.async_get_account.call_count == 1
         factory.assert_called_once()
-        clock[0] += 6 * 3600
         http.async_get_account.side_effect = None
         http.async_get_account.return_value = account
         assert await transport.async_get_account() == account
-        assert transport.fetch_method == "http"
+        assert transport.fetch_method == "browser"
+        assert http.async_get_account.call_count == 1
+        browser.async_close.assert_not_awaited()
+        await transport.async_close()
         browser.async_close.assert_awaited_once()
 
     asyncio.run(run())

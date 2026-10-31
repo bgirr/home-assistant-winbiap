@@ -46,6 +46,7 @@ def test_snapshot_roundtrip():
     "error",
     [
         WinBiapCannotConnect("request_failed"),
+        WinBiapCannotConnect("account_session_expired", category="session_expired"),
         WinBiapUnsupportedPage("browser_verification_required"),
         WinBiapInvalidAuth(),
         TimeoutError(),
@@ -206,5 +207,60 @@ def test_retry_schedule_and_success_reset(tmp_path):
             assert coordinator.freshness()["fetch_method"] == "browser"
         finally:
             await hass.async_stop(force=True)
+
+    asyncio.run(run())
+
+
+def test_private_browser_session_store_and_entry_removal(tmp_path):
+    from unittest.mock import patch
+
+    from homeassistant.helpers.storage import Store
+
+    from custom_components.winbiap import async_remove_entry
+    from custom_components.winbiap.api import WinBiapClient
+    from custom_components.winbiap.browser import BrowserClient
+
+    async def run():
+        hass = HomeAssistant(str(tmp_path))
+        store = Store(hass, 1, "winbiap.session.synthetic", private=True)
+        client = BrowserClient(
+            "https://example.org/demo/",
+            "CARD",
+            "PASSWORD",
+            str(tmp_path),
+            session_store=store,
+        )
+        client._account_url = "https://example.org/demo/user/loans.aspx"
+        client._ensure_browser = AsyncMock()
+        client._context = SimpleNamespace(
+            storage_state=AsyncMock(
+                return_value={
+                    "cookies": [
+                        {
+                            "domain": "example.org",
+                            "name": "session",
+                            "value": "SYNTHETIC_TOKEN",
+                        }
+                    ],
+                    "origins": [],
+                }
+            )
+        )
+        try:
+            with patch.object(
+                WinBiapClient, "async_get_account", AsyncMock(return_value=ACCOUNT)
+            ):
+                assert await client.async_get_account() == ACCOUNT
+            file = tmp_path / ".storage/winbiap.session.synthetic"
+            assert file.stat().st_mode & 0o777 == 0o600
+            raw = file.read_text()
+            assert "PASSWORD" not in raw and "CARD" not in raw
+            assert (await store.async_load())["state"]["cookies"][0][
+                "value"
+            ] == "SYNTHETIC_TOKEN"
+            await async_remove_entry(hass, SimpleNamespace(entry_id="synthetic"))
+            assert not file.exists()
+        finally:
+            await hass.async_stop()
 
     asyncio.run(run())

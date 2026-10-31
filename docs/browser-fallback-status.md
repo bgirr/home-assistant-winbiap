@@ -27,13 +27,25 @@ HA service user. The integration manifest installs the Python dependency; HACS
 alone cannot install OS packages. A missing runtime retains cached data with
 `browser_runtime_missing`; no download or privileged command runs during polling.
 
-## Runtime behavior
+## Runtime behavior (beta.15)
 
 HTTP session reuse and bounded GET retries precede browser fallback. Only a
 recognized browser-verification page starts Chromium. Each account has a serial
-fetch lock and its own in-memory session. Browser fetches have a 120-second limit;
+fetch lock and its own browser context. Browser fetches have a 120-second limit;
 failed processes, unloads and HA shutdown clean up the browser and driver.
-HTTP is reprobed after six hours. Failures retry at 5/15/30/60 minutes, honoring
+The browser remains selected once required; there is no periodic HTTP reprobe.
+Successful browser sessions are saved in the private HA Store
+`.storage/winbiap.session.<entry_id>` (0600), separately from account snapshots.
+Only cookies applicable to the library host and local storage for its exact origin
+are retained. A credential-bound fingerprint prevents reuse with changed credentials.
+These files contain authentication tokens, so HA backups require the same protection
+as config entries. Diagnostics never include session data. Removal of the integration
+or confirmed invalid credentials deletes the session file.
+
+A login redirect from the account page triggers one controlled relogin. Repeated
+redirects or ambiguous login failures remain retryable; only an explicit credential
+error requests reauthentication and stops polling.
+Failures retry at 5/15/30/60 minutes, honoring
 longer Retry-After values; successful updates return to 30 minutes. Confirmed
 invalid credentials stop automatic login attempts until reauthentication.
 
@@ -64,3 +76,15 @@ all account sections remain fresh; the next update is scheduled for 15:47:37 UTC
 The local observer log stopped after its baseline, so acceptance uses HA's own
 persisted Recorder history rather than assuming the observer completed.
 The one-time follow-up is finished. Normal HA polling continues independently.
+
+## Beta.15 validation — 2026-10-31
+
+The production incident was a single account-page redirect on 2026-10-27, incorrectly
+classified as invalid credentials. Polling then stopped (`next_attempt=null`).
+This does not establish rate limiting by the library.
+
+139 fast tests and 39 HA runtime/template tests cover the revised behavior.
+The synthetic browser probe expires a session and verifies recovery, then starts a
+new browser using the saved state and forbids any login call. The live production
+probe also retrieved all four account sections and restored a new browser without
+logging in. Deployment verification follows after installation.

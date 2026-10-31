@@ -45,6 +45,14 @@ def modules(monkeypatch):
     stub("homeassistant.data_entry_flow", FlowResult=dict)
     stub("homeassistant.helpers", selector=SimpleNamespace())
     stub("homeassistant.helpers.aiohttp_client", async_create_clientsession=Mock())
+    stub(
+        "homeassistant.helpers.storage",
+        Store=Mock(
+            side_effect=lambda *a, **kw: SimpleNamespace(
+                async_load=AsyncMock(return_value=None)
+            )
+        ),
+    )
     stub("voluptuous")
     stub("custom_components.winbiap.coordinator", WinBiapCoordinator=Mock())
     stub(
@@ -201,6 +209,7 @@ def test_entry_isolated_cookies_ha_cleanup(modules, monkeypatch, refresh_failure
         )
         for _ in range(2):
             entry = SimpleNamespace(
+                entry_id="synthetic",
                 async_on_unload=Mock(),
                 add_update_listener=Mock(),
                 data={

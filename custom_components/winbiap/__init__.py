@@ -6,6 +6,7 @@ from aiohttp import CookieJar, DummyCookieJar
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
+from homeassistant.helpers.storage import Store
 
 from .api import WinBiapClient
 from .browser import BrowserClient
@@ -26,6 +27,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         entry.data[CONF_LIBRARY_CARD],
         entry.data["password"],
     )
+    session_store = Store(hass, 1, f"winbiap.session.{entry.entry_id}", private=True)
+    try:
+        saved_session = await session_store.async_load()
+    except (OSError, ValueError):
+        saved_session = None
     client = AccountTransport(
         client,
         lambda: BrowserClient(
@@ -33,7 +39,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             entry.data[CONF_LIBRARY_CARD],
             entry.data["password"],
             hass.config.config_dir,
+            session_store=session_store,
         ),
+        prefer_browser=bool(saved_session),
     )
     coordinator = WinBiapCoordinator(hass, entry, client)
     try:
@@ -80,3 +88,6 @@ async def async_remove_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
     from homeassistant.helpers.storage import Store
 
     await Store(hass, 1, f"winbiap.{entry.entry_id}", private=True).async_remove()
+    await Store(
+        hass, 1, f"winbiap.session.{entry.entry_id}", private=True
+    ).async_remove()

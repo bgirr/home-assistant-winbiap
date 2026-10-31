@@ -5,7 +5,7 @@ by WinBIAP WebOPAC. It exposes current loans and due dates without sending
 library credentials anywhere except the configured library server.
 
 > [!WARNING]
-> `0.1.0-beta.14` adds a local browser fallback, live-tested with Stadtbücherei
+> `0.1.0-beta.15` retains browser sessions and recovers expiry, live-tested with Stadtbücherei
 > Königsbrunn on Debian/x86-64. Browser operation requires the runtime setup below.
 > Broader account-layout coverage still needs sanitized fixtures before a stable release.
 
@@ -39,7 +39,7 @@ Until the integration is accepted into the HACS default catalog:
 3. Enter `https://github.com/bgirr/home-assistant-winbiap`.
 4. Select **Integration** and add the repository.
 5. Open **WinBIAP Library** in HACS, enable beta versions in its menu, and
-   download **v0.1.0-beta.14** (or a newer release). Restart Home Assistant.
+   download **v0.1.0-beta.15** (or a newer release). Restart Home Assistant.
    A commit on the `develop` branch does not update an installed HACS version.
 6. Open **Settings > Devices & services > Add integration**.
 7. Select **WinBIAP Library**, search for your library by name, city, or postal
@@ -85,7 +85,10 @@ identity. New loans are added automatically after the next update.
 - Credentials are stored in the Home Assistant config entry.
 - Credentials, cookies, and card numbers are never logged or returned in
   diagnostics.
-- Each account uses its own HTTP cookie session.
+- Each account uses its own HTTP cookie session. Browser session cookies and local
+  storage are saved in a private HA Store file (0600), scoped to the account and
+  library origin. This file contains login tokens and must be protected in backups.
+  It is removed with the integration; credentials themselves are not copied into it.
 - Account HTML is processed locally inside Home Assistant.
 - Do not attach raw account pages to public issues. Follow the sanitizing guide
   in [docs/fixtures.md](docs/fixtures.md).

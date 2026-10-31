@@ -510,6 +510,20 @@ def page_is_login(html: str, response_url: str) -> bool:
     return LOGIN_NAME in html or response_url.casefold().endswith("/user/login.aspx")
 
 
+def credentials_rejected(html: str) -> bool:
+    """Require an explicit credential error, not just a login redirect."""
+    text = _tree(html).text.casefold()
+    return bool(
+        re.search(
+            r"(?:passwort|kennwort|zugangsdaten|ausweisnummer|benutzernummer)"
+            r".{0,60}(?:falsch|ungültig|nicht korrekt|nicht richtig)|"
+            r"(?:falsches|ungültiges)\s+(?:passwort|kennwort)|"
+            r"(?:invalid|incorrect|wrong)\s+(?:password|credentials)",
+            text,
+        )
+    )
+
+
 class WinBiapClient:
     """Read-only client; the caller owns and cleans up the supplied session."""
 
@@ -664,7 +678,11 @@ class WinBiapClient:
 
         if page_is_login(html, response_url):
             _LOGGER.warning("WinBIAP login returned the login page")
-            raise WinBiapInvalidAuth("The WebOPAC rejected the supplied credentials")
+            if credentials_rejected(html):
+                raise WinBiapInvalidAuth("credentials_rejected")
+            raise WinBiapCannotConnect(
+                "login_not_completed", category="session_expired"
+            )
         account_link = find_account_url(html, response_url)
         self._account_url = account_link or response_url
         _LOGGER.debug(
@@ -698,6 +716,17 @@ class WinBiapClient:
         raise WinBiapUnsupportedPage("wishlist_page_limit")
 
     async def async_get_account(self) -> WinBiapAccount:
+        """Retry a session lost after login once; never stop polling for it."""
+        for attempt in range(2):
+            try:
+                return await self._async_get_account_once()
+            except WinBiapCannotConnect as err:
+                if str(err) != "account_session_expired" or attempt:
+                    raise
+                self._account_url = None
+        raise AssertionError("unreachable")
+
+    async def _async_get_account_once(self) -> WinBiapAccount:
         """Fetch and parse the current account state."""
         landing_html = None
         if self._account_url is not None:
@@ -726,7 +755,10 @@ class WinBiapClient:
                 raise WinBiapCannotConnect("request_failed") from None
             if page_is_login(html, account_url):
                 _LOGGER.warning("WinBIAP account page redirected to login")
-                raise WinBiapInvalidAuth("The WebOPAC session expired after login")
+                self._account_url = None
+                raise WinBiapCannotConnect(
+                    "account_session_expired", category="session_expired"
+                )
 
         loans = parse_loans(html, account_url)
         page_text = _tree(html).text

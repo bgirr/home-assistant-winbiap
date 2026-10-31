@@ -109,3 +109,18 @@ fetches at 14:47:33 and 15:17:37 UTC, each current via browser with no errors or
 stale sections. Follow-up attempts match their preceding scheduled times within
 one second; no manual refresh was sent. Existing entity IDs and recorder history
 are preserved. See [host prerequisites and acceptance](browser-fallback-status.md).
+
+## 0.1.0-beta.15 — Session recovery and persistence
+
+Correct a permanent polling stop caused by treating an account-page redirect as
+invalid credentials. Session expiry now gets one controlled relogin; ambiguous
+failures retain retry/backoff. Only explicit credential errors halt automatic login.
+Keep the working browser transport and restore private, account-scoped sessions
+across restart. No extra keep-alive requests and no polling interval change.
+The existing dashboard automatically clears stale warnings after real recovery;
+entity IDs and account snapshots remain unchanged.
+
+Validation: 139 fast tests, 39 HA tests, synthetic expired-session recovery and
+browser restart without login; live fresh access to all account sections plus
+browser-session restoration without login. Session-store mode 0600 and deletion
+on entry removal are tested. Deployment verification is pending.

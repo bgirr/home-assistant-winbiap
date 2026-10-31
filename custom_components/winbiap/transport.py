@@ -1,20 +1,19 @@
-"""Select HTTP or a local browser with bounded work and automatic HTTP recovery."""
+"""Select HTTP or retain a working local browser with bounded work."""
 
 from __future__ import annotations
 
 import asyncio
 from contextlib import suppress
-from time import monotonic
 
 from .api import WinBiapCannotConnect, WinBiapInvalidAuth, WinBiapUnsupportedPage
 
 
 class AccountTransport:
-    def __init__(self, http, browser_factory):
+    def __init__(self, http, browser_factory, *, prefer_browser=False):
         self.http = http
         self._browser_factory = browser_factory
         self._browser = None
-        self._browser_until = 0.0
+        self._prefer_browser = prefer_browser
         self._lock = asyncio.Lock()
         self._active_task = None
         self.fetch_method = "http"
@@ -28,7 +27,7 @@ class AccountTransport:
                 self._active_task = None
 
     async def _fetch(self):
-        if monotonic() >= self._browser_until:
+        if not self._prefer_browser:
             self.fetch_method = "http"
             try:
                 async with asyncio.timeout(60):
@@ -37,17 +36,15 @@ class AccountTransport:
                 if str(err) != "browser_verification_required":
                     raise
             else:
-                self._browser_until = 0
                 await self._close_browser()
                 return account
+        self._prefer_browser = True
         self.fetch_method = "browser"
         try:
             if self._browser is None:
                 self._browser = self._browser_factory()
             async with asyncio.timeout(120):
                 account = await self._browser.async_get_account()
-            if self._browser_until <= monotonic():
-                self._browser_until = monotonic() + 6 * 3600
             return account
         except (WinBiapCannotConnect, WinBiapInvalidAuth, WinBiapUnsupportedPage):
             await self._close_browser()

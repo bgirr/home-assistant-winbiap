@@ -148,8 +148,23 @@ async def run(args):
         if args.production:
             from custom_components.winbiap.browser import BrowserClient
 
+            class MemoryStore:
+                data = None
+
+                async def async_load(self):
+                    return self.data
+
+                async def async_save(self, data):
+                    self.data = data
+
+                async def async_remove(self):
+                    self.data = None
+
             for independent in range(2):
-                client = BrowserClient(base, card, password, str(args.browser_config))
+                store = MemoryStore()
+                client = BrowserClient(
+                    base, card, password, str(args.browser_config), session_store=store
+                )
                 if not args.live:
                     client.base_url = base  # Local-only fixture server uses HTTP.
                 try:
@@ -172,6 +187,34 @@ async def run(args):
                         if independent == 0:
                             await client.async_get_account()
                             print("production_session_reused=true", flush=True)
+                            if not args.live:
+                                sessions.clear()
+                                assert (
+                                    len((await client.async_get_account()).loans) == 2
+                                )
+                                print("expired_session_recovered=true", flush=True)
+                            await client.async_close()
+                            restored = BrowserClient(
+                                base,
+                                card,
+                                password,
+                                str(args.browser_config),
+                                session_store=store,
+                            )
+                            if not args.live:
+                                restored.base_url = base
+
+                            async def unexpected_login():
+                                raise AssertionError("restored_session_required_login")
+
+                            restored.async_login = unexpected_login
+                            try:
+                                assert len(
+                                    (await restored.async_get_account()).loans
+                                ) == len(account.loans)
+                                print("browser_restart_without_login=true", flush=True)
+                            finally:
+                                await restored.async_close()
                 except Exception as err:
                     details = {
                         "production_failure": type(err).__name__,

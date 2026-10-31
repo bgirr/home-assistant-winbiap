@@ -262,3 +262,46 @@ def test_long_retry_after_is_forwarded_without_hammering():
     assert caught.value.retry_after == 1200
     assert caught.value.category == "rate_limited"
     assert session.request.call_count == 1
+
+
+def test_account_redirect_after_login_recovers_once():
+    account_url = BASE + "user/account.aspx"
+    landing = '<a href="account.aspx">Ausleihen</a>'
+    session = session_for(
+        Response(fixture("login.html")),
+        Response(landing, BASE + "user/home.aspx"),
+        Response(fixture("login.html")),
+        Response(fixture("login.html")),
+        Response(fixture("account_table.html"), account_url),
+    )
+    assert len(asyncio.run(client_for(session).async_get_account()).loans) == 2
+    assert sum(c.args[0] == "POST" for c in session.request.call_args_list) == 2
+
+
+def test_repeated_account_redirect_is_retryable_not_auth_failure():
+    landing = '<a href="account.aspx">Ausleihen</a>'
+    responses = [
+        Response(fixture("login.html")),
+        Response(landing, BASE + "user/home.aspx"),
+        Response(fixture("login.html")),
+    ]
+    session = session_for(*(responses + responses))
+    with pytest.raises(api.WinBiapCannotConnect) as caught:
+        asyncio.run(client_for(session).async_get_account())
+    assert caught.value.category == "session_expired"
+    assert sum(c.args[0] == "POST" for c in session.request.call_args_list) == 2
+
+
+@pytest.mark.parametrize(
+    "error,expected",
+    [
+        ("", api.WinBiapCannotConnect),
+        ("<span>Passwort ist falsch.</span>", api.WinBiapInvalidAuth),
+    ],
+)
+def test_login_form_alone_is_not_invalid_credentials(error, expected):
+    session = session_for(
+        Response(fixture("login.html")), Response(fixture("login.html") + error)
+    )
+    with pytest.raises(expected):
+        asyncio.run(client_for(session).async_login())

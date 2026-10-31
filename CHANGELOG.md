@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.1.0-beta.15 — Recover expired sessions and retain browser login
+
+- Treat account-to-login redirects as session expiry, with one bounded relogin.
+  Ambiguous login responses remain retryable; only explicit credential errors stop polling.
+- Keep the working browser transport instead of reprobeing HTTP every six hours.
+- Persist scoped browser cookies/local storage privately per HA entry after a
+  successful fetch. Restore them before login after restart; isolate changed credentials
+  and remove the session on confirmed credential rejection or integration removal.
+- Test expired sessions, repeated redirects, restart without login, account isolation,
+  private file permissions and cleanup. Keep the 30-minute interval and existing entities.
+
 ## 0.1.0-beta.14 — Automatic fetch with local browser fallback
 
 - Reuse account sessions; retry transient read failures at most twice and respect
