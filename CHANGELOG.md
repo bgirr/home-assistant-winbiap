@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased — Generic public opening hours
+## 0.1.0-beta.16 — Generic public opening hours
 
 - Discover public opening schedules within the selected WinBIAP library; support
   German weekday tables and paragraphs, split windows and explicit dated exceptions.

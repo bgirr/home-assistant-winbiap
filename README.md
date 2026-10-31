@@ -5,7 +5,8 @@ by WinBIAP WebOPAC. It exposes current loans and due dates without sending
 library credentials anywhere except the configured library server.
 
 > [!WARNING]
-> `0.1.0-beta.15` retains browser sessions and recovers expiry, live-tested with Stadtbücherei
+> `0.1.0-beta.16` adds generic public opening hours while retaining browser sessions.
+> Account operation has been live-tested with Stadtbücherei
 > Königsbrunn on Debian/x86-64. Browser operation requires the runtime setup below.
 > Broader account-layout coverage still needs sanitized fixtures before a stable release.
 
@@ -41,7 +42,7 @@ Until the integration is accepted into the HACS default catalog:
 3. Enter `https://github.com/bgirr/home-assistant-winbiap`.
 4. Select **Integration** and add the repository.
 5. Open **WinBIAP Library** in HACS, enable beta versions in its menu, and
-   download **v0.1.0-beta.15** (or a newer release). Restart Home Assistant.
+   download **v0.1.0-beta.16** (or a newer release). Restart Home Assistant.
    A commit on the `develop` branch does not update an installed HACS version.
 6. Open **Settings > Devices & services > Add integration**.
 7. Select **WinBIAP Library**, search for your library by name, city, or postal
@@ -84,8 +85,7 @@ identity. New loans are added automatically after the next update.
 
 ## Opening hours and return planning
 
-The following opening-hours changes are currently unreleased on the development
-branch. Opening-hours discovery uses the selected library rather than a fixed city.
+Opening-hours discovery uses the selected library rather than a fixed city.
 Configure a public fallback URL, a complete manual weekly schedule, dated closures
 and the library timezone in the integration options. Unknown days and stale web
 schedules do not produce a guessed last return date.
