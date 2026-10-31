@@ -123,4 +123,8 @@ entity IDs and account snapshots remain unchanged.
 Validation: 139 fast tests, 39 HA tests, synthetic expired-session recovery and
 browser restart without login; live fresh access to all account sections plus
 browser-session restoration without login. Session-store mode 0600 and deletion
-on entry removal are tested. Deployment verification is pending.
+on entry removal are tested. HACS beta.15 deployment is verified: fresh data after
+full HA restart and integration reload, actual persisted session restored by an
+independent browser with login forbidden, all four account sections current,
+seven valid covers, and no stale-data dashboard warning. Next automatic poll is
+scheduled normally; all five CI checks pass (41186023962).

@@ -87,4 +87,11 @@ This does not establish rate limiting by the library.
 The synthetic browser probe expires a session and verifies recovery, then starts a
 new browser using the saved state and forbids any login call. The live production
 probe also retrieved all four account sections and restored a new browser without
-logging in. Deployment verification follows after installation.
+logging in. HACS deployment verified on 2026-10-31: beta.15 is installed with no pending
+upgrade. A full HA restart fetched fresh data at 08:50:19 UTC. The actual private
+session file (0600) was then loaded by an independent browser with login explicitly
+forbidden: all four account sections were retrieved successfully. Reloading the
+integration fetched fresh data again at 08:51:33 UTC, with the next poll scheduled
+for 09:21:33 UTC, no stale sections and no error. All seven cover proxies return
+images; the live dashboard templates render seven covers and no cached-data warning.
+All five CI checks pass (run 41186023962).
