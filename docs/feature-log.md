@@ -128,3 +128,20 @@ full HA restart and integration reload, actual persisted session restored by an
 independent browser with login forbidden, all four account sections current,
 seven valid covers, and no stale-data dashboard warning. Next automatic poll is
 scheduled normally; all five CI checks pass (41186023962).
+
+## Unreleased — Generic opening hours and publication preparation
+
+Replaced the Königsbrunn-only coordinator gate with discovery for the selected
+library. Added public-source fallback, manual seven-day schedules, configurable
+timezone, dated persistent cache, explicit unknown days and conservative return
+planning. Public browser reads use a separate context without account credentials.
+The reusable `/buecherei` view now labels each account’s opening source and cache
+status and warns about accounts lacking a reliable return plan.
+
+Local validation: **146 fast tests and 43 Home Assistant/runtime/template tests**,
+plus Ruff lint, formatting and Git whitespace checks. Coverage includes synthetic
+paragraph/table layouts, dated exceptions, conflicting
+branches, origin/path boundaries, timezone conversion, manual options, fallback,
+restart persistence, settings isolation and dashboard rendering. This change is
+prepared locally; it is not a published HACS release or a live dashboard deployment.
+Browser support remains subject to the documented platform requirements.

@@ -54,15 +54,19 @@
   "options": {
     "step": {
       "init": {
-        "title": "Sonderöffnungszeiten",
-        "description": "Eine Zeile je Datum, z. B. 2026-12-24: geschlossen oder 2026-12-31: 10:00-12:00. Diese Angaben überschreiben den Wochenplan.",
+        "title": "Öffnungszeiten",
+        "description": "Automatisch aus dem öffentlichen WinBIAP-Katalog. Optional: HTTPS-Ersatzquelle, Zeitzone der Bücherei und vollständiger manueller Wochenplan (überschreibt den Abruf). Je Zeile z. B. Mo: 10:00-12:00, 14:00-18:00; alle sieben Tage Mo bis So angeben, geschlossene Tage mit geschlossen. Datierte Ausnahmen: 2030-12-24: geschlossen. Nicht aufgeführte Tage aus Webquellen bleiben unbekannt.",
         "data": {
-          "opening_exceptions": "Schließtage und Sonderöffnungszeiten"
+          "opening_exceptions": "Schließtage und Sonderöffnungszeiten",
+          "opening_source_url": "Alternative öffentliche HTTPS-Quelle",
+          "opening_timezone": "Zeitzone der Bücherei",
+          "opening_weekly": "Manueller Wochenplan (optional)"
         }
       }
     },
     "error": {
-      "invalid_opening_exceptions": "Bitte Datum und Zeitfenster prüfen."
+      "invalid_opening_exceptions": "Bitte Datum und Zeitfenster prüfen.",
+      "invalid_opening_options": "Bitte HTTPS-URL, Zeitzone, vollständigen Wochenplan und datierte Ausnahmen prüfen."
     }
   }
 }

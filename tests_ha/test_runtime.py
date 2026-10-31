@@ -91,9 +91,15 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
             subentries_data=[],
         )
         try:
-            with patch.object(
-                WinBiapClient, "async_get_account", AsyncMock(return_value=account)
-            ) as fetch:
+            with (
+                patch.object(
+                    WinBiapClient, "async_get_account", AsyncMock(return_value=account)
+                ) as fetch,
+                patch(
+                    "custom_components.winbiap.opening_coordinator.OpeningHoursCoordinator._async_update_data",
+                    AsyncMock(return_value=None),
+                ),
+            ):
                 await async_get_adapters(hass)
                 assert await async_setup_component(hass, "sensor", {})
                 await hass.config_entries.async_add(entry)
@@ -295,6 +301,23 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                     ("10:00", "18:00"),
                 )
                 assert return_state.attributes["due_date"] == "2030-01-02"
+                from datetime import timedelta
+
+                from homeassistant.helpers.update_coordinator import UpdateFailed
+
+                coordinator.opening_hours.async_set_updated_data(
+                    replace(schedule, fetched_at=datetime.now(UTC) - timedelta(days=3))
+                )
+                coordinator.opening_hours.async_set_update_error(
+                    UpdateFailed("synthetic outage")
+                )
+                await hass.async_block_till_done()
+                stale_hours = hass.states.get(opening_entity.entity_id)
+                assert stale_hours.state == "cached_schedule"
+                assert stale_hours.attributes["data_stale"] is True
+                assert hass.states.get(return_entity.entity_id).state == "unavailable"
+                coordinator.opening_hours.async_set_updated_data(schedule)
+                await hass.async_block_till_done()
                 coordinator.async_set_updated_data(replace(account, loans=()))
                 await hass.async_block_till_done()
                 assert hass.states.get(return_entity.entity_id).state == "unavailable"
@@ -302,10 +325,19 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
                 await hass.async_block_till_done()
                 options = await hass.config_entries.options.async_init(entry.entry_id)
                 assert options["type"] == "form"
+                for invalid in (
+                    {"opening_timezone": "Invalid/Zone"},
+                    {"opening_source_url": "https://user:secret@example.org"},
+                    {"opening_weekly": "Mo: 10:00-18:00"},
+                ):
+                    result = await hass.config_entries.options.async_configure(
+                        options["flow_id"], invalid
+                    )
+                    assert result["errors"]["base"] == "invalid_opening_options"
                 options = await hass.config_entries.options.async_configure(
                     options["flow_id"], {"opening_exceptions": "bad date"}
                 )
-                assert options["errors"]["base"] == "invalid_opening_exceptions"
+                assert options["errors"]["base"] == "invalid_opening_options"
                 options = await hass.config_entries.options.async_configure(
                     options["flow_id"],
                     {"opening_exceptions": "2030-12-24: geschlossen"},
@@ -329,7 +361,13 @@ def test_real_sensor_setup_reload_and_unload(tmp_path, caplog):
             await hass.async_stop(force=True)
 
     asyncio.run(run())
-    assert not [record for record in caplog.records if record.levelno >= logging.ERROR]
+    assert not [
+        record
+        for record in caplog.records
+        if record.levelno >= logging.ERROR
+        and record.getMessage()
+        != "Error requesting winbiap_opening_hours data: synthetic outage"
+    ]
     assert not [
         record
         for record in caplog.records

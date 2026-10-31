@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased — Generic public opening hours
+
+- Discover public opening schedules within the selected WinBIAP library; support
+  German weekday tables and paragraphs, split windows and explicit dated exceptions.
+- Add configurable HTTPS fallback, complete manual weekly schedule and library timezone.
+- Retain dated hours across outages and restarts; exclude stale or unknown days
+  from return planning without affecting account data.
+- Add a separate credential-free public browser fallback, bounded discovery and
+  cache cleanup on entry removal.
+- Generalize the reusable `/buecherei` dashboard with per-account sources, timestamps,
+  unknown days, manual schedules and outage warnings.
+- Document configuration and deployment limits for users of other libraries.
+
 ## 0.1.0-beta.15 — Recover expired sessions and retain browser login
 
 - Treat account-to-login redirects as session expiry, with one bounded relogin.

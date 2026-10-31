@@ -54,15 +54,19 @@
   "options": {
     "step": {
       "init": {
-        "title": "Opening exceptions",
-        "description": "One line per date, e.g. 2026-12-24: geschlossen or 2026-12-31: 10:00-12:00. These entries override regular hours.",
+        "title": "Opening hours",
+        "description": "Automatically read from the public WinBIAP catalog. Optional: HTTPS fallback source, library timezone, or a complete manual weekly plan (replaces fetching). One line per day, e.g. Mo: 10:00-12:00, 14:00-18:00; include all seven days Mo, Di, Mi, Do, Fr, Sa, So, using closed for closed days. Date overrides: 2030-12-24: closed. Days missing from web sources remain unknown.",
         "data": {
-          "opening_exceptions": "Closed dates and special hours"
+          "opening_exceptions": "Closed dates and special hours",
+          "opening_source_url": "Alternative public HTTPS source",
+          "opening_timezone": "Library timezone",
+          "opening_weekly": "Manual weekly schedule (optional)"
         }
       }
     },
     "error": {
-      "invalid_opening_exceptions": "Check dates and time intervals."
+      "invalid_opening_exceptions": "Check dates and time intervals.",
+      "invalid_opening_options": "Check the HTTPS URL, timezone, complete weekly schedule and dated overrides."
     }
   }
 }

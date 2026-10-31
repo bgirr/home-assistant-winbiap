@@ -226,6 +226,23 @@ class BrowserClient(WinBiapClient):
             raise WinBiapUnsupportedPage("unsupported_browser_method")
         return await self._settled_content()
 
+    async def async_public_page(self, url):
+        """Read a bounded public page without invoking account authentication."""
+        try:
+            await self._request("GET", url)
+            # Challenge elements can disappear before their redirect is finished.
+            await self._page.locator("main").wait_for(state="attached", timeout=15000)
+            html, final_url = await self._settled_content()
+            if not urlparse(final_url).path.startswith(urlparse(self.base_url).path):
+                raise WinBiapUnsupportedPage("cross_library_public_response")
+            if len(html.encode("utf-8")) > 2_000_000:
+                raise WinBiapCannotConnect("public_page_too_large")
+            return html
+        except (WinBiapCannotConnect, WinBiapUnsupportedPage):
+            raise
+        except Exception:
+            raise WinBiapCannotConnect("public_page_unavailable") from None
+
     async def async_login(self):
         html, url = await self._request(
             "GET", urljoin(self.base_url, "user/login.aspx")

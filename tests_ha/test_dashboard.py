@@ -164,3 +164,28 @@ def test_cached_books_and_last_update_warning():
     assert "Gespeicherter Datenstand" in text and "31.12.2029 um 19:15" in text
     assert "Browserprüfung" in text
     assert "<strong>1</strong><span>Ausgeliehen" in text
+
+
+def test_opening_hours_dashboard_unknown_days_stale_and_manual():
+    hours = S(
+        name="Library <A>",
+        state="cached_schedule",
+        attributes=S(
+            account_section="opening_hours",
+            weekly={"Mo": (("10:00", "18:00"),), "So": None},
+            data_stale=True,
+            manual=False,
+            source="https://example.org/hours",
+            fetched_at="2030-01-01T00:00:00+00:00",
+            timezone="Europe/Berlin",
+            exceptions={},
+        ),
+    )
+    out = render(cards[4], [hours])
+    assert "Library &lt;A&gt;" in out and "unbekannt" in out
+    assert "Gespeicherte Öffnungszeiten" in out and "https://example.org/hours" in out
+    hours.attributes.manual = True
+    out = render(cards[4], [hours])
+    assert "Manuell gepflegter Wochenplan" in out
+    hours.state = "unavailable"
+    assert "Öffnungszeiten nicht verfügbar" in render(cards[4], [hours])

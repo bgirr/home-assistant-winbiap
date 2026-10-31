@@ -333,35 +333,44 @@ class WinBiapOpeningHoursSensor(CoordinatorEntity, SensorEntity):
 
     @property
     def available(self):
-        from datetime import UTC, datetime
-
-        return bool(
-            self.coordinator.data and self.coordinator.data.fresh(datetime.now(UTC))
-        )
+        return self.coordinator.data is not None
 
     @property
     def native_value(self):
         return (
-            "regular_schedule"
+            "manual_schedule"
+            if self.coordinator.data and self.coordinator.data.manual
+            else "regular_schedule"
             if self.coordinator.last_update_success
             else "cached_schedule"
         )
 
     @property
     def extra_state_attributes(self):
+        from datetime import UTC, datetime
+
         from .opening_hours import DAYS
 
         data = self.coordinator.data
         if data is None:
-            return None
+            return {"account_section": "opening_hours"}
         return {
             "account_section": "opening_hours",
-            "weekly": {day: data.weekly[i] for i, day in enumerate(DAYS)},
+            "weekly": {
+                day: data.weekly[i] if i in data.known_days else None
+                for i, day in enumerate(DAYS)
+            },
+            "unknown_days": [
+                day for i, day in enumerate(DAYS) if i not in data.known_days
+            ],
+            "manual": data.manual,
+            "data_stale": not self.coordinator.last_update_success
+            or not data.fresh(datetime.now(UTC)),
             "exceptions": dict(data.exceptions),
             "source": data.source,
             "fetched_at": data.fetched_at.isoformat(),
             "basis": "regular_hours_with_known_exceptions",
-            "timezone": "Europe/Berlin",
+            "timezone": data.timezone,
         }
 
 
@@ -421,7 +430,10 @@ class WinBiapReturnDeadlineSensor(WinBiapEntity):
         from homeassistant.util import dt as dt_util
 
         if not (plan := self.plan):
-            return None
+            return {
+                "account_section": "return_deadline",
+                "loan_count": len(self.coordinator.data.loans),
+            }
         hours = self.coordinator.opening_hours.data
         return {
             **self.coordinator.freshness(),
@@ -436,5 +448,5 @@ class WinBiapReturnDeadlineSensor(WinBiapEntity):
             "basis": "regular_hours_with_known_exceptions",
             "source": hours.source,
             "hours_fetched_at": hours.fetched_at.isoformat(),
-            "timezone": "Europe/Berlin",
+            "timezone": hours.timezone,
         }

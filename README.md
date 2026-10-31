@@ -20,6 +20,8 @@ library credentials anywhere except the configured library server.
 - 30-minute polling, bounded retries and 5/15/30/60-minute failure backoff
 - dated persistent snapshots during outages, plus a diagnostic fetch-status sensor
 - reservations, current fees, wishlist, public opening hours and return-day planning
+- library-specific opening-hours discovery, configurable public fallback, manual weekly
+  schedules and timezone, with persistent dated cache and explicit unknown days
 - account sensors for loan count, next due date, and overdue count
 - cover image entities for dashboard cards, including lazy-loaded WebOPAC covers
 - one due-date sensor per loan with author, media type, barcode, branch, cover,
@@ -79,6 +81,19 @@ Reservations, fees and wishlist entities are included; see the [feature log](doc
 
 Returned loan entities become unavailable instead of silently changing their
 identity. New loans are added automatically after the next update.
+
+## Opening hours and return planning
+
+The following opening-hours changes are currently unreleased on the development
+branch. Opening-hours discovery uses the selected library rather than a fixed city.
+Configure a public fallback URL, a complete manual weekly schedule, dated closures
+and the library timezone in the integration options. Unknown days and stale web
+schedules do not produce a guessed last return date.
+
+See [Opening hours](docs/opening-hours.md) for formats, cache behavior, dashboard
+setup and supported layouts. Library selection does not imply every library layout
+or every HA installation supports the browser fallback. See the compatibility
+limits below before publishing a deployment as universally supported.
 
 ## Privacy and security
 

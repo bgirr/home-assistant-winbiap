@@ -64,3 +64,36 @@ def test_session_restored_only_for_same_credentials(monkeypatch, same_account):
         browser.close.assert_awaited_once()
 
     asyncio.run(run())
+
+
+def test_public_page_waits_for_content_without_login_and_bounds_output():
+    async def run():
+        client = module.BrowserClient("https://example.org/library/", "", "", "/tmp")
+        client._request = AsyncMock(return_value=("<main></main>", client.base_url))
+        wait = AsyncMock()
+        client._page = SimpleNamespace(
+            locator=Mock(return_value=SimpleNamespace(wait_for=wait))
+        )
+        client._settled_content = AsyncMock(
+            return_value=("<main>Public hours</main>", client.base_url)
+        )
+        client.async_login = AsyncMock(side_effect=AssertionError)
+        assert "Public hours" in await client.async_public_page(client.base_url)
+        wait.assert_awaited_once_with(state="attached", timeout=15000)
+        client.async_login.assert_not_called()
+        client._settled_content.return_value = (
+            "<main>Other library</main>",
+            "https://example.org/other/index.aspx",
+        )
+        with pytest.raises(module.WinBiapUnsupportedPage):
+            await client.async_public_page(client.base_url)
+        client._settled_content.return_value = ("x" * 2_000_001, client.base_url)
+        with pytest.raises(module.WinBiapCannotConnect):
+            await client.async_public_page(client.base_url)
+        wait.side_effect = RuntimeError("Synthetic browser error")
+        with pytest.raises(
+            module.WinBiapCannotConnect, match="public_page_unavailable"
+        ):
+            await client.async_public_page(client.base_url)
+
+    asyncio.run(run())

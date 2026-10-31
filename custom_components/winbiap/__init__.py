@@ -91,3 +91,5 @@ async def async_remove_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
     await Store(
         hass, 1, f"winbiap.session.{entry.entry_id}", private=True
     ).async_remove()
+
+    await Store(hass, 1, f"winbiap.hours.{entry.entry_id}").async_remove()

@@ -9,8 +9,6 @@ from zoneinfo import ZoneInfo
 from .models import WinBiapLoan
 from .opening_hours import OpeningHours, Windows
 
-BERLIN = ZoneInfo("Europe/Berlin")
-
 
 @dataclass(frozen=True)
 class ReturnPlan:
@@ -30,10 +28,15 @@ def calculate_return_plan(
     affected = tuple(loan for loan in loans if loan.due_date == due)
     for offset in range(367):
         day = due - timedelta(days=offset)
+        if (
+            day.isoformat() not in dict(hours.exceptions)
+            and day.weekday() not in hours.known_days
+        ):
+            return None
         windows = hours.windows_on(day)
         if windows:
             deadline = datetime.combine(
-                day, time.fromisoformat(windows[-1][1]), tzinfo=BERLIN
+                day, time.fromisoformat(windows[-1][1]), tzinfo=ZoneInfo(hours.timezone)
             )
             return ReturnPlan(
                 deadline,

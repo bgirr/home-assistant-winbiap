@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import logging
 from typing import Any
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 import voluptuous as vol
 from aiohttp import CookieJar
@@ -40,6 +41,7 @@ from .library_catalog import (
     load_library_catalog,
 )
 from .opening_hours import parse_exceptions
+from .public_hours import parse_weekly, validate_source
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -295,10 +297,16 @@ class WinBiapOptionsFlow(config_entries.OptionsFlow):
     async def async_step_init(self, user_input=None):
         errors = {}
         if user_input is not None:
+            user_input = {key: value.strip() for key, value in user_input.items()}
             try:
                 parse_exceptions(user_input.get("opening_exceptions", ""))
-            except (ValueError, IndexError):
-                errors["base"] = "invalid_opening_exceptions"
+                validate_source(user_input.get("opening_source_url", ""))
+                if weekly := user_input.get("opening_weekly", "").strip():
+                    parse_weekly(weekly)
+                if timezone := user_input.get("opening_timezone", "").strip():
+                    ZoneInfo(timezone)
+            except (ValueError, IndexError, ZoneInfoNotFoundError):
+                errors["base"] = "invalid_opening_options"
             else:
                 return self.async_create_entry(
                     title="", data={**self.config_entry.options, **user_input}
@@ -308,11 +316,27 @@ class WinBiapOptionsFlow(config_entries.OptionsFlow):
             data_schema=vol.Schema(
                 {
                     vol.Optional(
+                        "opening_source_url",
+                        default=self.config_entry.options.get("opening_source_url", ""),
+                    ): str,
+                    vol.Optional(
+                        "opening_timezone",
+                        default=self.config_entry.options.get(
+                            "opening_timezone", self.hass.config.time_zone
+                        ),
+                    ): str,
+                    vol.Optional(
+                        "opening_weekly",
+                        default=self.config_entry.options.get("opening_weekly", ""),
+                    ): selector.TextSelector(
+                        selector.TextSelectorConfig(multiline=True)
+                    ),
+                    vol.Optional(
                         "opening_exceptions",
                         default=self.config_entry.options.get("opening_exceptions", ""),
                     ): selector.TextSelector(
                         selector.TextSelectorConfig(multiline=True)
-                    )
+                    ),
                 }
             ),
             errors=errors,

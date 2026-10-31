@@ -19,9 +19,14 @@ class OpeningHours:
     exceptions: tuple[tuple[str, Windows], ...]
     fetched_at: datetime
     source: str = SOURCE_URL
+    known_days: tuple[int, ...] = tuple(range(7))
+    timezone: str = "Europe/Berlin"
+    manual: bool = False
 
     def fresh(self, now: datetime) -> bool:
-        return timedelta(0) <= now - self.fetched_at < timedelta(hours=48)
+        return self.manual or timedelta(0) <= now - self.fetched_at < timedelta(
+            hours=48
+        )
 
     def windows_on(self, day: date) -> Windows:
         return dict(self.exceptions).get(day.isoformat(), self.weekly[day.weekday()])
@@ -83,7 +88,19 @@ def parse_opening_hours(html: str, fetched_at: datetime | None = None) -> Openin
         schedule[parts[i]] = parse_windows(parts[i + 1])
     if not set(DAYS[:6]).issubset(schedule):
         raise ValueError("incomplete_opening_week")
-    # Official schedule lists Monday-Saturday; unlisted Sunday is treated as closed.
+    # Missing days remain unknown, including in the legacy municipal fallback.
+    exceptions = dict(parse_public_exceptions(html))
+    return OpeningHours(
+        tuple(schedule.get(day, ()) for day in DAYS),
+        tuple(sorted(exceptions.items())),
+        fetched_at or datetime.now(UTC),
+        known_days=tuple(i for i, day in enumerate(DAYS) if day in schedule),
+    )
+
+
+def parse_public_exceptions(html: str):
+    """Recognize explicit dated closures and special hours, never infer holidays."""
+    root = _tree(html)
     exceptions = {}
     for node in root.descendants("p"):
         match = re.search(
@@ -106,8 +123,4 @@ def parse_opening_hours(html: str, fetched_at: datetime | None = None) -> Openin
         if special:
             day = datetime.strptime(special[1], "%d.%m.%Y").date().isoformat()
             exceptions[day] = parse_windows(special[2])
-    return OpeningHours(
-        tuple(schedule.get(day, ()) for day in DAYS),
-        tuple(sorted(exceptions.items())),
-        fetched_at or datetime.now(UTC),
-    )
+    return tuple(sorted(exceptions.items()))

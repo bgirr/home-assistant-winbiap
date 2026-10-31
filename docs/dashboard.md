@@ -64,8 +64,8 @@ are personal account data even though the cover pictures themselves are public.
 
 ## Complete dynamic view
 
-`examples/buecherei.json` contains the responsive loan view, reservations, current fees and wishlist overview.
-It discovers WinBIAP entities dynamically and uses the installed card-mod resource
+[`examples/buecherei.json`](examples/buecherei.json) contains the responsive loan view, reservations, current fees and wishlist overview.
+It discovers WinBIAP entities dynamically and optionally uses card-mod
 for styling. Import it as the Bücherei view in a storage dashboard.
 
 ## Personal return planning
@@ -74,8 +74,14 @@ The first card now displays renewal status per book and the last in-person retur
 window above the counters. It uses the new return-deadline timestamp entity and
 opening-hours metadata, not a hard-coded weekly schedule. Missing/stale hours keep
 the library due date visible without inventing a visit deadline. Configure dated
-closures or special hours through the integration options. Source support currently
-covers Königsbrunn; the weekly schedule alone cannot guarantee unannounced closures.
+closures or special hours through the integration options. Public WinBIAP sources are discovered per library; fallback sources, timezone and
+manual weekly plans are configurable. See [Opening hours](opening-hours.md).
+The weekly schedule alone cannot guarantee unannounced closures.
+
+The opening-hours card shows each account separately, including unknown days,
+source, last successful fetch, timezone and cached-data warnings. Updating the
+integration does not overwrite an existing dashboard; import the updated view
+or copy its cards into `/buecherei`.
 
 
 ### Abruffehler und gespeicherte Daten (beta.13)
