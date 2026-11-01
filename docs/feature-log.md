@@ -144,3 +144,21 @@ paragraph/table layouts, dated exceptions, conflicting
 branches, origin/path boundaries, timezone conversion, manual options, fallback,
 restart persistence, settings isolation and dashboard rendering. Release deployment and live verification are tracked below.
 Browser support remains subject to the documented platform requirements.
+
+### Beta16 deployment acceptance — 2026-11-01
+
+- Published `v0.1.0-beta.16` from `55b62f9`; all five CI jobs passed in
+  [run 41213607315](https://github.com/bgirr/home-assistant-winbiap/actions/runs/41213607315).
+- Installed through HACS and restarted Home Assistant. All 25 deployed package
+  files matched the release checkout by SHA-256.
+- Verified a fresh account fetch after restart, with no stale-data flags or
+  refresh error and the next automatic refresh scheduled. All current cover
+  proxy requests returned successful image responses.
+- Verified fresh opening hours from the public WinBIAP contact page, separate
+  dated exceptions, unknown Sunday and a calculated return deadline.
+- Updated only the overview and opening-hours card in the existing `/buecherei`
+  view after saving a private backup. Other views and custom styling were preserved.
+  All five Markdown cards rendered successfully against the live HA state.
+
+No private account pages, credentials, cookies or media details are included in
+this acceptance record.
